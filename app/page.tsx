@@ -186,7 +186,7 @@ export default function Home() {
           }}>
             Expert advice, personal attention, and seamless planning —
             from your first enquiry to your last day away. Every journey
-            we craft is a bespoke experience.
+            we craft is a extraordinary experience.
           </p>
 
           <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
@@ -202,7 +202,7 @@ export default function Home() {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Bespoke Trip</a>
+            }}>Plan My Beautiful Trip</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
@@ -373,7 +373,7 @@ export default function Home() {
             padding: "4px 10px",
             borderRadius: "2px",
             marginBottom: "20px",
-          }}>Bespoke Planning</div>
+          }}>Personalized Planning</div>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(24px, 3vw, 36px)",
@@ -654,7 +654,7 @@ export default function Home() {
             marginBottom: "40px",
           }}>
             One of our consultants will be in touch within 24 hours
-            to begin crafting your bespoke itinerary.
+            to begin crafting your personalzed itinerary.
           </p>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
@@ -835,7 +835,7 @@ export default function Home() {
           {[
             {
               heading: "Experiences",
-              links: ["Ocean Islands", "African Safari", "Luxury Cruises", "Bespoke Journeys"],
+              links: ["Ocean Islands", "African Safari", "Luxury Cruises", "Unique Journeys"],
             },
             {
               heading: "Destinations",
