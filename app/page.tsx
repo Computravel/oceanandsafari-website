@@ -83,20 +83,48 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section style={{
-        background: "linear-gradient(135deg, var(--abyss) 0%, var(--indigo) 50%, #1A5A8A 100%)",
-        minHeight: "90vh",
+        position: "relative",
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        position: "relative",
         overflow: "hidden",
         padding: "80px 40px",
       }}>
-        {/* Background decoration */}
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 0,
+          }}
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay */}
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse at 70% 50%, rgba(29,165,160,0.15) 0%, transparent 60%)",
+          background: "linear-gradient(to right, rgba(11,31,58,0.85) 0%, rgba(11,31,58,0.65) 50%, rgba(11,31,58,0.3) 100%)",
+          zIndex: 1,
         }} />
+
+        {/* Teal radial glow */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse at 70% 50%, rgba(29,165,160,0.12) 0%, transparent 60%)",
+          zIndex: 1,
+        }} />
+
+        {/* Decorative rings */}
         <div style={{
           position: "absolute",
           top: "20%",
@@ -105,6 +133,7 @@ export default function Home() {
           height: "400px",
           borderRadius: "50%",
           border: "0.5px solid rgba(201,168,76,0.2)",
+          zIndex: 1,
         }} />
         <div style={{
           position: "absolute",
@@ -114,13 +143,18 @@ export default function Home() {
           height: "460px",
           borderRadius: "50%",
           border: "0.5px solid rgba(201,168,76,0.1)",
+          zIndex: 1,
         }} />
 
         {/* Hero Content */}
-        <div style={{ position: "relative", maxWidth: "600px" }}>
+        <div style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: "640px",
+        }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "16px",
+            fontSize: "13px",
             letterSpacing: "0.24em",
             textTransform: "uppercase",
             color: "var(--teal)",
@@ -130,7 +164,7 @@ export default function Home() {
 
           <h1 style={{
             fontFamily: "var(--font-cormorant), serif",
-            fontSize: "clamp(42px, 6vw, 72px)",
+            fontSize: "clamp(48px, 7vw, 82px)",
             fontWeight: 400,
             color: "var(--pearl)",
             lineHeight: 1.15,
@@ -145,61 +179,95 @@ export default function Home() {
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "18px",
-            color: "rgba(247,242,234,0.65)",
-            lineHeight: 1.8,
+            color: "rgba(247,242,234,0.75)",
+            lineHeight: 1.85,
             marginBottom: "36px",
-            maxWidth: "480px",
+            maxWidth: "500px",
           }}>
             Expert advice, personal attention, and seamless planning —
             from your first enquiry to your last day away. Every journey
             we craft is a bespoke experience.
           </p>
 
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-            <Link href="#enquire" style={{
+          <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
+            <a href="#enquire" style={{
               background: "var(--gold)",
               color: "var(--abyss)",
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "17px",
+              fontSize: "14px",
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              padding: "14px 28px",
+              padding: "16px 32px",
               borderRadius: "3px",
               textDecoration: "none",
-            }}>Plan My Bespoke Trip</Link>
-            <Link href="#packages" style={{
-              color: "rgba(247,242,234,0.7)",
+              display: "inline-block",
+            }}>Plan My Bespoke Trip</a>
+            <a href="#packages" style={{
+              color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "18px",
+              fontSize: "15px",
               letterSpacing: "0.08em",
               textDecoration: "none",
               display: "flex",
               alignItems: "center",
               gap: "8px",
-            }}>Browse packages <span style={{ color: "var(--teal)" }}>→</span></Link>
+            }}>Browse packages <span style={{ color: "var(--teal)" }}>→</span></a>
           </div>
 
           {/* Trust strip */}
           <div style={{
             display: "flex",
-            gap: "24px",
-            marginTop: "48px",
+            flexWrap: "wrap",
+            gap: "20px",
+            marginTop: "52px",
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
             {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner"].map((item) => (
-              <div key={item} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--teal)" }} />
+              <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <div style={{
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  background: "var(--teal)",
+                  flexShrink: 0,
+                }} />
                 <span style={{
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "16px",
+                  fontSize: "13px",
                   letterSpacing: "0.1em",
-                  color: "rgba(247,242,234,0.5)",
+                  color: "rgba(247,242,234,0.6)",
                 }}>{item}</span>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{
+          position: "absolute",
+          bottom: "32px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+        }}>
+          <div style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "rgba(247,242,234,0.4)",
+          }}>Scroll</div>
+          <div style={{
+            width: "1px",
+            height: "40px",
+            background: "linear-gradient(to bottom, rgba(201,168,76,0.6), transparent)",
+          }} />
         </div>
       </section>
 
