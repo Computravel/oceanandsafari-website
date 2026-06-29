@@ -39,7 +39,7 @@ export default function Home() {
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "11px",
+              fontSize: "17px",
               fontWeight: 500,
               letterSpacing: "0.16em",
               color: "var(--charcoal)",
@@ -47,7 +47,7 @@ export default function Home() {
             }}>Ocean & Safari</div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "9px",
+              fontSize: "12px",
               letterSpacing: "0.12em",
               color: "var(--muted)",
               textTransform: "uppercase",
@@ -60,7 +60,7 @@ export default function Home() {
           {["Destinations", "Experiences", "Cruises", "About"].map((item) => (
             <Link key={item} href="#" style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "12px",
+              fontSize: "18px",
               letterSpacing: "0.08em",
               color: "var(--charcoal)",
               textDecoration: "none",
@@ -70,11 +70,11 @@ export default function Home() {
           <Link href="#enquire" style={{
             background: "var(--gold)",
             color: "var(--pearl)",
-            fontSize: "11px",
+            fontSize: "17px",
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            padding: "9px 20px",
+            padding: "12px 24px",
             borderRadius: "3px",
             textDecoration: "none",
           }}>Plan My Trip</Link>
@@ -120,7 +120,7 @@ export default function Home() {
         <div style={{ position: "relative", maxWidth: "600px" }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "10px",
+            fontSize: "16px",
             letterSpacing: "0.24em",
             textTransform: "uppercase",
             color: "var(--teal)",
@@ -144,7 +144,7 @@ export default function Home() {
 
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "15px",
+            fontSize: "18px",
             color: "rgba(247,242,234,0.65)",
             lineHeight: 1.8,
             marginBottom: "36px",
@@ -160,7 +160,7 @@ export default function Home() {
               background: "var(--gold)",
               color: "var(--abyss)",
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "11px",
+              fontSize: "17px",
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
@@ -171,7 +171,7 @@ export default function Home() {
             <Link href="#packages" style={{
               color: "rgba(247,242,234,0.7)",
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "12px",
+              fontSize: "18px",
               letterSpacing: "0.08em",
               textDecoration: "none",
               display: "flex",
@@ -193,7 +193,7 @@ export default function Home() {
                 <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "var(--teal)" }} />
                 <span style={{
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "10px",
+                  fontSize: "16px",
                   letterSpacing: "0.1em",
                   color: "rgba(247,242,234,0.5)",
                 }}>{item}</span>
@@ -273,7 +273,7 @@ export default function Home() {
               }}>{item.title}</div>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "12px",
+                fontSize: "18px",
                 color: "var(--muted)",
                 lineHeight: 1.7,
               }}>{item.desc}</div>
@@ -296,7 +296,7 @@ export default function Home() {
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "9px",
+            fontSize: "12px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             fontWeight: 500,
@@ -315,7 +315,7 @@ export default function Home() {
           }}>Design your journey from scratch</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "13px",
+            fontSize: "16px",
             color: "rgba(247,242,234,0.55)",
             lineHeight: 1.8,
             marginBottom: "28px",
@@ -326,7 +326,7 @@ export default function Home() {
           </p>
           <Link href="#enquire" style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "11px",
+            fontSize: "17px",
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -345,7 +345,7 @@ export default function Home() {
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "9px",
+            fontSize: "12px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             fontWeight: 500,
@@ -364,7 +364,7 @@ export default function Home() {
           }}>Handpicked packages, bookable instantly</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "13px",
+            fontSize: "16px",
             color: "var(--muted)",
             lineHeight: 1.8,
             marginBottom: "28px",
@@ -375,7 +375,7 @@ export default function Home() {
           </p>
           <Link href="#packages" style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "11px",
+            fontSize: "17px",
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -407,7 +407,7 @@ export default function Home() {
           }}>Featured experiences</h2>
           <Link href="#" style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "11px",
+            fontSize: "17px",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
             color: "var(--gold)",
@@ -450,7 +450,7 @@ export default function Home() {
                   top: "10px",
                   left: "10px",
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "9px",
+                  fontSize: "12px",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   fontWeight: 500,
@@ -471,7 +471,7 @@ export default function Home() {
                 }}>{pkg.title}</div>
                 <div style={{
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "11px",
+                  fontSize: "17px",
                   color: "var(--muted)",
                   marginBottom: "12px",
                 }}>{pkg.nights}</div>
@@ -482,13 +482,13 @@ export default function Home() {
                 }}>
                   <div style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "14px",
+                    fontSize: "17px",
                     fontWeight: 500,
                     color: "var(--gold)",
-                  }}>{pkg.price} <span style={{ fontSize: "10px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+                  }}>{pkg.price} <span style={{ fontSize: "16px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
                   <Link href="#enquire" style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "10px",
+                    fontSize: "16px",
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     color: "var(--charcoal)",
@@ -541,7 +541,7 @@ export default function Home() {
             </p>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "11px",
+              fontSize: "17px",
               color: "rgba(247,242,234,0.4)",
               letterSpacing: "0.1em",
             }}>
@@ -562,7 +562,7 @@ export default function Home() {
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "10px",
+            fontSize: "16px",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             color: "var(--teal)",
@@ -579,7 +579,7 @@ export default function Home() {
           }}>Tell us about your dream journey</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "13px",
+            fontSize: "16px",
             color: "var(--muted)",
             textAlign: "center",
             lineHeight: 1.7,
@@ -599,7 +599,7 @@ export default function Home() {
               <div key={i}>
                 <label style={{
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "11px",
+                  fontSize: "17px",
                   letterSpacing: "0.08em",
                   color: "var(--charcoal)",
                   display: "block",
@@ -615,7 +615,7 @@ export default function Home() {
                     border: "0.5px solid var(--border)",
                     borderRadius: "4px",
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "13px",
+                    fontSize: "16px",
                     color: "var(--charcoal)",
                     background: "white",
                     outline: "none",
@@ -627,7 +627,7 @@ export default function Home() {
             <div style={{ gridColumn: "1 / -1" }}>
               <label style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "11px",
+                fontSize: "17px",
                 letterSpacing: "0.08em",
                 color: "var(--charcoal)",
                 display: "block",
@@ -643,7 +643,7 @@ export default function Home() {
                   border: "0.5px solid var(--border)",
                   borderRadius: "4px",
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "13px",
+                  fontSize: "16px",
                   color: "var(--charcoal)",
                   background: "white",
                   outline: "none",
@@ -658,7 +658,7 @@ export default function Home() {
                 background: "var(--gold)",
                 color: "var(--abyss)",
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "12px",
+                fontSize: "18px",
                 fontWeight: 600,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
@@ -697,20 +697,20 @@ export default function Home() {
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "13px",
+              fontSize: "16px",
               fontWeight: 500,
               color: "var(--charcoal)",
             }}>Travel protected with Santam Insurance</div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "11px",
+              fontSize: "17px",
               color: "var(--muted)",
             }}>Get a quote in seconds — before you confirm your booking</div>
           </div>
         </div>
         <button style={{
           fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "11px",
+          fontSize: "17px",
           fontWeight: 500,
           letterSpacing: "0.08em",
           color: "var(--teal)",
@@ -746,7 +746,7 @@ export default function Home() {
             </div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "10px",
+              fontSize: "16px",
               letterSpacing: "0.14em",
               color: "rgba(247,242,234,0.4)",
               textTransform: "uppercase",
@@ -754,7 +754,7 @@ export default function Home() {
             }}>Ocean & Safari · Luxury Travel</div>
             <p style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "12px",
+              fontSize: "18px",
               color: "rgba(247,242,234,0.4)",
               lineHeight: 1.7,
               maxWidth: "240px",
@@ -781,7 +781,7 @@ export default function Home() {
             <div key={i}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "10px",
+                fontSize: "16px",
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 color: "var(--gold)",
@@ -792,7 +792,7 @@ export default function Home() {
                 <div key={link} style={{ marginBottom: "10px" }}>
                   <Link href="#" style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "12px",
+                    fontSize: "18px",
                     color: "rgba(247,242,234,0.45)",
                     textDecoration: "none",
                     letterSpacing: "0.04em",
@@ -812,7 +812,7 @@ export default function Home() {
         }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "11px",
+            fontSize: "17px",
             color: "rgba(247,242,234,0.25)",
             letterSpacing: "0.04em",
           }}>© 2026 Ocean & Safari · A Computravel Company · All rights reserved</div>
@@ -820,7 +820,7 @@ export default function Home() {
             {["Privacy Policy", "Terms", "POPIA Compliance"].map((item) => (
               <Link key={item} href="#" style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "11px",
+                fontSize: "17px",
                 color: "rgba(247,242,234,0.25)",
                 textDecoration: "none",
                 letterSpacing: "0.04em",

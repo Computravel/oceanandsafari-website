@@ -23,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 18px;
 }
 
 body {
@@ -30,14 +31,51 @@ body {
   color: var(--charcoal);
   font-family: 'Jost', sans-serif;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.8;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Cormorant Garant', serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 400;
+  line-height: 1.25;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+a {
+  font-size: 1rem;
 }
 
 ::selection {
   background: var(--teal);
   color: var(--pearl);
+}
+
+/* ── ACCESSIBILITY ── */
+input, textarea, button, select {
+  font-size: 1rem;
+}
+
+/* ── LARGER BASE SIZES FOR OLDER CLIENTS ── */
+.nav-link {
+  font-size: 1rem !important;
+}
+
+.body-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--charcoal);
+}
+
+.caption-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.label-text {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
 }
