@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Ocean & Safari Signature Palette */
+  --abyss: #0B1F3A;
+  --indigo: #0E3A6E;
+  --cobalt: #1A6EA8;
+  --teal: #1DA5A0;
+  --coral: #D4904A;
+  --gold: #C9A84C;
+  --pearl: #F7F2EA;
+  --ivory: #F2EDE6;
+  --charcoal: #2C2420;
+  --muted: #9C8E7A;
+  --border: #E0D8C8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--pearl);
+  color: var(--charcoal);
+  font-family: 'Jost', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garant', serif;
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--teal);
+  color: var(--pearl);
 }
