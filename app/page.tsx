@@ -77,7 +77,7 @@ export default function Home() {
             padding: "12px 24px",
             borderRadius: "3px",
             textDecoration: "none",
-          }}>Plan My Trip</Link>
+          }}>Plan My Journey</Link>
         </div>
       </nav>
 
@@ -202,7 +202,7 @@ export default function Home() {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Beautiful Trip</a>
+            }}>Plan My Beautiful Journey</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
@@ -701,7 +701,7 @@ export default function Home() {
                 display: "block",
                 marginBottom: "6px",
                 fontWeight: 500,
-              }}>Tell us about your dream trip</label>
+              }}>Tell us about your dream holiday</label>
               <textarea
                 placeholder="Dates, number of travellers, special occasions, budget range, anything else we should know..."
                 rows={4}
