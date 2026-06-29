@@ -429,7 +429,7 @@ export default function Home() {
             color: "var(--charcoal)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Handpicked packages, bookable instantly</h2>
+          }}>Hand-selected packages, bookable instantly</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
