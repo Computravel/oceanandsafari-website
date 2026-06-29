@@ -490,20 +490,163 @@ export default function Home() {
           gap: "16px",
         }}>
           {[
-            { emoji: "🦁", category: "Safari", title: "Serengeti & Zanzibar", nights: "10 nights · Tanzania", price: "From R42,500", bg: "linear-gradient(135deg, #C8A96E 0%, #8B6914 100%)" },
-            { emoji: "🚢", category: "Cruise", title: "Mediterranean Discovery", nights: "12 nights · MSC Bellissima", price: "From R38,900", bg: "linear-gradient(135deg, var(--cobalt) 0%, var(--indigo) 100%)" },
-            { emoji: "🏝️", category: "Island", title: "Mauritius Escape", nights: "7 nights · Beachfront villa", price: "From R54,200", bg: "linear-gradient(135deg, var(--teal) 0%, var(--cobalt) 100%)" },
-            { emoji: "🌺", category: "Island", title: "Maldives Overwater", nights: "8 nights · Private villa", price: "From R78,000", bg: "linear-gradient(135deg, #1DA5A0 0%, #0B7A75 100%)" },
-            { emoji: "🦒", category: "Safari", title: "Okavango & Victoria Falls", nights: "9 nights · Botswana & Zimbabwe", price: "From R65,500", bg: "linear-gradient(135deg, #8B6914 0%, #5A4010 100%)" },
-            { emoji: "⛵", category: "Cruise", title: "Seychelles Island Hop", nights: "10 nights · Luxury yacht", price: "From R92,000", bg: "linear-gradient(135deg, #1A6EA8 0%, #0B3A6E 100%)" },
-          ].map((pkg, i) => (
-            <div key={i} style={{
-              background: "white",
-              border: "0.5px solid var(--border)",
-              borderRadius: "8px",
-              overflow: "hidden",
-              cursor: "pointer",
-            }}>
+  {
+    image: "/serengeti.jpg",
+    category: "Safari",
+    title: "Serengeti & Zanzibar",
+    nights: "10 nights · Tanzania",
+    price: "From R42,500",
+  },
+  {
+    image: "/mediterranean.jpg",
+    category: "Cruise",
+    title: "Seabourne Cruise Experience",
+    nights: "12 nights · Luxury Ocean Cruise",
+    price: "From R38,900",
+  },
+  {
+    image: "/mauritius.jpg",
+    category: "Island",
+    title: "Mauritius Escape",
+    nights: "7 nights · Beachfront villa",
+    price: "From R54,200",
+  },
+  {
+    image: "/maldives.jpg",
+    category: "Island",
+    title: "Maldives Overwater",
+    nights: "8 nights · Private villa",
+    price: "From R78,000",
+  },
+  {
+    image: "/okavango.jpg",
+    category: "Safari",
+    title: "Okavango & Victoria Falls",
+    nights: "9 nights · Botswana & Zimbabwe",
+    price: "From R65,500",
+  },
+  {
+    image: "/seychelles.jpg",
+    category: "Island",
+    title: "Seychelles Island Escape",
+    nights: "10 nights · Private island",
+    price: "From R92,000",
+  },
+].map((pkg, i) => (
+  <div key={i} style={{
+    background: "white",
+    border: "0.5px solid var(--border)",
+    borderRadius: "8px",
+    overflow: "hidden",
+    cursor: "pointer",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+  }}
+    onMouseEnter={e => {
+      (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+      (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
+    }}
+    onMouseLeave={e => {
+      (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+      (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+    }}
+  >
+    {/* Image */}
+    <div style={{
+      height: "200px",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      <img
+        src={pkg.image}
+        alt={pkg.title}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          transition: "transform 0.4s ease",
+        }}
+        onMouseEnter={e => {
+          (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)";
+        }}
+        onMouseLeave={e => {
+          (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+        }}
+      />
+      {/* Category badge */}
+      <div style={{
+        position: "absolute",
+        top: "12px",
+        left: "12px",
+        fontFamily: "var(--font-jost), sans-serif",
+        fontSize: "11px",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        fontWeight: 500,
+        background: "rgba(11,31,58,0.75)",
+        color: "white",
+        padding: "4px 10px",
+        borderRadius: "2px",
+        backdropFilter: "blur(4px)",
+      }}>{pkg.category}</div>
+      {/* Gold bottom gradient */}
+      <div style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "60px",
+        background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
+      }} />
+    </div>
+
+    {/* Card body */}
+    <div style={{ padding: "20px" }}>
+      <div style={{
+        fontFamily: "var(--font-cormorant), serif",
+        fontSize: "20px",
+        color: "var(--charcoal)",
+        marginBottom: "6px",
+        lineHeight: 1.3,
+      }}>{pkg.title}</div>
+      <div style={{
+        fontFamily: "var(--font-jost), sans-serif",
+        fontSize: "13px",
+        color: "var(--muted)",
+        marginBottom: "16px",
+      }}>{pkg.nights}</div>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingTop: "16px",
+        borderTop: "0.5px solid var(--border)",
+      }}>
+        <div style={{
+          fontFamily: "var(--font-jost), sans-serif",
+          fontSize: "17px",
+          fontWeight: 500,
+          color: "var(--gold)",
+        }}>{pkg.price} <span style={{
+          fontSize: "12px",
+          color: "var(--muted)",
+          fontWeight: 400,
+        }}>pp</span></div>
+        <a href="#enquire" style={{
+          fontFamily: "var(--font-jost), sans-serif",
+          fontSize: "12px",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "var(--pearl)",
+          textDecoration: "none",
+          background: "var(--indigo)",
+          padding: "8px 16px",
+          borderRadius: "3px",
+          fontWeight: 500,
+        }}>Enquire</a>
+      </div>
+    </div>
+  </div>
+))}
               <div style={{
                 height: "120px",
                 background: pkg.bg,
