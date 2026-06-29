@@ -18,7 +18,6 @@ export default function Home() {
         zIndex: 100,
         backdropFilter: "blur(8px)",
       }}>
-        {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div style={{
             fontFamily: "var(--font-cormorant), serif",
@@ -31,11 +30,7 @@ export default function Home() {
             <span style={{ color: "var(--gold)", margin: "0 2px" }}>&</span>
             <span style={{ color: "var(--teal)" }}>S</span>
           </div>
-          <div style={{
-            width: "0.5px",
-            height: "24px",
-            background: "var(--border)",
-          }} />
+          <div style={{ width: "0.5px", height: "24px", background: "var(--border)" }} />
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
@@ -55,7 +50,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Nav Links */}
         <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
           {["Destinations", "Experiences", "Cruises", "About"].map((item) => (
             <Link key={item} href="#" style={{
@@ -90,68 +84,47 @@ export default function Home() {
         overflow: "hidden",
         padding: "80px 40px",
       }}>
-        {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-          }}
-        >
+        <video autoPlay muted loop playsInline style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+        }}>
           <source src="/hero.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark overlay */}
         <div style={{
           position: "absolute",
           inset: 0,
           background: "linear-gradient(to right, rgba(11,31,58,0.85) 0%, rgba(11,31,58,0.65) 50%, rgba(11,31,58,0.3) 100%)",
           zIndex: 1,
         }} />
-
-        {/* Teal radial glow */}
         <div style={{
           position: "absolute",
           inset: 0,
           background: "radial-gradient(ellipse at 70% 50%, rgba(29,165,160,0.12) 0%, transparent 60%)",
           zIndex: 1,
         }} />
-
-        {/* Decorative rings */}
         <div style={{
           position: "absolute",
-          top: "20%",
-          right: "10%",
-          width: "400px",
-          height: "400px",
+          top: "20%", right: "10%",
+          width: "400px", height: "400px",
           borderRadius: "50%",
           border: "0.5px solid rgba(201,168,76,0.2)",
           zIndex: 1,
         }} />
         <div style={{
           position: "absolute",
-          top: "15%",
-          right: "7%",
-          width: "460px",
-          height: "460px",
+          top: "15%", right: "7%",
+          width: "460px", height: "460px",
           borderRadius: "50%",
           border: "0.5px solid rgba(201,168,76,0.1)",
           zIndex: 1,
         }} />
 
-        {/* Hero Content */}
-        <div style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: "640px",
-        }}>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: "640px" }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "13px",
@@ -186,7 +159,7 @@ export default function Home() {
           }}>
             Expert advice, personal attention, and seamless planning —
             from your first enquiry to your last day away. Every journey
-            we craft is a extraordinary experience.
+            we craft is an extraordinary experience.
           </p>
 
           <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
@@ -202,7 +175,7 @@ export default function Home() {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Beautiful Journey</a>
+            }}>Plan My Bespoke Trip</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
@@ -215,7 +188,6 @@ export default function Home() {
             }}>Browse packages <span style={{ color: "var(--teal)" }}>→</span></a>
           </div>
 
-          {/* Trust strip */}
           <div style={{
             display: "flex",
             flexWrap: "wrap",
@@ -226,13 +198,7 @@ export default function Home() {
           }}>
             {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <div style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  background: "var(--teal)",
-                  flexShrink: 0,
-                }} />
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
                   fontFamily: "var(--font-jost), sans-serif",
                   fontSize: "13px",
@@ -244,7 +210,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div style={{
           position: "absolute",
           bottom: "32px",
@@ -295,7 +260,6 @@ export default function Home() {
         <div style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "0",
           border: "0.5px solid var(--border)",
           borderRadius: "8px",
           overflow: "hidden",
@@ -303,24 +267,9 @@ export default function Home() {
           margin: "0 auto",
         }}>
           {[
-            {
-              icon: "✦",
-              title: "Personal consultant",
-              desc: "One dedicated specialist handles your entire journey from first enquiry to final farewell",
-              color: "var(--gold)",
-            },
-            {
-              icon: "◈",
-              title: "Exclusive access",
-              desc: "Official partner relationships with Thompsons mean benefits no algorithm can find",
-              color: "var(--teal)",
-            },
-            {
-              icon: "◎",
-              title: "Every detail managed",
-              desc: "From transfers to insurance — nothing is left to chance, nothing left to worry about",
-              color: "var(--cobalt)",
-            },
+            { icon: "✦", title: "Personal consultant", desc: "One dedicated specialist handles your entire journey from first enquiry to final farewell", color: "var(--gold)" },
+            { icon: "◈", title: "Exclusive access", desc: "Official partner relationships with Thompsons mean benefits no algorithm can find", color: "var(--teal)" },
+            { icon: "◎", title: "Every detail managed", desc: "From transfers to insurance — nothing is left to chance, nothing left to worry about", color: "var(--cobalt)" },
           ].map((item, i) => (
             <div key={i} style={{
               padding: "36px 28px",
@@ -328,20 +277,16 @@ export default function Home() {
               background: "white",
               textAlign: "center",
             }}>
-              <div style={{
-                fontSize: "22px",
-                color: item.color,
-                marginBottom: "16px",
-              }}>{item.icon}</div>
+              <div style={{ fontSize: "22px", color: item.color, marginBottom: "16px" }}>{item.icon}</div>
               <div style={{
                 fontFamily: "var(--font-cormorant), serif",
-                fontSize: "18px",
+                fontSize: "20px",
                 color: "var(--charcoal)",
                 marginBottom: "10px",
               }}>{item.title}</div>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "18px",
+                fontSize: "16px",
                 color: "var(--muted)",
                 lineHeight: 1.7,
               }}>{item.desc}</div>
@@ -356,11 +301,7 @@ export default function Home() {
         gridTemplateColumns: "1fr 1fr",
         borderBottom: "0.5px solid var(--border)",
       }}>
-        <div style={{
-          padding: "56px 48px",
-          background: "var(--abyss)",
-          borderRight: "0.5px solid rgba(255,255,255,0.08)",
-        }}>
+        <div style={{ padding: "56px 48px", background: "var(--abyss)", borderRight: "0.5px solid rgba(255,255,255,0.08)" }}>
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
@@ -373,7 +314,7 @@ export default function Home() {
             padding: "4px 10px",
             borderRadius: "2px",
             marginBottom: "20px",
-          }}>Personalized Planning</div>
+          }}>Personalised Planning</div>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(24px, 3vw, 36px)",
@@ -406,10 +347,7 @@ export default function Home() {
           }}>Start a conversation <span>→</span></Link>
         </div>
 
-        <div style={{
-          padding: "56px 48px",
-          background: "var(--ivory)",
-        }}>
+        <div style={{ padding: "56px 48px", background: "var(--ivory)" }}>
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
@@ -429,7 +367,7 @@ export default function Home() {
             color: "var(--charcoal)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Hand-selected travel experiences, bookable instantly</h2>
+          }}>Hand-selected experiences, bookable instantly</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
@@ -490,224 +428,110 @@ export default function Home() {
           gap: "16px",
         }}>
           {[
-  {
-    image: "/serengeti.jpg",
-    category: "Safari",
-    title: "Serengeti & Zanzibar",
-    nights: "10 nights · Tanzania",
-    price: "From R42,500",
-  },
-  {
-    image: "/mediterranean.jpg",
-    category: "Cruise",
-    title: "Seabourne Cruise Experience",
-    nights: "12 nights · Luxury Ocean Cruise",
-    price: "From R38,900",
-  },
-  {
-    image: "/mauritius.jpg",
-    category: "Island",
-    title: "Mauritius Escape",
-    nights: "7 nights · Beachfront villa",
-    price: "From R54,200",
-  },
-  {
-    image: "/maldives.jpg",
-    category: "Island",
-    title: "Maldives Overwater",
-    nights: "8 nights · Private villa",
-    price: "From R78,000",
-  },
-  {
-    image: "/okavango.jpg",
-    category: "Safari",
-    title: "Okavango & Victoria Falls",
-    nights: "9 nights · Botswana & Zimbabwe",
-    price: "From R65,500",
-  },
-  {
-    image: "/seychelles.jpg",
-    category: "Island",
-    title: "Seychelles Island Escape",
-    nights: "10 nights · Private island",
-    price: "From R92,000",
-  },
-].map((pkg, i) => (
-  <div key={i} style={{
-    background: "white",
-    border: "0.5px solid var(--border)",
-    borderRadius: "8px",
-    overflow: "hidden",
-    cursor: "pointer",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-  }}
-    onMouseEnter={e => {
-      (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-      (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
-    }}
-    onMouseLeave={e => {
-      (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-      (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-    }}
-  >
-    {/* Image */}
-    <div style={{
-      height: "200px",
-      position: "relative",
-      overflow: "hidden",
-    }}>
-      <img
-        src={pkg.image}
-        alt={pkg.title}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transition: "transform 0.4s ease",
-        }}
-        onMouseEnter={e => {
-          (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)";
-        }}
-        onMouseLeave={e => {
-          (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
-        }}
-      />
-      {/* Category badge */}
-      <div style={{
-        position: "absolute",
-        top: "12px",
-        left: "12px",
-        fontFamily: "var(--font-jost), sans-serif",
-        fontSize: "11px",
-        letterSpacing: "0.14em",
-        textTransform: "uppercase",
-        fontWeight: 500,
-        background: "rgba(11,31,58,0.75)",
-        color: "white",
-        padding: "4px 10px",
-        borderRadius: "2px",
-        backdropFilter: "blur(4px)",
-      }}>{pkg.category}</div>
-      {/* Gold bottom gradient */}
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "60px",
-        background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
-      }} />
-    </div>
-
-    {/* Card body */}
-    <div style={{ padding: "20px" }}>
-      <div style={{
-        fontFamily: "var(--font-cormorant), serif",
-        fontSize: "20px",
-        color: "var(--charcoal)",
-        marginBottom: "6px",
-        lineHeight: 1.3,
-      }}>{pkg.title}</div>
-      <div style={{
-        fontFamily: "var(--font-jost), sans-serif",
-        fontSize: "13px",
-        color: "var(--muted)",
-        marginBottom: "16px",
-      }}>{pkg.nights}</div>
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingTop: "16px",
-        borderTop: "0.5px solid var(--border)",
-      }}>
-        <div style={{
-          fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "17px",
-          fontWeight: 500,
-          color: "var(--gold)",
-        }}>{pkg.price} <span style={{
-          fontSize: "12px",
-          color: "var(--muted)",
-          fontWeight: 400,
-        }}>pp</span></div>
-        <a href="#enquire" style={{
-          fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "12px",
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "var(--pearl)",
-          textDecoration: "none",
-          background: "var(--indigo)",
-          padding: "8px 16px",
-          borderRadius: "3px",
-          fontWeight: 500,
-        }}>Enquire</a>
-      </div>
-    </div>
-  </div>
-))}
-              <div style={{
-                height: "120px",
-                background: pkg.bg,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "36px",
-                position: "relative",
-              }}>
-                <span style={{
+            { image: "/serengeti.jpg", category: "Safari", title: "Serengeti & Zanzibar", nights: "10 nights · Tanzania", price: "From R42,500" },
+            { image: "/mediterranean.jpg", category: "Cruise", title: "Seabourne Cruise Experience", nights: "12 nights · Luxury Ocean Cruise", price: "From R38,900" },
+            { image: "/mauritius.jpg", category: "Island", title: "Mauritius Escape", nights: "7 nights · Beachfront villa", price: "From R54,200" },
+            { image: "/maldives.jpg", category: "Island", title: "Maldives Overwater", nights: "8 nights · Private villa", price: "From R78,000" },
+            { image: "/okavango.jpg", category: "Safari", title: "Okavango & Victoria Falls", nights: "9 nights · Botswana & Zimbabwe", price: "From R65,500" },
+            { image: "/seychelles.jpg", category: "Island", title: "Seychelles Island Escape", nights: "10 nights · Private island", price: "From R92,000" },
+          ].map((pkg, i) => (
+            <div key={i}
+              style={{
+                background: "white",
+                border: "0.5px solid var(--border)",
+                borderRadius: "8px",
+                overflow: "hidden",
+                cursor: "pointer",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+              }}
+            >
+              <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
+                <img
+                  src={pkg.image}
+                  alt={pkg.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.4s ease",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
+                  }}
+                />
+                <div style={{
                   position: "absolute",
-                  top: "10px",
-                  left: "10px",
+                  top: "12px",
+                  left: "12px",
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "12px",
-                  letterSpacing: "0.12em",
+                  fontSize: "11px",
+                  letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  background: "rgba(255,255,255,0.15)",
+                  background: "rgba(11,31,58,0.75)",
                   color: "white",
-                  padding: "3px 8px",
+                  padding: "4px 10px",
                   borderRadius: "2px",
                   backdropFilter: "blur(4px)",
-                }}>{pkg.category}</span>
-                {pkg.emoji}
+                }}>{pkg.category}</div>
+                <div style={{
+                  position: "absolute",
+                  bottom: 0, left: 0, right: 0,
+                  height: "60px",
+                  background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
+                }} />
               </div>
-              <div style={{ padding: "16px" }}>
+
+              <div style={{ padding: "20px" }}>
                 <div style={{
                   fontFamily: "var(--font-cormorant), serif",
-                  fontSize: "17px",
+                  fontSize: "22px",
                   color: "var(--charcoal)",
-                  marginBottom: "4px",
+                  marginBottom: "6px",
+                  lineHeight: 1.3,
                 }}>{pkg.title}</div>
                 <div style={{
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "17px",
+                  fontSize: "15px",
                   color: "var(--muted)",
-                  marginBottom: "12px",
+                  marginBottom: "16px",
                 }}>{pkg.nights}</div>
                 <div style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  paddingTop: "16px",
+                  borderTop: "0.5px solid var(--border)",
                 }}>
                   <div style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "17px",
+                    fontSize: "18px",
                     fontWeight: 500,
                     color: "var(--gold)",
-                  }}>{pkg.price} <span style={{ fontSize: "16px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
-                  <Link href="#enquire" style={{
+                  }}>{pkg.price} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+                  <a href="#enquire" style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "16px",
-                    letterSpacing: "0.08em",
+                    fontSize: "13px",
+                    letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "var(--charcoal)",
+                    color: "var(--pearl)",
                     textDecoration: "none",
-                    border: "0.5px solid var(--border)",
-                    padding: "4px 10px",
-                    borderRadius: "2px",
-                  }}>Enquire</Link>
+                    background: "var(--indigo)",
+                    padding: "9px 18px",
+                    borderRadius: "3px",
+                    fontWeight: 500,
+                  }}>Enquire</a>
                 </div>
               </div>
             </div>
@@ -739,7 +563,7 @@ export default function Home() {
           <div>
             <p style={{
               fontFamily: "var(--font-cormorant), serif",
-              fontSize: "clamp(18px, 2.5vw, 24px)",
+              fontSize: "clamp(20px, 2.5vw, 26px)",
               color: "rgba(247,242,234,0.82)",
               lineHeight: 1.75,
               fontStyle: "italic",
@@ -790,22 +614,22 @@ export default function Home() {
           }}>Tell us about your dream journey</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "16px",
+            fontSize: "17px",
             color: "var(--muted)",
             textAlign: "center",
             lineHeight: 1.7,
             marginBottom: "40px",
           }}>
             One of our consultants will be in touch within 24 hours
-            to begin crafting your personalzed itinerary.
+            to begin crafting your personalised itinerary.
           </p>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             {[
-              { label: "Full name", placeholder: "Your name", type: "text", full: false },
-              { label: "Email address", placeholder: "your@email.com", type: "email", full: false },
-              { label: "Phone number", placeholder: "+27 ...", type: "tel", full: false },
-              { label: "Destination in mind", placeholder: "e.g. Mauritius, Serengeti...", type: "text", full: false },
+              { label: "Full name", placeholder: "Your name", type: "text" },
+              { label: "Email address", placeholder: "your@email.com", type: "email" },
+              { label: "Phone number", placeholder: "+27 ...", type: "tel" },
+              { label: "Destination in mind", placeholder: "e.g. Mauritius, Serengeti...", type: "text" },
             ].map((field, i) => (
               <div key={i}>
                 <label style={{
@@ -822,7 +646,7 @@ export default function Home() {
                   placeholder={field.placeholder}
                   style={{
                     width: "100%",
-                    padding: "11px 14px",
+                    padding: "13px 16px",
                     border: "0.5px solid var(--border)",
                     borderRadius: "4px",
                     fontFamily: "var(--font-jost), sans-serif",
@@ -847,10 +671,10 @@ export default function Home() {
               }}>Tell us about your dream holiday</label>
               <textarea
                 placeholder="Dates, number of travellers, special occasions, budget range, anything else we should know..."
-                rows={4}
+                rows={5}
                 style={{
                   width: "100%",
-                  padding: "11px 14px",
+                  padding: "13px 16px",
                   border: "0.5px solid var(--border)",
                   borderRadius: "4px",
                   fontFamily: "var(--font-jost), sans-serif",
@@ -873,7 +697,7 @@ export default function Home() {
                 fontWeight: 600,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                padding: "16px",
+                padding: "18px",
                 borderRadius: "4px",
                 border: "none",
                 cursor: "pointer",
@@ -888,56 +712,53 @@ export default function Home() {
         background: "rgba(29,165,160,0.08)",
         borderTop: "0.5px solid rgba(29,165,160,0.2)",
         borderBottom: "0.5px solid rgba(29,165,160,0.2)",
-        padding: "20px 40px",
+        padding: "24px 40px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div style={{
-            width: "36px",
-            height: "36px",
+            width: "40px",
+            height: "40px",
             background: "var(--teal)",
             borderRadius: "6px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "18px",
+            fontSize: "20px",
             flexShrink: 0,
           }}>🛡️</div>
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "16px",
+              fontSize: "17px",
               fontWeight: 500,
               color: "var(--charcoal)",
             }}>Travel protected with Santam Insurance</div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "17px",
+              fontSize: "15px",
               color: "var(--muted)",
             }}>Get a quote in seconds — before you confirm your booking</div>
           </div>
         </div>
         <button style={{
           fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "17px",
+          fontSize: "16px",
           fontWeight: 500,
           letterSpacing: "0.08em",
           color: "var(--teal)",
           background: "rgba(29,165,160,0.12)",
           border: "0.5px solid var(--teal)",
-          padding: "8px 18px",
+          padding: "10px 22px",
           borderRadius: "4px",
           cursor: "pointer",
         }}>Get a quote</button>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{
-        background: "var(--abyss)",
-        padding: "48px 40px 32px",
-      }}>
+      <footer style={{ background: "var(--abyss)", padding: "48px 40px 32px" }}>
         <div style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1fr",
@@ -947,7 +768,7 @@ export default function Home() {
           <div>
             <div style={{
               fontFamily: "var(--font-cormorant), serif",
-              fontSize: "32px",
+              fontSize: "36px",
               marginBottom: "4px",
               lineHeight: 1,
             }}>
@@ -957,7 +778,7 @@ export default function Home() {
             </div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "16px",
+              fontSize: "13px",
               letterSpacing: "0.14em",
               color: "rgba(247,242,234,0.4)",
               textTransform: "uppercase",
@@ -965,7 +786,7 @@ export default function Home() {
             }}>Ocean & Safari · Luxury Travel</div>
             <p style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "18px",
+              fontSize: "16px",
               color: "rgba(247,242,234,0.4)",
               lineHeight: 1.7,
               maxWidth: "240px",
@@ -976,23 +797,14 @@ export default function Home() {
           </div>
 
           {[
-            {
-              heading: "Experiences",
-              links: ["Ocean Islands", "African Safari", "Luxury Cruises", "Unique Journeys"],
-            },
-            {
-              heading: "Destinations",
-              links: ["Mauritius", "Maldives", "Serengeti", "Seychelles"],
-            },
-            {
-              heading: "Company",
-              links: ["About Us", "Our Consultants", "ASATA Member", "Contact"],
-            },
+            { heading: "Experiences", links: ["Ocean Islands", "African Safari", "Luxury Cruises", "Unique Journeys"] },
+            { heading: "Destinations", links: ["Mauritius", "Maldives", "Serengeti", "Seychelles"] },
+            { heading: "Company", links: ["About Us", "Our Consultants", "ASATA Member", "Contact"] },
           ].map((col, i) => (
             <div key={i}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "16px",
+                fontSize: "13px",
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 color: "var(--gold)",
@@ -1000,10 +812,10 @@ export default function Home() {
                 marginBottom: "16px",
               }}>{col.heading}</div>
               {col.links.map((link) => (
-                <div key={link} style={{ marginBottom: "10px" }}>
+                <div key={link} style={{ marginBottom: "12px" }}>
                   <Link href="#" style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "18px",
+                    fontSize: "16px",
                     color: "rgba(247,242,234,0.45)",
                     textDecoration: "none",
                     letterSpacing: "0.04em",
@@ -1023,7 +835,7 @@ export default function Home() {
         }}>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "17px",
+            fontSize: "15px",
             color: "rgba(247,242,234,0.25)",
             letterSpacing: "0.04em",
           }}>© 2026 Ocean & Safari · A Computravel Company · All rights reserved</div>
@@ -1031,7 +843,7 @@ export default function Home() {
             {["Privacy Policy", "Terms", "POPIA Compliance"].map((item) => (
               <Link key={item} href="#" style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "17px",
+                fontSize: "15px",
                 color: "rgba(247,242,234,0.25)",
                 textDecoration: "none",
                 letterSpacing: "0.04em",
