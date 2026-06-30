@@ -377,7 +377,7 @@ export default function Home() {
             lineHeight: 1.8,
             marginBottom: "28px",
           }}>
-            Curated by our consultants and available at fixed prices.
+            Curated by our consultants and available at your convenience.
             Browse safaris, island escapes, cruises, and more —
             fully planned, ready when you are.
           </p>
@@ -392,7 +392,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             gap: "8px",
-          }}>See all packages <span>→</span></Link>
+          }}>See all experiences <span>→</span></Link>
         </div>
       </section>
 
