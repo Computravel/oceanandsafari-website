@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     const { name, email, phone, destination, message } = await request.json();
 
     await resend.emails.send({
-      from: 'Ocean & Safari <onboarding@resend.dev>',
+      from: 'Ocean & Safari <enquiries@oceanandsafari.com>',
       to: 'lindsay@computravel.co.za',
       subject: `New Enquiry from ${name} — ${destination}`,
       html: `
