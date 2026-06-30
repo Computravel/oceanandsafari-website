@@ -1,8 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { supabase } from "@/app/lib/supabase";
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: "", email: "", phone: "", destination: "", message: ""
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async () => {
+    setStatus("sending");
+    const { error } = await supabase
+      .from("enquiries")
+      .insert([{
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        destination: formData.destination,
+        message: formData.message,
+      }]);
+
+    if (error) {
+      console.error(error);
+      setStatus("error");
+    } else {
+      setStatus("success");
+      setFormData({ name: "", email: "", phone: "", destination: "", message: "" });
+    }
+  };
+
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif" }}>
 
@@ -590,7 +618,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ENQUIRY FORM ── */}
+      {/*{/* ── ENQUIRY FORM ── */}
       <section id="enquire" style={{
         padding: "80px 40px",
         background: "var(--ivory)",
@@ -627,39 +655,122 @@ export default function Home() {
           </p>
 
           <div className="enquiry-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-            {[
-              { label: "Full name", placeholder: "Your name", type: "text" },
-              { label: "Email address", placeholder: "your@email.com", type: "email" },
-              { label: "Phone number", placeholder: "+27 ...", type: "tel" },
-              { label: "Destination in mind", placeholder: "e.g. Mauritius, Serengeti...", type: "text" },
-            ].map((field, i) => (
-              <div key={i}>
-                <label style={{
+
+            <div>
+              <label style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "17px",
+                letterSpacing: "0.08em",
+                color: "var(--charcoal)",
+                display: "block",
+                marginBottom: "6px",
+                fontWeight: 500,
+              }}>Full name</label>
+              <input
+                type="text"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={e => setFormData({...formData, name: e.target.value})}
+                style={{
+                  width: "100%",
+                  padding: "13px 16px",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "4px",
                   fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "17px",
-                  letterSpacing: "0.08em",
+                  fontSize: "16px",
                   color: "var(--charcoal)",
-                  display: "block",
-                  marginBottom: "6px",
-                  fontWeight: 500,
-                }}>{field.label}</label>
-                <input
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  style={{
-                    width: "100%",
-                    padding: "13px 16px",
-                    border: "0.5px solid var(--border)",
-                    borderRadius: "4px",
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "16px",
-                    color: "var(--charcoal)",
-                    background: "white",
-                    outline: "none",
-                  }}
-                />
-              </div>
-            ))}
+                  background: "white",
+                  outline: "none",
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "17px",
+                letterSpacing: "0.08em",
+                color: "var(--charcoal)",
+                display: "block",
+                marginBottom: "6px",
+                fontWeight: 500,
+              }}>Email address</label>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={e => setFormData({...formData, email: e.target.value})}
+                style={{
+                  width: "100%",
+                  padding: "13px 16px",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "4px",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  color: "var(--charcoal)",
+                  background: "white",
+                  outline: "none",
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "17px",
+                letterSpacing: "0.08em",
+                color: "var(--charcoal)",
+                display: "block",
+                marginBottom: "6px",
+                fontWeight: 500,
+              }}>Phone number</label>
+              <input
+                type="tel"
+                placeholder="+27 ..."
+                value={formData.phone}
+                onChange={e => setFormData({...formData, phone: e.target.value})}
+                style={{
+                  width: "100%",
+                  padding: "13px 16px",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "4px",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  color: "var(--charcoal)",
+                  background: "white",
+                  outline: "none",
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "17px",
+                letterSpacing: "0.08em",
+                color: "var(--charcoal)",
+                display: "block",
+                marginBottom: "6px",
+                fontWeight: 500,
+              }}>Destination in mind</label>
+              <input
+                type="text"
+                placeholder="e.g. Mauritius, Serengeti..."
+                value={formData.destination}
+                onChange={e => setFormData({...formData, destination: e.target.value})}
+                style={{
+                  width: "100%",
+                  padding: "13px 16px",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "4px",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  color: "var(--charcoal)",
+                  background: "white",
+                  outline: "none",
+                }}
+              />
+            </div>
 
             <div style={{ gridColumn: "1 / -1" }}>
               <label style={{
@@ -674,6 +785,8 @@ export default function Home() {
               <textarea
                 placeholder="Dates, number of travellers, special occasions, budget range, anything else we should know..."
                 rows={5}
+                value={formData.message}
+                onChange={e => setFormData({...formData, message: e.target.value})}
                 style={{
                   width: "100%",
                   padding: "13px 16px",
@@ -690,21 +803,53 @@ export default function Home() {
             </div>
 
             <div style={{ gridColumn: "1 / -1" }}>
-              <button style={{
-                width: "100%",
-                background: "var(--gold)",
-                color: "var(--abyss)",
-                fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "18px",
-                fontWeight: 600,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                padding: "18px",
-                borderRadius: "4px",
-                border: "none",
-                cursor: "pointer",
-              }}>Send My Enquiry</button>
+              {status === "success" ? (
+                <div style={{
+                  background: "rgba(29,165,160,0.1)",
+                  border: "0.5px solid var(--teal)",
+                  borderRadius: "4px",
+                  padding: "20px",
+                  textAlign: "center",
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: "22px",
+                  color: "var(--teal)",
+                }}>
+                  Thank you — we will be in touch within 24 hours to begin planning your journey. 🌊
+                </div>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={status === "sending"}
+                  style={{
+                    width: "100%",
+                    background: status === "sending" ? "var(--muted)" : "var(--gold)",
+                    color: "var(--abyss)",
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    padding: "18px",
+                    borderRadius: "4px",
+                    border: "none",
+                    cursor: status === "sending" ? "wait" : "pointer",
+                  }}>
+                  {status === "sending" ? "Sending..." : "Send My Enquiry"}
+                </button>
+              )}
+              {status === "error" && (
+                <div style={{
+                  marginTop: "12px",
+                  textAlign: "center",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "14px",
+                  color: "var(--coral)",
+                }}>
+                  Something went wrong — please try again or email us directly.
+                </div>
+              )}
             </div>
+
           </div>
         </div>
       </section>
