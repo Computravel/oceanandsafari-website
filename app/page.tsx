@@ -42,13 +42,13 @@ export default function Home() {
               color: "var(--charcoal)",
               textTransform: "uppercase",
             }}>Ocean & Safari</div>
-            <div style={{
+           <div style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "12px",
               letterSpacing: "0.12em",
               color: "var(--muted)",
               textTransform: "uppercase",
-            }}>Luxury Travel</div>
+            }}>Luxury Travel · by Computravel</div>
           </div>
         </div>
 
@@ -198,7 +198,7 @@ export default function Home() {
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
-            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner"].map((item) => (
+            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner", "A Computravel Company"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
