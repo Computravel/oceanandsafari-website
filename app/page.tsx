@@ -828,7 +828,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div style={{
+        <div className="footer-bottom" style={{
           borderTop: "0.5px solid rgba(255,255,255,0.06)",
           paddingTop: "24px",
           display: "flex",
