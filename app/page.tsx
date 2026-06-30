@@ -25,10 +25,21 @@ export default function Home() {
     if (error) {
       console.error(error);
       setStatus("error");
-    } else {
-      setStatus("success");
-      setFormData({ name: "", email: "", phone: "", destination: "", message: "" });
+      return;
     }
+
+    try {
+      await fetch("/api/send-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch (emailError) {
+      console.error("Email notification failed:", emailError);
+    }
+
+    setStatus("success");
+    setFormData({ name: "", email: "", phone: "", destination: "", message: "" });
   };
 
   return (
