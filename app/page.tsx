@@ -148,7 +148,7 @@ export default function Home() {
           }}>
             Your luxury experience<br />
             begins the moment<br />
-            <em style={{ color: "var(--gold)" }}>you make contact</em>
+            <em style={{ color: "var(--gold)" }}>we connect</em>
           </h1>
 
           <p style={{
@@ -177,7 +177,7 @@ export default function Home() {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Bespoke Trip</a>
+            }}>Plan My Beautiful Journey</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
