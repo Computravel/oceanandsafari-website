@@ -198,7 +198,7 @@ export default function Home() {
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
-            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner", "A Computravel Company"].map((item) => (
+            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "A Computravel Company"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
