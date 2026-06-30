@@ -187,7 +187,7 @@ export default function Home() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-            }}>Browse packages <span style={{ color: "var(--teal)" }}>→</span></a>
+            }}>Browse experiences <span style={{ color: "var(--teal)" }}>→</span></a>
           </div>
 
           <div style={{
