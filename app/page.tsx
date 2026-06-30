@@ -259,7 +259,7 @@ export default function Home() {
           and seamless planning — from your first enquiry to your last day away.&rdquo;
         </p>
 
-        <div style={{
+        <div className="usp-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
           border: "0.5px solid var(--border)",
@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* ── DUAL AUDIENCE ── */}
-      <section style={{
+      <section className="dual-section" style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
         borderBottom: "0.5px solid var(--border)",
@@ -424,7 +424,7 @@ export default function Home() {
           }}>View all →</Link>
         </div>
 
-        <div style={{
+        <div className="packages-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
           gap: "16px",
@@ -626,7 +626,7 @@ export default function Home() {
             to begin crafting your personalised itinerary.
           </p>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div className="enquiry-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             {[
               { label: "Full name", placeholder: "Your name", type: "text" },
               { label: "Email address", placeholder: "your@email.com", type: "email" },
@@ -710,7 +710,7 @@ export default function Home() {
       </section>
 
       {/* ── SANTAM INSURANCE ── */}
-      <section style={{
+      <section className="santam-strip" style={{
         background: "rgba(29,165,160,0.08)",
         borderTop: "0.5px solid rgba(29,165,160,0.2)",
         borderBottom: "0.5px solid rgba(29,165,160,0.2)",
@@ -761,7 +761,7 @@ export default function Home() {
 
       {/* ── FOOTER ── */}
       <footer style={{ background: "var(--abyss)", padding: "48px 40px 32px" }}>
-        <div style={{
+        <div className="footer-grid" style={{
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1fr",
           gap: "40px",
