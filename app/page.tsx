@@ -323,7 +323,7 @@ export default function Home() {
             color: "var(--pearl)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Design your journey from scratch</h2>
+          }}>Design your unique journey</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
@@ -333,7 +333,7 @@ export default function Home() {
           }}>
             Tell us where you dream of going. Our consultants work with
             officially appointed travel representatives to craft an itinerary
-            built entirely around you — no templates, no compromises.
+            built entirely around you.
           </p>
           <Link href="#enquire" style={{
             fontFamily: "var(--font-jost), sans-serif",
@@ -362,14 +362,14 @@ export default function Home() {
             padding: "4px 10px",
             borderRadius: "2px",
             marginBottom: "20px",
-          }}>Ready to Book</div>
+          }}>Ready to Reserve</div>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(24px, 3vw, 36px)",
             color: "var(--charcoal)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Hand-selected experiences, bookable instantly</h2>
+          }}>Browse our curated experiences</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
