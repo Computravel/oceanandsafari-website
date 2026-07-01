@@ -1,19 +1,39 @@
-import { getExperiences, getExclusiveEscapes } from "@/sanity/lib/queries";
-import HomeClient from "./HomeClient";
+"use client";
 
-export default async function Home() {
-  const experiences = await getExperiences();
-  const exclusiveEscapes = await getExclusiveEscapes();
+import Link from "next/link";
+import { useState } from "react";
+import { supabase } from "@/app/lib/supabase";
 
-  return (
-    <HomeClient 
-      experiences={experiences} 
-      exclusiveEscapes={exclusiveEscapes} 
-    />
-  );
+interface Experience {
+  _id: string;
+  title: string;
+  category: string;
+  destination: string;
+  country: string;
+  duration: number;
+  priceFrom: number;
+  heroImage: string;
+  description: string;
+  slug: { current: string };
 }
 
-export default function Home() {
+interface ExclusiveEscape {
+  _id: string;
+  title: string;
+  description: string;
+  heroImage: string;
+  originalPrice: number;
+  offerPrice: number;
+  expiryDate: string;
+  linkedExperience: string;
+}
+
+interface Props {
+  experiences: Experience[];
+  exclusiveEscapes: ExclusiveEscape[];
+}
+
+export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", destination: "", message: ""
   });
@@ -90,7 +110,7 @@ export default function Home() {
               color: "var(--charcoal)",
               textTransform: "uppercase",
             }}>Ocean & Safari</div>
-           <div style={{
+            <div style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "12px",
               letterSpacing: "0.12em",
@@ -165,14 +185,6 @@ export default function Home() {
           border: "0.5px solid rgba(201,168,76,0.2)",
           zIndex: 1,
         }} />
-        <div style={{
-          position: "absolute",
-          top: "15%", right: "7%",
-          width: "460px", height: "460px",
-          borderRadius: "50%",
-          border: "0.5px solid rgba(201,168,76,0.1)",
-          zIndex: 1,
-        }} />
 
         <div style={{ position: "relative", zIndex: 2, maxWidth: "640px" }}>
           <div style={{
@@ -225,7 +237,7 @@ export default function Home() {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Beautiful Journey</a>
+            }}>Plan My Bespoke Trip</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
@@ -246,7 +258,7 @@ export default function Home() {
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
-            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "A Computravel Company"].map((item) => (
+            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner", "A Computravel Company"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
@@ -371,7 +383,7 @@ export default function Home() {
             color: "var(--pearl)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Design your unique journey</h2>
+          }}>Design your journey from scratch</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
@@ -381,7 +393,7 @@ export default function Home() {
           }}>
             Tell us where you dream of going. Our consultants work with
             officially appointed travel representatives to craft an itinerary
-            built entirely around you.
+            built entirely around you — no templates, no compromises.
           </p>
           <Link href="#enquire" style={{
             fontFamily: "var(--font-jost), sans-serif",
@@ -410,14 +422,14 @@ export default function Home() {
             padding: "4px 10px",
             borderRadius: "2px",
             marginBottom: "20px",
-          }}>Ready to Reserve</div>
+          }}>Ready to Book</div>
           <h2 style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(24px, 3vw, 36px)",
             color: "var(--charcoal)",
             lineHeight: 1.25,
             marginBottom: "16px",
-          }}>Browse our curated experiences</h2>
+          }}>Hand-selected experiences, bookable instantly</h2>
           <p style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "16px",
@@ -425,7 +437,7 @@ export default function Home() {
             lineHeight: 1.8,
             marginBottom: "28px",
           }}>
-            Curated by our consultants and available at your convenience.
+            Curated by our consultants and available at fixed prices.
             Browse safaris, island escapes, cruises, and more —
             fully planned, ready when you are.
           </p>
@@ -444,7 +456,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FEATURED PACKAGES ── */}
+      {/* ── FEATURED EXPERIENCES — FROM SANITY ── */}
       <section id="packages" style={{
         padding: "64px 40px",
         background: "var(--pearl)",
@@ -472,122 +484,306 @@ export default function Home() {
           }}>View all →</Link>
         </div>
 
-        <div className="packages-grid" style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "16px",
-        }}>
-          {[
-            { image: "/serengeti.jpg", category: "Safari", title: "Serengeti & Zanzibar", nights: "10 nights · Tanzania", price: "From R42,500" },
-            { image: "/mediterranean.jpg", category: "Cruise", title: "Seabourne Cruise Experience", nights: "12 nights · Luxury Ocean Cruise", price: "From R38,900" },
-            { image: "/mauritius.jpg", category: "Island", title: "Mauritius Escape", nights: "7 nights · Beachfront villa", price: "From R54,200" },
-            { image: "/maldives.jpg", category: "Island", title: "Maldives Overwater", nights: "8 nights · Private villa", price: "From R78,000" },
-            { image: "/okavango.jpg", category: "Safari", title: "Okavango & Victoria Falls", nights: "9 nights · Botswana & Zimbabwe", price: "From R65,500" },
-            { image: "/seychelles.jpg", category: "Island", title: "Seychelles Island Escape", nights: "10 nights · Private island", price: "From R92,000" },
-          ].map((pkg, i) => (
-            <div key={i}
-              style={{
-                background: "white",
-                border: "0.5px solid var(--border)",
-                borderRadius: "8px",
-                overflow: "hidden",
-                cursor: "pointer",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-              }}
-            >
-              <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
-                <img
-                  src={pkg.image}
-                  alt={pkg.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    transition: "transform 0.4s ease",
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
-                  }}
-                />
-                <div style={{
-                  position: "absolute",
-                  top: "12px",
-                  left: "12px",
-                  fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "11px",
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  fontWeight: 500,
-                  background: "rgba(11,31,58,0.75)",
-                  color: "white",
-                  padding: "4px 10px",
-                  borderRadius: "2px",
-                  backdropFilter: "blur(4px)",
-                }}>{pkg.category}</div>
-                <div style={{
-                  position: "absolute",
-                  bottom: 0, left: 0, right: 0,
-                  height: "60px",
-                  background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
-                }} />
-              </div>
+        {experiences && experiences.length > 0 ? (
+          <div className="packages-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "16px",
+          }}>
+            {experiences.map((pkg) => (
+              <div key={pkg._id}
+                style={{
+                  background: "white",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                  (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+                }}
+              >
+                <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
+                  {pkg.heroImage ? (
+                    <img
+                      src={pkg.heroImage}
+                      alt={pkg.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transition: "transform 0.4s ease",
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: "100%",
+                      height: "100%",
+                      background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)",
+                    }} />
+                  )}
+                  <div style={{
+                    position: "absolute",
+                    top: "12px",
+                    left: "12px",
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "11px",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    fontWeight: 500,
+                    background: "rgba(11,31,58,0.75)",
+                    color: "white",
+                    padding: "4px 10px",
+                    borderRadius: "2px",
+                    backdropFilter: "blur(4px)",
+                  }}>{pkg.category}</div>
+                  <div style={{
+                    position: "absolute",
+                    bottom: 0, left: 0, right: 0,
+                    height: "60px",
+                    background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
+                  }} />
+                </div>
 
-              <div style={{ padding: "20px" }}>
-                <div style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontSize: "22px",
-                  color: "var(--charcoal)",
-                  marginBottom: "6px",
-                  lineHeight: 1.3,
-                }}>{pkg.title}</div>
-                <div style={{
-                  fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "15px",
-                  color: "var(--muted)",
-                  marginBottom: "16px",
-                }}>{pkg.nights}</div>
-                <div style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: "16px",
-                  borderTop: "0.5px solid var(--border)",
-                }}>
+                <div style={{ padding: "20px" }}>
+                  <div style={{
+                    fontFamily: "var(--font-cormorant), serif",
+                    fontSize: "22px",
+                    color: "var(--charcoal)",
+                    marginBottom: "6px",
+                    lineHeight: 1.3,
+                  }}>{pkg.title}</div>
                   <div style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "18px",
-                    fontWeight: 500,
-                    color: "var(--gold)",
-                  }}>{pkg.price} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
-                  <a href="#enquire" style={{
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "13px",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "var(--pearl)",
-                    textDecoration: "none",
-                    background: "var(--indigo)",
-                    padding: "9px 18px",
-                    borderRadius: "3px",
-                    fontWeight: 500,
-                  }}>Enquire</a>
+                    fontSize: "15px",
+                    color: "var(--muted)",
+                    marginBottom: "16px",
+                  }}>{pkg.duration} nights · {pkg.destination}</div>
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: "16px",
+                    borderTop: "0.5px solid var(--border)",
+                  }}>
+                    <div style={{
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "18px",
+                      fontWeight: 500,
+                      color: "var(--gold)",
+                    }}>From R{pkg.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+                    <a href="#enquire" style={{
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "13px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--pearl)",
+                      textDecoration: "none",
+                      background: "var(--indigo)",
+                      padding: "9px 18px",
+                      borderRadius: "3px",
+                      fontWeight: 500,
+                    }}>Enquire</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="packages-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "16px",
+          }}>
+            {[
+              { image: "/serengeti.jpg", category: "Safari", title: "Serengeti & Zanzibar", nights: "10 nights · Tanzania", price: "From R42,500" },
+              { image: "/mediterranean.jpg", category: "Cruise", title: "Seabourne Cruise Experience", nights: "12 nights · Luxury Ocean Cruise", price: "From R38,900" },
+              { image: "/mauritius.jpg", category: "Island", title: "Mauritius Escape", nights: "7 nights · Beachfront villa", price: "From R54,200" },
+              { image: "/maldives.jpg", category: "Island", title: "Maldives Overwater", nights: "8 nights · Private villa", price: "From R78,000" },
+              { image: "/okavango.jpg", category: "Safari", title: "Okavango & Victoria Falls", nights: "9 nights · Botswana & Zimbabwe", price: "From R65,500" },
+              { image: "/seychelles.jpg", category: "Island", title: "Seychelles Island Escape", nights: "10 nights · Private island", price: "From R92,000" },
+            ].map((pkg, i) => (
+              <div key={i}
+                style={{
+                  background: "white",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                }}
+              >
+                <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
+                  <img src={pkg.image} alt={pkg.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div style={{
+                    position: "absolute",
+                    top: "12px", left: "12px",
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "11px",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    fontWeight: 500,
+                    background: "rgba(11,31,58,0.75)",
+                    color: "white",
+                    padding: "4px 10px",
+                    borderRadius: "2px",
+                  }}>{pkg.category}</div>
+                </div>
+                <div style={{ padding: "20px" }}>
+                  <div style={{
+                    fontFamily: "var(--font-cormorant), serif",
+                    fontSize: "22px",
+                    color: "var(--charcoal)",
+                    marginBottom: "6px",
+                  }}>{pkg.title}</div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "15px",
+                    color: "var(--muted)",
+                    marginBottom: "16px",
+                  }}>{pkg.nights}</div>
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: "16px",
+                    borderTop: "0.5px solid var(--border)",
+                  }}>
+                    <div style={{
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "18px",
+                      fontWeight: 500,
+                      color: "var(--gold)",
+                    }}>{pkg.price} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+                    <a href="#enquire" style={{
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "13px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--pearl)",
+                      textDecoration: "none",
+                      background: "var(--indigo)",
+                      padding: "9px 18px",
+                      borderRadius: "3px",
+                      fontWeight: 500,
+                    }}>Enquire</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
+
+      {/* ── EXCLUSIVE ESCAPES — FROM SANITY ── */}
+      {exclusiveEscapes && exclusiveEscapes.length > 0 && (
+        <section style={{
+          padding: "64px 40px",
+          background: "var(--abyss)",
+          borderBottom: "0.5px solid rgba(255,255,255,0.05)",
+        }}>
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: "32px",
+          }}>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: "clamp(28px, 4vw, 40px)",
+              color: "var(--pearl)",
+            }}>Exclusive Escapes</h2>
+            <span style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "13px",
+              color: "var(--gold)",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}>Limited availability</span>
+          </div>
+
+          <div className="packages-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "16px",
+          }}>
+            {exclusiveEscapes.map((escape) => (
+              <div key={escape._id} style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "0.5px solid rgba(201,168,76,0.3)",
+                borderRadius: "8px",
+                overflow: "hidden",
+              }}>
+                {escape.heroImage && (
+                  <div style={{ height: "180px", overflow: "hidden" }}>
+                    <img
+                      src={escape.heroImage}
+                      alt={escape.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
+                )}
+                <div style={{ padding: "20px" }}>
+                  <div style={{
+                    fontFamily: "var(--font-cormorant), serif",
+                    fontSize: "22px",
+                    color: "var(--pearl)",
+                    marginBottom: "8px",
+                  }}>{escape.title}</div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    color: "rgba(247,242,234,0.55)",
+                    lineHeight: 1.6,
+                    marginBottom: "16px",
+                  }}>{escape.description}</div>
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: "16px",
+                    borderTop: "0.5px solid rgba(255,255,255,0.08)",
+                  }}>
+                    <div>
+                      {escape.originalPrice && (
+                        <div style={{
+                          fontFamily: "var(--font-jost), sans-serif",
+                          fontSize: "13px",
+                          color: "rgba(247,242,234,0.35)",
+                          textDecoration: "line-through",
+                        }}>R{escape.originalPrice?.toLocaleString()}</div>
+                      )}
+                      <div style={{
+                        fontFamily: "var(--font-jost), sans-serif",
+                        fontSize: "18px",
+                        fontWeight: 500,
+                        color: "var(--gold)",
+                      }}>R{escape.offerPrice?.toLocaleString()} <span style={{ fontSize: "12px", fontWeight: 400, color: "rgba(247,242,234,0.4)" }}>pp</span></div>
+                    </div>
+                    <a href="#enquire" style={{
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "12px",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--abyss)",
+                      textDecoration: "none",
+                      background: "var(--gold)",
+                      padding: "9px 18px",
+                      borderRadius: "3px",
+                      fontWeight: 500,
+                    }}>Enquire</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── TESTIMONIAL ── */}
       <section style={{
@@ -638,7 +834,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/*{/* ── ENQUIRY FORM ── */}
+      {/* ── ENQUIRY FORM ── */}
       <section id="enquire" style={{
         padding: "80px 40px",
         background: "var(--ivory)",
@@ -675,7 +871,6 @@ export default function Home() {
           </p>
 
           <div className="enquiry-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-
             <div>
               <label style={{
                 fontFamily: "var(--font-jost), sans-serif",
@@ -869,7 +1064,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-
           </div>
         </div>
       </section>
