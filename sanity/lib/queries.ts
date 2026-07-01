@@ -49,3 +49,47 @@ export async function getArticles() {
     }
   `)
 }
+// Fetch single experience by slug
+export async function getExperience(slug: string) {
+  return client.fetch(`
+    *[_type == "experience" && slug.current == $slug && published == true][0] {
+      _id,
+      title,
+      category,
+      destination,
+      country,
+      duration,
+      priceFrom,
+      "heroImage": heroImage.asset->url,
+      description,
+      highlights,
+      itinerary,
+      included,
+      notIncluded,
+      departureDate,
+      flights,
+      transfers,
+      accommodation,
+      shipName,
+      cruiseLine,
+      departureCity,
+      arrivalCity,
+      needVisas,
+      validFrom,
+      validTo,
+      offerExpires,
+      tripReference,
+      termsAndConditions,
+      slug
+    }
+  `, { slug })
+}
+
+// Fetch all experience slugs for static generation
+export async function getExperienceSlugs() {
+  return client.fetch(`
+    *[_type == "experience" && published == true] {
+      "slug": slug.current
+    }
+  `)
+}

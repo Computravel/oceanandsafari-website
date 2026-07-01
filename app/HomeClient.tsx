@@ -491,7 +491,17 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             gap: "16px",
           }}>
             {experiences.map((pkg) => (
-              <div key={pkg._id}
+              <Link key={pkg._id} href={`/experiences/${pkg.slug?.current}`} style={{ textDecoration: "none" }}>
+              <div
+                style={{
+                  background: "white",
+                  border: "0.5px solid var(--border)",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onMouseEnter={e => {
                 style={{
                   background: "white",
                   border: "0.5px solid var(--border)",
@@ -593,6 +603,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
                   </div>
                 </div>
               </div>
+              </Link>
             ))}
           </div>
         ) : (
