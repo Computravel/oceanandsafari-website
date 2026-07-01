@@ -49,7 +49,7 @@ export default async function ExperiencePage({
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "17px",
+              fontSize: "20px",
               fontWeight: 500,
               letterSpacing: "0.16em",
               color: "var(--charcoal)",
@@ -57,7 +57,7 @@ export default async function ExperiencePage({
             }}>Ocean & Safari</div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "12px",
+              fontSize: "15px",
               letterSpacing: "0.12em",
               color: "var(--muted)",
               textTransform: "uppercase",
@@ -68,7 +68,7 @@ export default async function ExperiencePage({
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <Link href="/" style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "15px",
+            fontSize: "18px",
             color: "var(--muted)",
             textDecoration: "none",
             display: "flex",
@@ -78,7 +78,7 @@ export default async function ExperiencePage({
           <Link href="/#enquire" style={{
             background: "var(--gold)",
             color: "var(--pearl)",
-            fontSize: "15px",
+            fontSize: "18px",
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -122,7 +122,7 @@ export default async function ExperiencePage({
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "11px",
+            fontSize: "14px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             fontWeight: 500,
@@ -143,7 +143,7 @@ export default async function ExperiencePage({
           }}>{experience.title}</h1>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "16px",
+            fontSize: "19px",
             color: "rgba(247,242,234,0.7)",
           }}>
             {experience.duration} nights · {experience.destination}{experience.country ? `, ${experience.country}` : ""}
@@ -176,7 +176,7 @@ export default async function ExperiencePage({
               }}>About this experience</h2>
               <p style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "17px",
+                fontSize: "20px",
                 color: "var(--muted)",
                 lineHeight: 1.85,
               }}>{experience.description}</p>
@@ -205,7 +205,7 @@ export default async function ExperiencePage({
                     }} />
                     <span style={{
                       fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "16px",
+                      fontSize: "19px",
                       color: "var(--charcoal)",
                       lineHeight: 1.6,
                     }}>{highlight}</span>
@@ -229,7 +229,7 @@ export default async function ExperiencePage({
                   <div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "13px",
+                      fontSize: "16px",
                       fontWeight: 500,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
@@ -243,10 +243,10 @@ export default async function ExperiencePage({
                         gap: "10px",
                         marginBottom: "8px",
                       }}>
-                        <span style={{ color: "var(--teal)", fontSize: "16px", flexShrink: 0 }}>✓</span>
+                        <span style={{ color: "var(--teal)", fontSize: "19px", flexShrink: 0 }}>✓</span>
                         <span style={{
                           fontFamily: "var(--font-jost), sans-serif",
-                          fontSize: "15px",
+                          fontSize: "18px",
                           color: "var(--charcoal)",
                         }}>{item}</span>
                       </div>
@@ -257,7 +257,7 @@ export default async function ExperiencePage({
                   <div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "13px",
+                      fontSize: "16px",
                       fontWeight: 500,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
@@ -271,10 +271,10 @@ export default async function ExperiencePage({
                         gap: "10px",
                         marginBottom: "8px",
                       }}>
-                        <span style={{ color: "var(--coral)", fontSize: "16px", flexShrink: 0 }}>✕</span>
+                        <span style={{ color: "var(--coral)", fontSize: "19px", flexShrink: 0 }}>✕</span>
                         <span style={{
                           fontFamily: "var(--font-jost), sans-serif",
-                          fontSize: "15px",
+                          fontSize: "18px",
                           color: "var(--charcoal)",
                         }}>{item}</span>
                       </div>
@@ -295,7 +295,7 @@ export default async function ExperiencePage({
             }}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "12px",
+                fontSize: "15px",
                 fontWeight: 500,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
@@ -304,7 +304,7 @@ export default async function ExperiencePage({
               }}>Terms & Conditions</div>
               <p style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "14px",
+                fontSize: "17px",
                 color: "var(--muted)",
                 lineHeight: 1.7,
               }}>{experience.termsAndConditions}</p>
@@ -331,7 +331,7 @@ export default async function ExperiencePage({
             }}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "13px",
+                fontSize: "16px",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 color: "rgba(247,242,234,0.5)",
@@ -346,7 +346,7 @@ export default async function ExperiencePage({
               }}>R{experience.priceFrom?.toLocaleString()}</div>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "13px",
+                fontSize: "16px",
                 color: "rgba(247,242,234,0.5)",
               }}>per person</div>
             </div>
@@ -379,13 +379,13 @@ export default async function ExperiencePage({
                 }}>
                   <span style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "13px",
+                    fontSize: "16px",
                     color: "var(--muted)",
                     flexShrink: 0,
                   }}>{item.label}</span>
                   <span style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "13px",
+                    fontSize: "16px",
                     color: "var(--charcoal)",
                     fontWeight: 500,
                     textAlign: "right",
@@ -402,7 +402,7 @@ export default async function ExperiencePage({
                 background: "var(--gold)",
                 color: "var(--abyss)",
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "15px",
+                fontSize: "18px",
                 fontWeight: 600,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
@@ -413,7 +413,7 @@ export default async function ExperiencePage({
               }}>Enquire About This Trip</Link>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "13px",
+                fontSize: "16px",
                 color: "var(--muted)",
                 textAlign: "center",
                 marginTop: "12px",
