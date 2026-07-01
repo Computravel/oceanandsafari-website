@@ -491,17 +491,8 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             gap: "16px",
           }}>
             {experiences.map((pkg) => (
-              <Link key={pkg._id} href={`/experiences/${pkg.slug?.current}`} style={{ textDecoration: "none" }}>
+            <Link key={pkg._id} href={`/experiences/${pkg.slug?.current}`} style={{ textDecoration: "none" }}>
               <div
-                style={{
-                  background: "white",
-                  border: "0.5px solid var(--border)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                }}
-                onMouseEnter={e => {
                 style={{
                   background: "white",
                   border: "0.5px solid var(--border)",
@@ -588,7 +579,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
                       fontWeight: 500,
                       color: "var(--gold)",
                     }}>From R{pkg.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
-                    <a href="#enquire" style={{
+                    <span style={{
                       fontFamily: "var(--font-jost), sans-serif",
                       fontSize: "13px",
                       letterSpacing: "0.1em",
@@ -599,12 +590,12 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
                       padding: "9px 18px",
                       borderRadius: "3px",
                       fontWeight: 500,
-                    }}>Enquire</a>
+                    }}>View details</span>
                   </div>
                 </div>
               </div>
-              </Link>
-            ))}
+            </Link>
+          ))}
           </div>
         ) : (
           <div className="packages-grid" style={{
