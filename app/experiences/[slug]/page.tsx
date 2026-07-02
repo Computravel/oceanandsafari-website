@@ -81,10 +81,6 @@ export default async function ExperiencePage({
          }}>← Back to experiences</Link>
           
             href="#enquire-form"
-            onClick={e => {
-              e.preventDefault();
-              document.getElementById("enquire-form")?.scrollIntoView({ behavior: "smooth" });
-            }}
             style={{
               background: "var(--gold)",
               color: "var(--pearl)",
@@ -95,7 +91,6 @@ export default async function ExperiencePage({
               padding: "10px 20px",
               borderRadius: "3px",
               textDecoration: "none",
-              cursor: "pointer",
             }}>Enquire Now</a>
         </div>
       </nav>
@@ -431,10 +426,6 @@ export default async function ExperiencePage({
             <div style={{ padding: "0 24px 24px" }}>
               
                 href="#enquire-form"
-                onClick={e => {
-                  e.preventDefault();
-                  document.getElementById("enquire-form")?.scrollIntoView({ behavior: "smooth" });
-                }}
                 style={{
                   display: "block",
                   width: "100%",
