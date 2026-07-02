@@ -85,6 +85,12 @@ export const article = {
               description: 'Shown below the image on the article page',
             },
           ],
+          preview: {
+            select: {
+              imageUrl: 'asset.url',
+              title: 'alt',
+            },
+          },
         },
       ],
     },
