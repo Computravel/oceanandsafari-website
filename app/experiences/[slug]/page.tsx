@@ -1,8 +1,8 @@
 import { getExperience, getExperienceSlugs } from "@/sanity/lib/queries";
 import { PortableText } from "@portabletext/react";
+import EnquiryForm from "@/app/components/EnquiryForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import EnquiryForm from "@/app/components/EnquiryForm";
 
 export const revalidate = 30;
 
@@ -78,20 +78,18 @@ export default async function ExperiencePage({
             display: "flex",
             alignItems: "center",
             gap: "6px",
-         }}>← Back to experiences</Link>
-          
-            href="#enquire-form"
-            style={{
-              background: "var(--gold)",
-              color: "var(--pearl)",
-              fontSize: "15px",
-              fontWeight: 500,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              padding: "10px 20px",
-              borderRadius: "3px",
-              textDecoration: "none",
-            }}>Enquire Now</a>
+          }}>← Back to experiences</Link>
+          <a href="#enquire-form" style={{
+            background: "var(--gold)",
+            color: "var(--pearl)",
+            fontSize: "15px",
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            padding: "10px 20px",
+            borderRadius: "3px",
+            textDecoration: "none",
+          }}>Enquire Now</a>
         </div>
       </nav>
 
@@ -199,7 +197,7 @@ export default async function ExperiencePage({
                 fontSize: "32px",
                 color: "var(--charcoal)",
                 marginBottom: "20px",
-              }}>Experience Highlights</h2>
+              }}>The Experience Highlights</h2>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "18px",
@@ -341,10 +339,7 @@ export default async function ExperiencePage({
         </div>
 
         {/* RIGHT — Booking sidebar */}
-        <div style={{
-          position: "sticky",
-          top: "84px",
-        }}>
+        <div style={{ position: "sticky", top: "84px" }}>
           <div style={{
             background: "white",
             border: "0.5px solid var(--border)",
@@ -353,10 +348,7 @@ export default async function ExperiencePage({
             boxShadow: "0 4px 24px rgba(11,31,58,0.08)",
           }}>
             {/* Price header */}
-            <div style={{
-              background: "var(--abyss)",
-              padding: "24px",
-            }}>
+            <div style={{ background: "var(--abyss)", padding: "24px" }}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "14px",
@@ -424,24 +416,21 @@ export default async function ExperiencePage({
 
             {/* Enquire button */}
             <div style={{ padding: "0 24px 24px" }}>
-              
-                href="#enquire-form"
-                style={{
-                  display: "block",
-                  width: "100%",
-                  background: "var(--gold)",
-                  color: "var(--abyss)",
-                  fontFamily: "var(--font-jost), sans-serif",
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  padding: "16px",
-                  borderRadius: "6px",
-                  textDecoration: "none",
-                  textAlign: "center",
-                  cursor: "pointer",
-                }}>Enquire About This Experience</a>
+              <a href="#enquire-form" style={{
+                display: "block",
+                width: "100%",
+                background: "var(--gold)",
+                color: "var(--abyss)",
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "16px",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                padding: "16px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                textAlign: "center",
+              }}>Enquire About This Experience</a>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "14px",
@@ -456,6 +445,7 @@ export default async function ExperiencePage({
           </div>
         </div>
       </div>
+
       {/* ── ENQUIRY FORM ── */}
       <section id="enquire-form" style={{
         padding: "80px 40px",
@@ -497,6 +487,7 @@ export default async function ExperiencePage({
           />
         </div>
       </section>
+
     </main>
   );
 }
