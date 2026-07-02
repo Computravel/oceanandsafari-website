@@ -104,3 +104,31 @@ export async function getExperienceSlugs() {
     }
   `, {}, options)
 }
+
+// Fetch single article by slug
+export async function getArticle(slug: string) {
+  return client.fetch(`
+    *[_type == "article" && slug.current == $slug && published == true][0] {
+      _id,
+      title,
+      category,
+      excerpt,
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      body,
+      publishedAt,
+      seoTitle,
+      seoDescription,
+      slug
+    }
+  `, { slug }, options)
+}
+
+// Fetch all article slugs for static generation
+export async function getArticleSlugs() {
+  return client.fetch(`
+    *[_type == "article" && published == true] {
+      "slug": slug.current
+    }
+  `, {}, options)
+}

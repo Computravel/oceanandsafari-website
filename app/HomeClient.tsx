@@ -137,15 +137,21 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         </div>
 
         <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
-          {["Destinations", "Experiences", "Cruises", "About"].map((item) => (
-            <Link key={item} href="#" style={{
+          {[
+            { label: "Destinations", href: "#" },
+            { label: "Experiences", href: "#packages" },
+            { label: "Cruises", href: "#" },
+            { label: "Journal", href: "/articles" },
+            { label: "About", href: "#" },
+          ].map((item) => (
+            <Link key={item.label} href={item.href} style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "18px",
               letterSpacing: "0.08em",
               color: "var(--charcoal)",
               textDecoration: "none",
               opacity: 0.75,
-            }}>{item}</Link>
+            }}>{item.label}</Link>
           ))}
           <Link href="#enquire" style={{
             background: "var(--gold)",
