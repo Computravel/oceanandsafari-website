@@ -1,3 +1,4 @@
+import { PortableText } from '@portabletext/react'
 import { getExperience, getExperienceSlugs } from "@/sanity/lib/queries";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -174,12 +175,14 @@ export default async function ExperiencePage({
                 color: "var(--charcoal)",
                 marginBottom: "16px",
               }}>About this experience</h2>
-              <p style={{
+              <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "20px",
                 color: "var(--muted)",
                 lineHeight: 1.85,
-              }}>{experience.description}</p>
+              }}>
+                <PortableText value={experience.description} />
+              </div>
             </div>
           )}
 
@@ -193,16 +196,14 @@ export default async function ExperiencePage({
                 marginBottom: "20px",
               }}>Highlights</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {experience.highlights.map((highlight: string, i: number) => (
-                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <div style={{
-                      width: "6px",
-                      height: "6px",
-                      borderRadius: "50%",
-                      background: "var(--teal)",
-                      flexShrink: 0,
-                      marginTop: "8px",
-                    }} />
+                <div style={{
+  fontFamily: "var(--font-jost), sans-serif",
+  fontSize: "19px",
+  color: "var(--charcoal)",
+  lineHeight: 1.8,
+}}>
+  <PortableText value={experience.highlights} />
+</div>
                     <span style={{
                       fontFamily: "var(--font-jost), sans-serif",
                       fontSize: "19px",
@@ -236,21 +237,14 @@ export default async function ExperiencePage({
                       color: "var(--teal)",
                       marginBottom: "12px",
                     }}>Included</div>
-                    {experience.included.map((item: string, i: number) => (
-                      <div key={i} style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "10px",
-                        marginBottom: "8px",
-                      }}>
-                        <span style={{ color: "var(--teal)", fontSize: "19px", flexShrink: 0 }}>✓</span>
-                        <span style={{
-                          fontFamily: "var(--font-jost), sans-serif",
-                          fontSize: "18px",
-                          color: "var(--charcoal)",
-                        }}>{item}</span>
-                      </div>
-                    ))}
+                    <div style={{
+  fontFamily: "var(--font-jost), sans-serif",
+  fontSize: "18px",
+  color: "var(--charcoal)",
+  lineHeight: 1.7,
+}}>
+  <PortableText value={experience.included} />
+</div>
                   </div>
                 )}
                 {experience.notIncluded?.length > 0 && (
@@ -264,21 +258,14 @@ export default async function ExperiencePage({
                       color: "var(--coral)",
                       marginBottom: "12px",
                     }}>Not included</div>
-                    {experience.notIncluded.map((item: string, i: number) => (
-                      <div key={i} style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "10px",
-                        marginBottom: "8px",
-                      }}>
-                        <span style={{ color: "var(--coral)", fontSize: "19px", flexShrink: 0 }}>✕</span>
-                        <span style={{
-                          fontFamily: "var(--font-jost), sans-serif",
-                          fontSize: "18px",
-                          color: "var(--charcoal)",
-                        }}>{item}</span>
-                      </div>
-                    ))}
+                    <div style={{
+  fontFamily: "var(--font-jost), sans-serif",
+  fontSize: "18px",
+  color: "var(--charcoal)",
+  lineHeight: 1.7,
+}}>
+  <PortableText value={experience.notIncluded} />
+</div>
                   </div>
                 )}
               </div>

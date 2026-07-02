@@ -60,15 +60,21 @@ export const experience = {
     {
       name: 'description',
       title: 'Description',
-      type: 'text',
-      rows: 4,
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+      ],
+      description: 'Full formatted description with rich text support',
     },
     {
       name: 'highlights',
       title: 'Highlights',
       type: 'array',
-      of: [{ type: 'string' }],
-      description: 'Key selling points — shown as bullet points',
+      of: [
+        { type: 'block' },
+      ],
+      description: 'Key selling points — paste multiple lines at once, use bullet points',
     },
     {
       name: 'itinerary',
@@ -80,13 +86,19 @@ export const experience = {
       name: 'included',
       title: 'What is Included',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [
+        { type: 'block' },
+      ],
+      description: 'Paste multiple items at once — use bullet points or numbered list',
     },
     {
       name: 'notIncluded',
       title: 'What is Not Included',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [
+        { type: 'block' },
+      ],
+      description: 'Paste multiple items at once — use bullet points or numbered list',
     },
     {
       name: 'departureDate',
