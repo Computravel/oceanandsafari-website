@@ -1,6 +1,7 @@
 import { getExperiences, getExclusiveEscapes } from "@/sanity/lib/queries";
 import HomeClient from "./HomeClient";
-export const revalidate = 60;
+export const revalidate = 30;
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const experiences = await getExperiences();
