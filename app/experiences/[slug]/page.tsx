@@ -2,6 +2,7 @@ import { getExperience, getExperienceSlugs } from "@/sanity/lib/queries";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import EnquiryForm from "@/app/components/EnquiryForm";
 
 export const revalidate = 30;
 
@@ -78,7 +79,12 @@ export default async function ExperiencePage({
             alignItems: "center",
             gap: "6px",
           }}>← Back to experiences</Link>
-          <Link href={`/?experience=${encodeURIComponent(experience.title)}#enquire`} style={{
+          href="#enquire-form"
+            onClick={e => {
+              e.preventDefault();
+              document.getElementById("enquire-form")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            style={{
             background: "var(--gold)",
             color: "var(--pearl)",
             fontSize: "15px",
@@ -88,7 +94,7 @@ export default async function ExperiencePage({
             padding: "10px 20px",
             borderRadius: "3px",
             textDecoration: "none",
-          }}>Enquire Now</Link>
+          }}>Enquire Now</a>
         </div>
       </nav>
 
@@ -421,21 +427,28 @@ export default async function ExperiencePage({
 
             {/* Enquire button */}
             <div style={{ padding: "0 24px 24px" }}>
-              <Link href={`/?experience=${encodeURIComponent(experience.title)}#enquire`} style={{
-                display: "block",
-                width: "100%",
-                background: "var(--gold)",
-                color: "var(--abyss)",
-                fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "16px",
-                fontWeight: 600,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                padding: "16px",
-                borderRadius: "6px",
-                textDecoration: "none",
-                textAlign: "center",
-              }}>Enquire About This Experience</Link>
+              
+                href="#enquire-form"
+                onClick={e => {
+                  e.preventDefault();
+                  document.getElementById("enquire-form")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  background: "var(--gold)",
+                  color: "var(--abyss)",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  padding: "16px",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}>Enquire About This Experience</a>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "14px",
@@ -450,6 +463,47 @@ export default async function ExperiencePage({
           </div>
         </div>
       </div>
+      {/* ── ENQUIRY FORM ── */}
+      <section id="enquire-form" style={{
+        padding: "80px 40px",
+        background: "var(--ivory)",
+        borderTop: "0.5px solid var(--border)",
+      }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+          <div style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "13px",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "var(--teal)",
+            fontWeight: 500,
+            marginBottom: "12px",
+            textAlign: "center",
+          }}>Enquire About This Experience</div>
+          <h2 style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "clamp(28px, 4vw, 40px)",
+            color: "var(--charcoal)",
+            textAlign: "center",
+            marginBottom: "12px",
+          }}>{experience.title}</h2>
+          <p style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "16px",
+            color: "var(--muted)",
+            textAlign: "center",
+            lineHeight: 1.7,
+            marginBottom: "40px",
+          }}>
+            One of our consultants will be in touch within 24 hours
+            to begin crafting your personalised itinerary.
+          </p>
+          <EnquiryForm
+            experienceTitle={experience.title}
+            experienceUrl={`https://oceanandsafari.com/experiences/${experience.slug?.current}`}
+          />
+        </div>
+      </section>
     </main>
   );
 }
