@@ -56,6 +56,15 @@ export const experience = {
       title: 'Hero Image',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe the image for SEO and accessibility. e.g. "Aerial view of Maldives overwater bungalows at sunrise"',
+          validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO — please add a description'),
+        },
+      ],
     },
     {
       name: 'description',
