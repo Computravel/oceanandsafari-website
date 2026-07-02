@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { supabase } from "@/app/lib/supabase";
+import { useState, useEffect } from "react";
 
 interface Experience {
   _id: string;
@@ -37,6 +38,15 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", destination: "", message: ""
   });
+
+  // Pre-fill experience from URL if coming from experience page
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const experience = params.get("experience");
+    if (experience) {
+      setFormData(prev => ({ ...prev, destination: experience }));
+    }
+  }, []);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleSubmit = async () => {
@@ -969,10 +979,10 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
                 display: "block",
                 marginBottom: "6px",
                 fontWeight: 500,
-              }}>Destination in mind</label>
+              }}>Experience or destination in mind</label>
               <input
                 type="text"
-                placeholder="e.g. Mauritius, Serengeti..."
+                placeholder="e.g. Serengeti & Zanzibar, Mauritius Escape..."
                 value={formData.destination}
                 onChange={e => setFormData({...formData, destination: e.target.value})}
                 style={{

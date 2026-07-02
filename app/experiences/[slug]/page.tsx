@@ -78,7 +78,7 @@ export default async function ExperiencePage({
             alignItems: "center",
             gap: "6px",
           }}>← Back to experiences</Link>
-          <Link href="/#enquire" style={{
+          <Link href={`/#enquire?experience=${encodeURIComponent(experience.title)}`} style={{
             background: "var(--gold)",
             color: "var(--pearl)",
             fontSize: "15px",
@@ -421,7 +421,7 @@ export default async function ExperiencePage({
 
             {/* Enquire button */}
             <div style={{ padding: "0 24px 24px" }}>
-              <Link href="/#enquire" style={{
+              <Link href={`/#enquire?experience=${encodeURIComponent(experience.title)}`} style={{
                 display: "block",
                 width: "100%",
                 background: "var(--gold)",
@@ -435,7 +435,7 @@ export default async function ExperiencePage({
                 borderRadius: "6px",
                 textDecoration: "none",
                 textAlign: "center",
-              }}>Enquire About This Trip</Link>
+              }}>Enquire About This Experience</Link>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "14px",

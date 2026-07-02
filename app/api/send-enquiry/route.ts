@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'Ocean & Safari <enquiries@oceanandsafari.com>',
       to: 'lindsay@computravel.co.za',
-      subject: `New Enquiry from ${name} — ${destination}`,
+      subject: `New Experience Enquiry from ${name} — ${destination}`,
       html: `
         <h2>New Website Enquiry</h2>
         <p><strong>Name:</strong> ${name}</p>
