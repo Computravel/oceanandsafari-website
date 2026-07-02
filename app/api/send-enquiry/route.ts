@@ -73,6 +73,9 @@ export async function POST(request: NextRequest) {
             <div style="font-size: 11px; letter-spacing: 0.2em; color: rgba(247,242,234,0.5); text-transform: uppercase; margin-top: 4px;">
               Ocean & Safari · Luxury Travel
             </div>
+            <div style="font-size: 10px; letter-spacing: 0.16em; color: rgba(201,168,76,0.7); text-transform: uppercase; margin-top: 6px;">
+              by Computravel
+            </div>
           </div>
 
           <div style="background: #F7F2EA; padding: 32px; border-radius: 0 0 8px 8px;">
