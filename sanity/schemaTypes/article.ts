@@ -38,6 +38,21 @@ export const article = {
       title: 'Hero Image',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe the image for SEO and accessibility. e.g. "Zanzibar Stone Town waterfront at sunset with traditional dhow boats"',
+          validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO — please add a description'),
+        },
+        {
+          name: 'caption',
+          title: 'Caption (optional)',
+          type: 'string',
+          description: 'Shown below the image on the article page',
+        },
+      ],
     },
     {
       name: 'excerpt',
@@ -52,7 +67,25 @@ export const article = {
       type: 'array',
       of: [
         { type: 'block' },
-        { type: 'image', options: { hotspot: true } },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Describe the image for SEO and accessibility. e.g. "Zanzibar Stone Town waterfront at sunset"',
+              validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO — please add a description'),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+              description: 'Shown below the image on the article page',
+            },
+          ],
+        },
       ],
     },
     {
