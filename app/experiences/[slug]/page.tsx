@@ -218,23 +218,23 @@ export default async function ExperiencePage({
                 marginBottom: "20px",
               }}>What&apos;s Included</h2>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-                {experience.included?.length > 0 && (
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--teal)",
-                      marginBottom: "12px",
-                    }}>✓ Included</div>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "17px",
-                      color: "var(--charcoal)",
-                      lineHeight: 1.7,
-                    }}>
+                <div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "var(--teal)",
+                    marginBottom: "12px",
+                  }}>✓ Included</div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "17px",
+                    color: "var(--charcoal)",
+                    lineHeight: 1.7,
+                  }}>
+                    {experience.included?.length > 0 && (
                       <PortableText
                         value={experience.included}
                         components={{
@@ -259,26 +259,26 @@ export default async function ExperiencePage({
                           },
                         }}
                       />
-                    </div>
+                    )}
                   </div>
-                )}
-                {(
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--coral)",
-                      marginBottom: "12px",
-                    }}>✕ Not Included</div>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "17px",
-                      color: "var(--charcoal)",
-                      lineHeight: 1.7,
-                    }}>
+                </div>
+                <div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "var(--coral)",
+                    marginBottom: "12px",
+                  }}>✕ Not Included</div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "17px",
+                    color: "var(--charcoal)",
+                    lineHeight: 1.7,
+                  }}>
+                    {experience.notIncluded?.length > 0 && (
                       <PortableText
                         value={experience.notIncluded}
                         components={{
@@ -303,9 +303,9 @@ export default async function ExperiencePage({
                           },
                         }}
                       />
-                    </div>
+                    )}
                   </div>
-                }
+                </div>
               </div>
             </div>
           )}
