@@ -269,10 +269,39 @@ export default async function ArticlePage({
                   ),
                 },
                 types: {
-                  image: ({value}: any) => (
-                    <div style={{ margin: "40px 0" }}>
-                      <img
-                        src={value.asset?.url}
+                  image: ({value}: any) => {
+                    const imageurl = value.asset?.url ||
+                      (value.asset?._ref
+                        ? `https://cdn.sanity.io/images/ibvmvzmo/production/${value.asset._ref
+                            .replace('image-', '')
+                            .replace(/-(\w+)$/, '.$1')}`
+                        : null);
+                    if (!imageurl) return null;
+                    return (
+                      <div style={{ margin: "40px 0" }}>
+                        <img
+                          src={imageurl}
+                          alt={value.alt || ""}
+                          style={{
+                            width: "100%",
+                            borderradius: "6px",
+                            objectfit: "cover",
+                          }}
+                        />
+                        {value.caption && (
+                          <p style={{
+                            fontfamily: "var(--font-jost), sans-serif",
+                            fontsize: "13px",
+                            color: "var(--muted)",
+                            textalign: "center",
+                            margintop: "10px",
+                            fontstyle: "italic",
+                          }}>{value.caption}</p>
+                        )}
+                      </div>
+                    );
+                  },
+                },
                         alt={value.alt || ""}
                         style={{
                           width: "100%",
