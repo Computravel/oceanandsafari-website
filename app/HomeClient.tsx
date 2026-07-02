@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { supabase } from "@/app/lib/supabase";
 import { useState, useEffect } from "react";
+import { supabase } from "@/app/lib/supabase";
 
 interface Experience {
   _id: string;
