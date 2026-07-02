@@ -78,23 +78,25 @@ export default async function ExperiencePage({
             display: "flex",
             alignItems: "center",
             gap: "6px",
-          }}>← Back to experiences</Link>
-          href="#enquire-form"
+         }}>← Back to experiences</Link>
+          
+            href="#enquire-form"
             onClick={e => {
               e.preventDefault();
               document.getElementById("enquire-form")?.scrollIntoView({ behavior: "smooth" });
             }}
             style={{
-            background: "var(--gold)",
-            color: "var(--pearl)",
-            fontSize: "15px",
-            fontWeight: 500,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            padding: "10px 20px",
-            borderRadius: "3px",
-            textDecoration: "none",
-          }}>Enquire Now</a>
+              background: "var(--gold)",
+              color: "var(--pearl)",
+              fontSize: "15px",
+              fontWeight: 500,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              padding: "10px 20px",
+              borderRadius: "3px",
+              textDecoration: "none",
+              cursor: "pointer",
+            }}>Enquire Now</a>
         </div>
       </nav>
 
