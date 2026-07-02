@@ -204,17 +204,6 @@ export default async function ExperiencePage({
 }}>
   <PortableText value={experience.highlights} />
 </div>
-                    <span style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "19px",
-                      color: "var(--charcoal)",
-                      lineHeight: 1.6,
-                    }}>{highlight}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* Included / Not Included */}
           {(experience.included?.length > 0 || experience.notIncluded?.length > 0) && (
