@@ -1179,7 +1179,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
                 src="/asata.png"
                 alt="ASATA Member"
                 style={{
-                  height: "72px",
+                  height: "100px",
                   width: "auto",
                   opacity: 0.9,
                 }}
