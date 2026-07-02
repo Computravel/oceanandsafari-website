@@ -153,17 +153,7 @@ export default async function ArticlesPage() {
                   border: "0.5px solid var(--border)",
                   borderRadius: "8px",
                   overflow: "hidden",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                  }}
-                >
+                }}>
                   {/* Image */}
                   <div style={{ height: "200px", overflow: "hidden", position: "relative", background: "var(--abyss)" }}>
                     {article.heroImage ? (
