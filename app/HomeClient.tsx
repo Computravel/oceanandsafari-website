@@ -253,7 +253,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
               borderRadius: "3px",
               textDecoration: "none",
               display: "inline-block",
-            }}>Plan My Bespoke Trip</a>
+            }}>Plan My Exclusive Experience</a>
             <a href="#packages" style={{
               color: "rgba(247,242,234,0.75)",
               fontFamily: "var(--font-jost), sans-serif",
@@ -274,7 +274,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
-            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "Thompsons Partner", "A Computravel Company"].map((item) => (
+            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "A Computravel Company"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
@@ -1169,10 +1169,23 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
               color: "rgba(247,242,234,0.4)",
               lineHeight: 1.7,
               maxWidth: "240px",
+              marginBottom: "20px",
             }}>
               A division of Computravel — proudly South African,
               serving discerning travellers for over 25 years.
             </p>
+            <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
+              <img
+                src="/asata.png"
+                alt="ASATA Member"
+                style={{
+                  height: "48px",
+                  width: "auto",
+                  opacity: 0.85,
+                  filter: "brightness(0) invert(1)",
+                }}
+              />
+            </div>
           </div>
 
           {[
