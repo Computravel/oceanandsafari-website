@@ -176,7 +176,7 @@ export default async function ExperiencePage({
                 fontSize: "32px",
                 color: "var(--charcoal)",
                 marginBottom: "16px",
-              }}>About this experience</h2>
+              }}>About this Experience</h2>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "18px",
@@ -216,7 +216,7 @@ export default async function ExperiencePage({
                 fontSize: "32px",
                 color: "var(--charcoal)",
                 marginBottom: "20px",
-              }}>What&apos;s included</h2>
+              }}>What&apos;s Included</h2>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
                 {experience.included?.length > 0 && (
                   <div>
@@ -262,7 +262,7 @@ export default async function ExperiencePage({
                     </div>
                   </div>
                 )}
-                {experience.notIncluded?.length > 0 && (
+                {(
                   <div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
@@ -272,7 +272,7 @@ export default async function ExperiencePage({
                       textTransform: "uppercase",
                       color: "var(--coral)",
                       marginBottom: "12px",
-                    }}>✕ Not included</div>
+                    }}>✕ Not Included</div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
                       fontSize: "17px",
@@ -305,7 +305,7 @@ export default async function ExperiencePage({
                       />
                     </div>
                   </div>
-                )}
+                }
               </div>
             </div>
           )}
