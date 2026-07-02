@@ -180,7 +180,7 @@ export default async function ExperiencePage({
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "18px",
-                color: "var(--muted)",
+                color: "var(--charcoal)",
                 lineHeight: 1.85,
               }}>
                 <PortableText value={experience.description} />
@@ -196,7 +196,7 @@ export default async function ExperiencePage({
                 fontSize: "32px",
                 color: "var(--charcoal)",
                 marginBottom: "20px",
-              }}>Highlights</h2>
+              }}>Experience Highlights</h2>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "18px",
@@ -228,14 +228,37 @@ export default async function ExperiencePage({
                       textTransform: "uppercase",
                       color: "var(--teal)",
                       marginBottom: "12px",
-                    }}>Included</div>
+                    }}>✓ Included</div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
                       fontSize: "17px",
                       color: "var(--charcoal)",
                       lineHeight: 1.7,
                     }}>
-                      <PortableText value={experience.included} />
+                      <PortableText
+                        value={experience.included}
+                        components={{
+                          list: {
+                            bullet: ({children}: any) => (
+                              <ul style={{ paddingLeft: "20px", margin: "8px 0" }}>{children}</ul>
+                            ),
+                          },
+                          listItem: {
+                            bullet: ({children}: any) => (
+                              <li style={{
+                                marginBottom: "8px",
+                                listStyleType: "none",
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "10px",
+                              }}>
+                                <span style={{ color: "var(--teal)", flexShrink: 0 }}>✓</span>
+                                <span>{children}</span>
+                              </li>
+                            ),
+                          },
+                        }}
+                      />
                     </div>
                   </div>
                 )}
@@ -249,14 +272,37 @@ export default async function ExperiencePage({
                       textTransform: "uppercase",
                       color: "var(--coral)",
                       marginBottom: "12px",
-                    }}>Not included</div>
+                    }}>✕ Not included</div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
                       fontSize: "17px",
                       color: "var(--charcoal)",
                       lineHeight: 1.7,
                     }}>
-                      <PortableText value={experience.notIncluded} />
+                      <PortableText
+                        value={experience.notIncluded}
+                        components={{
+                          list: {
+                            bullet: ({children}: any) => (
+                              <ul style={{ paddingLeft: "20px", margin: "8px 0" }}>{children}</ul>
+                            ),
+                          },
+                          listItem: {
+                            bullet: ({children}: any) => (
+                              <li style={{
+                                marginBottom: "8px",
+                                listStyleType: "none",
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: "10px",
+                              }}>
+                                <span style={{ color: "var(--coral)", flexShrink: 0 }}>✕</span>
+                                <span>{children}</span>
+                              </li>
+                            ),
+                          },
+                        }}
+                      />
                     </div>
                   </div>
                 )}
