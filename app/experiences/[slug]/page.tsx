@@ -1,5 +1,5 @@
-import { PortableText } from '@portabletext/react'
 import { getExperience, getExperienceSlugs } from "@/sanity/lib/queries";
+import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -50,7 +50,7 @@ export default async function ExperiencePage({
           <div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "20px",
+              fontSize: "17px",
               fontWeight: 500,
               letterSpacing: "0.16em",
               color: "var(--charcoal)",
@@ -58,7 +58,7 @@ export default async function ExperiencePage({
             }}>Ocean & Safari</div>
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "15px",
+              fontSize: "12px",
               letterSpacing: "0.12em",
               color: "var(--muted)",
               textTransform: "uppercase",
@@ -69,7 +69,7 @@ export default async function ExperiencePage({
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <Link href="/" style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "18px",
+            fontSize: "15px",
             color: "var(--muted)",
             textDecoration: "none",
             display: "flex",
@@ -79,7 +79,7 @@ export default async function ExperiencePage({
           <Link href="/#enquire" style={{
             background: "var(--gold)",
             color: "var(--pearl)",
-            fontSize: "18px",
+            fontSize: "15px",
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
@@ -123,7 +123,7 @@ export default async function ExperiencePage({
           <div style={{
             display: "inline-block",
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "14px",
+            fontSize: "11px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             fontWeight: 500,
@@ -144,7 +144,7 @@ export default async function ExperiencePage({
           }}>{experience.title}</h1>
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "19px",
+            fontSize: "18px",
             color: "rgba(247,242,234,0.7)",
           }}>
             {experience.duration} nights · {experience.destination}{experience.country ? `, ${experience.country}` : ""}
@@ -177,7 +177,7 @@ export default async function ExperiencePage({
               }}>About this experience</h2>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "20px",
+                fontSize: "18px",
                 color: "var(--muted)",
                 lineHeight: 1.85,
               }}>
@@ -195,15 +195,16 @@ export default async function ExperiencePage({
                 color: "var(--charcoal)",
                 marginBottom: "20px",
               }}>Highlights</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <div style={{
-  fontFamily: "var(--font-jost), sans-serif",
-  fontSize: "19px",
-  color: "var(--charcoal)",
-  lineHeight: 1.8,
-}}>
-  <PortableText value={experience.highlights} />
-</div>
+              <div style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "18px",
+                color: "var(--charcoal)",
+                lineHeight: 1.8,
+              }}>
+                <PortableText value={experience.highlights} />
+              </div>
+            </div>
+          )}
 
           {/* Included / Not Included */}
           {(experience.included?.length > 0 || experience.notIncluded?.length > 0) && (
@@ -219,7 +220,7 @@ export default async function ExperiencePage({
                   <div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "16px",
+                      fontSize: "14px",
                       fontWeight: 500,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
@@ -227,20 +228,20 @@ export default async function ExperiencePage({
                       marginBottom: "12px",
                     }}>Included</div>
                     <div style={{
-  fontFamily: "var(--font-jost), sans-serif",
-  fontSize: "18px",
-  color: "var(--charcoal)",
-  lineHeight: 1.7,
-}}>
-  <PortableText value={experience.included} />
-</div>
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "17px",
+                      color: "var(--charcoal)",
+                      lineHeight: 1.7,
+                    }}>
+                      <PortableText value={experience.included} />
+                    </div>
                   </div>
                 )}
                 {experience.notIncluded?.length > 0 && (
                   <div>
                     <div style={{
                       fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "16px",
+                      fontSize: "14px",
                       fontWeight: 500,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
@@ -248,13 +249,13 @@ export default async function ExperiencePage({
                       marginBottom: "12px",
                     }}>Not included</div>
                     <div style={{
-  fontFamily: "var(--font-jost), sans-serif",
-  fontSize: "18px",
-  color: "var(--charcoal)",
-  lineHeight: 1.7,
-}}>
-  <PortableText value={experience.notIncluded} />
-</div>
+                      fontFamily: "var(--font-jost), sans-serif",
+                      fontSize: "17px",
+                      color: "var(--charcoal)",
+                      lineHeight: 1.7,
+                    }}>
+                      <PortableText value={experience.notIncluded} />
+                    </div>
                   </div>
                 )}
               </div>
@@ -271,7 +272,7 @@ export default async function ExperiencePage({
             }}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "15px",
+                fontSize: "13px",
                 fontWeight: 500,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
@@ -280,7 +281,7 @@ export default async function ExperiencePage({
               }}>Terms & Conditions</div>
               <p style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "17px",
+                fontSize: "16px",
                 color: "var(--muted)",
                 lineHeight: 1.7,
               }}>{experience.termsAndConditions}</p>
@@ -307,7 +308,7 @@ export default async function ExperiencePage({
             }}>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "16px",
+                fontSize: "14px",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 color: "rgba(247,242,234,0.5)",
@@ -322,7 +323,7 @@ export default async function ExperiencePage({
               }}>R{experience.priceFrom?.toLocaleString()}</div>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "16px",
+                fontSize: "14px",
                 color: "rgba(247,242,234,0.5)",
               }}>per person</div>
             </div>
@@ -355,13 +356,13 @@ export default async function ExperiencePage({
                 }}>
                   <span style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "16px",
+                    fontSize: "15px",
                     color: "var(--muted)",
                     flexShrink: 0,
                   }}>{item.label}</span>
                   <span style={{
                     fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "16px",
+                    fontSize: "15px",
                     color: "var(--charcoal)",
                     fontWeight: 500,
                     textAlign: "right",
@@ -378,7 +379,7 @@ export default async function ExperiencePage({
                 background: "var(--gold)",
                 color: "var(--abyss)",
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "18px",
+                fontSize: "16px",
                 fontWeight: 600,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
@@ -389,7 +390,7 @@ export default async function ExperiencePage({
               }}>Enquire About This Trip</Link>
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "16px",
+                fontSize: "14px",
                 color: "var(--muted)",
                 textAlign: "center",
                 marginTop: "12px",
