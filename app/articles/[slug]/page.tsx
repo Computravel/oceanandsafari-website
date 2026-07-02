@@ -45,19 +45,7 @@ export default async function ArticlePage({
 
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
-      <nav style={{
-        background: "rgba(247,242,234,0.97)",
-        borderBottom: "0.5px solid var(--border)",
-        padding: "0 40px",
-        height: "64px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        position: "sticky",
-        top: 0,
-        zIndex: 100,
-        backdropFilter: "blur(8px)",
-      }}>
+      <nav style={{ background: "rgba(247,242,234,0.97)", borderBottom: "0.5px solid var(--border)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(8px)" }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", letterSpacing: "0.02em", lineHeight: 1 }}>
             <span style={{ color: "var(--abyss)" }}>O</span>
@@ -138,12 +126,9 @@ export default async function ArticlePage({
             />
           </div>
         )}
-
         <div style={{ marginTop: "60px", padding: "40px", background: "var(--abyss)", borderRadius: "12px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--pearl)", marginBottom: "12px" }}>Ready to experience this for yourself?</div>
-          <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "rgba(247,242,234,0.6)", lineHeight: 1.7, marginBottom: "24px" }}>
-            Speak to an Ocean & Safari consultant and begin planning your bespoke journey today.
-          </p>
+          <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "rgba(247,242,234,0.6)", lineHeight: 1.7, marginBottom: "24px" }}>Speak to an Ocean & Safari consultant and begin planning your bespoke journey today.</p>
           <Link href="/#enquire" style={{ display: "inline-block", background: "var(--gold)", color: "var(--abyss)", fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", padding: "14px 32px", borderRadius: "4px", textDecoration: "none" }}>Plan My Exclusive Experience</Link>
         </div>
       </div>
