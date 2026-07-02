@@ -38,12 +38,19 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
     name: "", email: "", phone: "", destination: "", message: ""
   });
 
-  // Pre-fill experience from URL if coming from experience page
+  // Pre-fill experience from URL and scroll to form
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const experience = params.get("experience");
     if (experience) {
       setFormData(prev => ({ ...prev, destination: experience }));
+      // Small delay to ensure page has rendered before scrolling
+      setTimeout(() => {
+        const enquireSection = document.getElementById("enquire");
+        if (enquireSection) {
+          enquireSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500);
     }
   }, []);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
