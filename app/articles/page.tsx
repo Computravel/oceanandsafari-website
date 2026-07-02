@@ -1,10 +1,144 @@
-import { getArticles } from "@/sanity/lib/queries";
+import { getArticle, getArticleSlugs } from "@/sanity/lib/queries";
+import { PortableText } from "@portabletext/react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 export const revalidate = 30;
 
-export default async function ArticlesPage() {
-  const articles = await getArticles();
+export async function generateStaticParams() {
+  const slugs = await getArticleSlugs();
+  return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+  return {
+    title: article?.seoTitle || article?.title || "Ocean & Safari Journal",
+    description: article?.seoDescription || article?.excerpt || "",
+  };
+}
+
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+
+  if (!article) notFound();
+
+  const categoryLabel = article.category?.replace(/-/g, ' ') || '';
+
+  const portableTextComponents = {
+    block: {
+      h2: ({children}: any) => (
+        <h2 style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "32px",
+          color: "var(--charcoal)",
+          fontWeight: 400,
+          marginTop: "48px",
+          marginBottom: "16px",
+          lineHeight: 1.3,
+        }}>{children}</h2>
+      ),
+      h3: ({children}: any) => (
+        <h3 style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "24px",
+          color: "var(--charcoal)",
+          fontWeight: 400,
+          marginTop: "36px",
+          marginBottom: "12px",
+        }}>{children}</h3>
+      ),
+      normal: ({children}: any) => (
+        <p style={{
+          marginBottom: "24px",
+          lineHeight: 1.85,
+        }}>{children}</p>
+      ),
+    },
+    list: {
+      bullet: ({children}: any) => (
+        <ul style={{
+          paddingLeft: "24px",
+          marginBottom: "24px",
+        }}>{children}</ul>
+      ),
+      number: ({children}: any) => (
+        <ol style={{
+          paddingLeft: "24px",
+          marginBottom: "24px",
+        }}>{children}</ol>
+      ),
+    },
+    listItem: {
+      bullet: ({children}: any) => (
+        <li style={{
+          marginBottom: "10px",
+          lineHeight: 1.7,
+          listStyleType: "none",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "12px",
+        }}>
+          <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "2px" }}>◆</span>
+          <span>{children}</span>
+        </li>
+      ),
+    },
+    marks: {
+      strong: ({children}: any) => (
+        <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
+      ),
+      em: ({children}: any) => (
+        <em style={{ fontStyle: "italic", color: "var(--charcoal)" }}>{children}</em>
+      ),
+    },
+    types: {
+      image: ({value}: any) => {
+        const ref = value.asset?._ref || '';
+        const imageUrl = value.asset?.url ||
+          (ref
+            ? `https://cdn.sanity.io/images/ibvmvzmo/production/${ref
+                .replace('image-', '')
+                .replace(/-(\w+)$/, '.$1')}`
+            : null);
+        if (!imageUrl) return null;
+        return (
+          <div style={{ margin: "40px 0" }}>
+            <img
+              src={imageUrl}
+              alt={value.alt || ""}
+              style={{
+                width: "100%",
+                borderRadius: "6px",
+                objectFit: "cover",
+              }}
+            />
+            {value.caption && (
+              <p style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "13px",
+                color: "var(--muted)",
+                textAlign: "center",
+                marginTop: "10px",
+                fontStyle: "italic",
+              }}>{value.caption}</p>
+            )}
+          </div>
+        );
+      },
+    },
+  };
 
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
@@ -55,12 +189,12 @@ export default async function ArticlesPage() {
         </Link>
 
         <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <Link href="/" style={{
+          <Link href="/articles" style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "15px",
             color: "var(--muted)",
             textDecoration: "none",
-          }}>← Back to home</Link>
+          }}>← Travel Journal</Link>
           <Link href="/#enquire" style={{
             background: "var(--gold)",
             color: "var(--pearl)",
@@ -75,174 +209,146 @@ export default async function ArticlesPage() {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section style={{
+      {/* ── HERO IMAGE ── */}
+      <div style={{
+        height: "55vh",
+        position: "relative",
+        overflow: "hidden",
         background: "var(--abyss)",
-        padding: "80px 40px 60px",
-        textAlign: "center",
       }}>
+        {article.heroImage && (
+          <img
+            src={article.heroImage}
+            alt={article.heroImageAlt || article.title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: 0.85,
+            }}
+          />
+        )}
         <div style={{
-          fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "11px",
-          letterSpacing: "0.24em",
-          textTransform: "uppercase",
-          color: "var(--teal)",
-          fontWeight: 500,
-          marginBottom: "16px",
-        }}>Travel Journal</div>
-        <h1 style={{
-          fontFamily: "var(--font-cormorant), serif",
-          fontSize: "clamp(36px, 5vw, 56px)",
-          fontWeight: 400,
-          color: "var(--pearl)",
-          lineHeight: 1.2,
-          marginBottom: "16px",
-        }}>Stories, Guides & Inspiration</h1>
-        <p style={{
-          fontFamily: "var(--font-jost), sans-serif",
-          fontSize: "17px",
-          color: "rgba(247,242,234,0.6)",
-          maxWidth: "520px",
-          margin: "0 auto",
-          lineHeight: 1.7,
-        }}>
-          Expert destination guides, travel inspiration and insider knowledge
-          from our luxury travel specialists.
-        </p>
-      </section>
-
-      {/* ── ARTICLES GRID ── */}
-      <section style={{ padding: "64px 40px", maxWidth: "1100px", margin: "0 auto" }}>
-
-        {/* Category filter labels */}
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to top, rgba(11,31,58,0.8) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)",
+        }} />
         <div style={{
-          display: "flex",
-          gap: "12px",
-          flexWrap: "wrap",
-          marginBottom: "40px",
+          position: "absolute",
+          bottom: "40px",
+          left: "40px",
+          right: "40px",
+          maxWidth: "800px",
         }}>
-          {["All", "Destination Guide", "Travel Tips", "Client Stories", "Cruise Guides", "Safari Guides", "Community & Sustainability", "Travel Requirements"].map((cat) => (
-            <div key={cat} style={{
-              fontFamily: "var(--font-jost), sans-serif",
-              fontSize: "12px",
-              letterSpacing: "0.08em",
-              color: cat === "All" ? "var(--pearl)" : "var(--muted)",
-              background: cat === "All" ? "var(--abyss)" : "transparent",
-              border: "0.5px solid var(--border)",
-              padding: "6px 14px",
-              borderRadius: "20px",
-              cursor: "pointer",
-            }}>{cat}</div>
-          ))}
-        </div>
-
-        {articles && articles.length > 0 ? (
           <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "24px",
-          }}>
-            {articles.map((article: any) => (
-              <Link
-                key={article._id}
-                href={`/articles/${article.slug?.current}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div style={{
-                  background: "white",
-                  border: "0.5px solid var(--border)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                }}>
-                  {/* Image */}
-                  <div style={{ height: "200px", overflow: "hidden", position: "relative", background: "var(--abyss)" }}>
-                    {article.heroImage ? (
-                      <img
-                        src={article.heroImage}
-                        alt={article.heroImageAlt || article.title}
-                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                      />
-                    ) : (
-                      <div style={{
-                        width: "100%",
-                        height: "100%",
-                        background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)",
-                      }} />
-                    )}
-                    <div style={{
-                      position: "absolute",
-                      top: "12px",
-                      left: "12px",
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "10px",
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      fontWeight: 500,
-                      background: "rgba(11,31,58,0.75)",
-                      color: "white",
-                      padding: "4px 10px",
-                      borderRadius: "2px",
-                      backdropFilter: "blur(4px)",
-                    }}>{article.category?.replace(/-/g, ' ')}</div>
-                  </div>
-
-                  {/* Content */}
-                  <div style={{ padding: "20px" }}>
-                    <h2 style={{
-                      fontFamily: "var(--font-cormorant), serif",
-                      fontSize: "20px",
-                      color: "var(--charcoal)",
-                      lineHeight: 1.3,
-                      marginBottom: "10px",
-                    }}>{article.title}</h2>
-                    {article.excerpt && (
-                      <p style={{
-                        fontFamily: "var(--font-jost), sans-serif",
-                        fontSize: "14px",
-                        color: "var(--muted)",
-                        lineHeight: 1.7,
-                        marginBottom: "16px",
-                      }}>{article.excerpt}</p>
-                    )}
-                    <div style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      paddingTop: "14px",
-                      borderTop: "0.5px solid var(--border)",
-                    }}>
-                      <span style={{
-                        fontFamily: "var(--font-jost), sans-serif",
-                        fontSize: "12px",
-                        color: "var(--muted)",
-                      }}>
-                        {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}
-                      </span>
-                      <span style={{
-                        fontFamily: "var(--font-jost), sans-serif",
-                        fontSize: "12px",
-                        color: "var(--gold)",
-                        fontWeight: 500,
-                        letterSpacing: "0.06em",
-                      }}>Read more →</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div style={{
-            textAlign: "center",
-            padding: "80px 40px",
-            color: "var(--muted)",
+            display: "inline-block",
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            fontWeight: 500,
+            background: "rgba(29,165,160,0.8)",
+            color: "white",
+            padding: "4px 12px",
+            borderRadius: "2px",
+            marginBottom: "12px",
+            backdropFilter: "blur(4px)",
+          }}>{categoryLabel}</div>
+          <h1 style={{
             fontFamily: "var(--font-cormorant), serif",
-            fontSize: "24px",
+            fontSize: "clamp(28px, 4vw, 52px)",
+            fontWeight: 400,
+            color: "var(--pearl)",
+            lineHeight: 1.2,
+            marginBottom: "12px",
+          }}>{article.title}</h1>
+          {article.publishedAt && (
+            <div style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "14px",
+              color: "rgba(247,242,234,0.6)",
+            }}>
+              {new Date(article.publishedAt).toLocaleDateString('en-ZA', { dateStyle: 'long' })}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── ARTICLE CONTENT ── */}
+      <div style={{
+        maxWidth: "780px",
+        margin: "0 auto",
+        padding: "60px 40px",
+      }}>
+
+        {/* Excerpt */}
+        {article.excerpt && (
+          <p style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "22px",
+            color: "var(--charcoal)",
+            lineHeight: 1.7,
+            fontStyle: "italic",
+            marginBottom: "40px",
+            paddingBottom: "40px",
+            borderBottom: "0.5px solid var(--border)",
+          }}>{article.excerpt}</p>
+        )}
+
+        {/* Body */}
+        {article.body && (
+          <div style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "18px",
+            color: "var(--charcoal)",
+            lineHeight: 1.85,
           }}>
-            Articles coming soon — check back shortly.
+            <PortableText
+              value={article.body}
+              components={portableTextComponents}
+            />
           </div>
         )}
-      </section>
+
+        {/* CTA */}
+        <div style={{
+          marginTop: "60px",
+          padding: "40px",
+          background: "var(--abyss)",
+          borderRadius: "12px",
+          textAlign: "center",
+        }}>
+          <div style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "28px",
+            color: "var(--pearl)",
+            marginBottom: "12px",
+          }}>Ready to experience this for yourself?</div>
+          <p style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "16px",
+            color: "rgba(247,242,234,0.6)",
+            lineHeight: 1.7,
+            marginBottom: "24px",
+          }}>
+            Speak to an Ocean & Safari consultant and begin planning
+            your bespoke journey today.
+          </p>
+          <Link href="/#enquire" style={{
+            display: "inline-block",
+            background: "var(--gold)",
+            color: "var(--abyss)",
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "14px",
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            padding: "14px 32px",
+            borderRadius: "4px",
+            textDecoration: "none",
+          }}>Plan My Exclusive Experience</Link>
+        </div>
+      </div>
 
     </main>
   );
