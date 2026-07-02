@@ -1,5 +1,7 @@
 import { client } from './client'
 
+const options = { next: { revalidate: 30 } }
+
 // Fetch all published experiences
 export async function getExperiences() {
   return client.fetch(`
@@ -16,7 +18,7 @@ export async function getExperiences() {
       highlights,
       slug
     }
-  `)
+  `, {}, options)
 }
 
 // Fetch all active exclusive escapes
@@ -32,7 +34,7 @@ export async function getExclusiveEscapes() {
       expiryDate,
       "linkedExperience": linkedExperience->slug.current
     }
-  `)
+  `, {}, options)
 }
 
 // Fetch all published articles
@@ -47,8 +49,9 @@ export async function getArticles() {
       publishedAt,
       slug
     }
-  `)
+  `, {}, options)
 }
+
 // Fetch single experience by slug
 export async function getExperience(slug: string) {
   return client.fetch(`
@@ -82,7 +85,7 @@ export async function getExperience(slug: string) {
       termsAndConditions,
       slug
     }
-  `, { slug })
+  `, { slug }, options)
 }
 
 // Fetch all experience slugs for static generation
@@ -91,5 +94,5 @@ export async function getExperienceSlugs() {
     *[_type == "experience" && published == true] {
       "slug": slug.current
     }
-  `)
+  `, {}, options)
 }

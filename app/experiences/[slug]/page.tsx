@@ -3,6 +3,8 @@ import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const revalidate = 30;
+
 export async function generateStaticParams() {
   const slugs = await getExperienceSlugs();
   return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
