@@ -47,7 +47,9 @@ export async function getArticles() {
       excerpt,
       "heroImage": heroImage.asset->url,
       publishedAt,
-      slug
+      slug,
+      seoTitle,
+      seoDescription
     }
   `, {}, options)
 }
@@ -83,7 +85,9 @@ export async function getExperience(slug: string) {
       offerExpires,
       tripReference,
       termsAndConditions,
-      slug
+      slug,
+      seoTitle,
+      seoDescription
     }
   `, { slug }, options)
 }

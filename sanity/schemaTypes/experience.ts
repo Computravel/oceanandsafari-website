@@ -194,6 +194,21 @@ export const experience = {
       initialValue: false,
       description: 'Toggle to make this experience visible on the website',
     },
+    {
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description: 'Appears in Google search results. Ideally 50-60 characters.',
+      validation: (Rule: any) => Rule.max(60).warning('SEO titles over 60 characters may be truncated in Google'),
+    },
+    {
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'text',
+      rows: 3,
+      description: 'Appears under the title in Google search results. Ideally 140-160 characters.',
+      validation: (Rule: any) => Rule.max(160).warning('SEO descriptions over 160 characters may be truncated in Google'),
+    },
   ],
   preview: {
     select: {
