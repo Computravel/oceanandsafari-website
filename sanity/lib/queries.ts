@@ -115,7 +115,15 @@ export async function getArticle(slug: string) {
       excerpt,
       "heroImage": heroImage.asset->url,
       "heroImageAlt": heroImage.alt,
-      body,
+      body[] {
+        ...,
+        _type == "image" => {
+          ...,
+          alt,
+          caption,
+          "asset": asset->
+        }
+      },
       publishedAt,
       seoTitle,
       seoDescription,
