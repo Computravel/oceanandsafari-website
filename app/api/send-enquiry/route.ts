@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 
     // Email to Lindsay
     await resend.emails.send({
-      from: 'Ocean & Safari <onboarding@resend.dev>',
+      from: 'Ocean & Safari <enquiries@oceanandsafari.com>',
       to: 'lindsay@computravel.co.za',
       subject: `New Experience Enquiry from ${name} — ${destination}`,
       html: `
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
 
     // Confirmation email to client
     await resend.emails.send({
-      from: 'Ocean & Safari <onboarding@resend.dev>',
+      from: 'Ocean & Safari <enquiries@oceanandsafari.com>',
       to: email,
       subject: `Your enquiry about ${destination} — Ocean & Safari`,
       html: `
