@@ -38,6 +38,110 @@ export default async function ArticlePage({
 
   const categoryLabel = article.category?.replace(/-/g, ' ') || '';
 
+  const portableTextComponents = {
+    block: {
+      h2: ({children}: any) => (
+        <h2 style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "32px",
+          color: "var(--charcoal)",
+          fontWeight: 400,
+          marginTop: "48px",
+          marginBottom: "16px",
+          lineHeight: 1.3,
+        }}>{children}</h2>
+      ),
+      h3: ({children}: any) => (
+        <h3 style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "24px",
+          color: "var(--charcoal)",
+          fontWeight: 400,
+          marginTop: "36px",
+          marginBottom: "12px",
+        }}>{children}</h3>
+      ),
+      normal: ({children}: any) => (
+        <p style={{
+          marginBottom: "24px",
+          lineHeight: 1.85,
+        }}>{children}</p>
+      ),
+    },
+    list: {
+      bullet: ({children}: any) => (
+        <ul style={{
+          paddingLeft: "24px",
+          marginBottom: "24px",
+        }}>{children}</ul>
+      ),
+      number: ({children}: any) => (
+        <ol style={{
+          paddingLeft: "24px",
+          marginBottom: "24px",
+        }}>{children}</ol>
+      ),
+    },
+    listItem: {
+      bullet: ({children}: any) => (
+        <li style={{
+          marginBottom: "10px",
+          lineHeight: 1.7,
+          listStyleType: "none",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "12px",
+        }}>
+          <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "2px" }}>◆</span>
+          <span>{children}</span>
+        </li>
+      ),
+    },
+    marks: {
+      strong: ({children}: any) => (
+        <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
+      ),
+      em: ({children}: any) => (
+        <em style={{ fontStyle: "italic", color: "var(--charcoal)" }}>{children}</em>
+      ),
+    },
+    types: {
+      image: ({value}: any) => {
+        const ref = value.asset?._ref || '';
+        const imageUrl = value.asset?.url ||
+          (ref
+            ? `https://cdn.sanity.io/images/ibvmvzmo/production/${ref
+                .replace('image-', '')
+                .replace(/-(\w+)$/, '.$1')}`
+            : null);
+        if (!imageUrl) return null;
+        return (
+          <div style={{ margin: "40px 0" }}>
+            <img
+              src={imageUrl}
+              alt={value.alt || ""}
+              style={{
+                width: "100%",
+                borderRadius: "6px",
+                objectFit: "cover",
+              }}
+            />
+            {value.caption && (
+              <p style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "13px",
+                color: "var(--muted)",
+                textAlign: "center",
+                marginTop: "10px",
+                fontStyle: "italic",
+              }}>{value.caption}</p>
+            )}
+          </div>
+        );
+      },
+    },
+  };
+
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
 
