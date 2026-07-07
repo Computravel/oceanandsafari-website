@@ -16,10 +16,10 @@ export const structure: StructureResolver = (S) =>
                 .documentId(documentId)
                 .schemaType('article')
                 .views([
-                  S.view.form().title('✏️ Edit'),
+                  S.view.form().title('Edit'),
                   S.view
                     .component(ViewArticleOnSite)
-                    .title('🌐 View on Site'),
+                    .title('View on Site'),
                 ])
             )
         ),
@@ -35,10 +35,10 @@ export const structure: StructureResolver = (S) =>
                 .documentId(documentId)
                 .schemaType('experience')
                 .views([
-                  S.view.form().title('✏️ Edit'),
+                  S.view.form().title('Edit'),
                   S.view
                     .component(ViewExperienceOnSite)
-                    .title('🌐 View on Site'),
+                    .title('View on Site'),
                 ])
             )
         ),

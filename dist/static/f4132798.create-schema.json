@@ -1,0 +1,1747 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "slug"
+      }
+    ],
+    "name": "media.tag",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Destination Guide",
+              "value": "destination-guide"
+            },
+            {
+              "title": "Travel Tips",
+              "value": "travel-tips"
+            },
+            {
+              "title": "Client Stories",
+              "value": "client-stories"
+            },
+            {
+              "title": "Cruise Guides",
+              "value": "cruise-guides"
+            },
+            {
+              "title": "Safari Guides",
+              "value": "safari-guides"
+            },
+            {
+              "title": "Community & Sustainability",
+              "value": "community-sustainability"
+            },
+            {
+              "title": "Important Travel Requirements",
+              "value": "travel-requirements"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "destination-guide",
+                  "travel-tips",
+                  "client-stories",
+                  "cruise-guides",
+                  "safari-guides",
+                  "community-sustainability",
+                  "travel-requirements"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "warning",
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "message": "Alt text is important for SEO — please add a description"
+              }
+            ],
+            "description": "Describe the image for SEO and accessibility. e.g. \"Zanzibar Stone Town waterfront at sunset with traditional dhow boats\"",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          },
+          {
+            "description": "Shown below the image on the article page",
+            "name": "caption",
+            "type": "string",
+            "title": "Caption (optional)"
+          }
+        ],
+        "name": "heroImage",
+        "type": "image"
+      },
+      {
+        "rows": 3,
+        "description": "Brief summary shown in article listings",
+        "name": "excerpt",
+        "type": "text",
+        "title": "Short excerpt"
+      },
+      {
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "warning",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "message": "Alt text is important for SEO — please add a description"
+                  }
+                ],
+                "description": "Describe the image for SEO and accessibility. e.g. \"Zanzibar Stone Town waterfront at sunset\"",
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              },
+              {
+                "description": "Shown below the image on the article page",
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Article Body"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date"
+      },
+      {
+        "initialValue": false,
+        "description": "Toggle to make this article visible on the website",
+        "name": "published",
+        "type": "boolean"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "message": "SEO titles over 60 characters may be truncated in Google"
+          }
+        ],
+        "description": "Appears in Google search results. Ideally 50-60 characters.",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "SEO Title"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "message": "SEO descriptions over 160 characters may be truncated in Google"
+          }
+        ],
+        "description": "Appears under the title in Google search results. Ideally 140-160 characters.",
+        "name": "seoDescription",
+        "type": "text",
+        "title": "SEO Description"
+      }
+    ],
+    "name": "article",
+    "type": "document",
+    "title": "Articles"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Safari",
+              "value": "safari"
+            },
+            {
+              "title": "Island",
+              "value": "island"
+            },
+            {
+              "title": "Cruise",
+              "value": "cruise"
+            },
+            {
+              "title": "Coastal",
+              "value": "coastal"
+            },
+            {
+              "title": "Rail",
+              "value": "rail"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "safari",
+                  "island",
+                  "cruise",
+                  "coastal",
+                  "rail"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "destination",
+        "type": "string"
+      },
+      {
+        "name": "country",
+        "type": "string"
+      },
+      {
+        "name": "duration",
+        "type": "number",
+        "title": "Duration (nights)"
+      },
+      {
+        "name": "priceFrom",
+        "type": "number",
+        "title": "Price From (R pp)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "warning",
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "message": "Alt text is important for SEO — please add a description"
+              }
+            ],
+            "description": "Describe the image for SEO and accessibility. e.g. \"Aerial view of Maldives overwater bungalows at sunrise\"",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "heroImage",
+        "type": "image"
+      },
+      {
+        "description": "Full formatted description with rich text support",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "description",
+        "type": "array"
+      },
+      {
+        "description": "Key selling points — paste multiple lines at once, use bullet points",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "highlights",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "itinerary",
+        "type": "array"
+      },
+      {
+        "description": "Paste multiple items at once — use bullet points or numbered list",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "included",
+        "type": "array",
+        "title": "What is Included"
+      },
+      {
+        "description": "Paste multiple items at once — use bullet points or numbered list",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "notIncluded",
+        "type": "array",
+        "title": "What is Not Included"
+      },
+      {
+        "name": "departureDate",
+        "type": "date"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Included",
+              "value": "included"
+            },
+            {
+              "title": "Not Included",
+              "value": "not-included"
+            }
+          ]
+        },
+        "name": "flights",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Included",
+              "value": "included"
+            },
+            {
+              "title": "Not Included",
+              "value": "not-included"
+            }
+          ]
+        },
+        "name": "transfers",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "accommodation",
+        "type": "text"
+      },
+      {
+        "description": "Cruises only",
+        "name": "shipName",
+        "type": "string"
+      },
+      {
+        "description": "Cruises only",
+        "name": "cruiseLine",
+        "type": "string"
+      },
+      {
+        "name": "departureCity",
+        "type": "string"
+      },
+      {
+        "name": "arrivalCity",
+        "type": "string"
+      },
+      {
+        "initialValue": "Check with travel advisor",
+        "name": "needVisas",
+        "type": "string",
+        "title": "Visa Requirements"
+      },
+      {
+        "name": "validFrom",
+        "type": "date",
+        "title": "Travel Valid From"
+      },
+      {
+        "name": "validTo",
+        "type": "date",
+        "title": "Travel Valid To"
+      },
+      {
+        "name": "offerExpires",
+        "type": "date"
+      },
+      {
+        "name": "tripReference",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "name": "termsAndConditions",
+        "type": "text",
+        "title": "Terms and Conditions"
+      },
+      {
+        "initialValue": false,
+        "description": "Toggle to make this experience visible on the website",
+        "name": "published",
+        "type": "boolean"
+      },
+      {
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "message": "SEO titles over 60 characters may be truncated in Google"
+          }
+        ],
+        "description": "Appears in Google search results. Ideally 50-60 characters.",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "SEO Title"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "warning",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "message": "SEO descriptions over 160 characters may be truncated in Google"
+          }
+        ],
+        "description": "Appears under the title in Google search results. Ideally 140-160 characters.",
+        "name": "seoDescription",
+        "type": "text",
+        "title": "SEO Description"
+      }
+    ],
+    "name": "experience",
+    "type": "document",
+    "title": "Experiences"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Describe the image for SEO and accessibility",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "heroImage",
+        "type": "image",
+        "title": "Image"
+      },
+      {
+        "name": "originalPrice",
+        "type": "number",
+        "title": "Original Price (R pp)"
+      },
+      {
+        "name": "offerPrice",
+        "type": "number",
+        "title": "Offer Price (R pp)"
+      },
+      {
+        "name": "expiryDate",
+        "type": "date"
+      },
+      {
+        "description": "Link to the full experience page",
+        "to": [
+          {
+            "type": "experience"
+          }
+        ],
+        "name": "linkedExperience",
+        "type": "reference"
+      },
+      {
+        "initialValue": true,
+        "description": "Toggle to show or hide this escape on the homepage",
+        "name": "active",
+        "type": "boolean"
+      }
+    ],
+    "name": "exclusiveEscape",
+    "type": "document",
+    "title": "Exclusive Escapes"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Cruise Line Name"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "rows": 4,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "highlights",
+        "type": "array"
+      },
+      {
+        "description": "e.g. MSC Bellissima, MSC Seashore",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "shipClasses",
+        "type": "array"
+      },
+      {
+        "description": "e.g. Mediterranean, Caribbean, Indian Ocean",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "destinationsServed",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            3,
+            4,
+            5
+          ]
+        },
+        "name": "starRating",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Luxury",
+              "value": "luxury"
+            },
+            {
+              "title": "Premium",
+              "value": "premium"
+            },
+            {
+              "title": "Contemporary",
+              "value": "contemporary"
+            },
+            {
+              "title": "Expedition",
+              "value": "expedition"
+            },
+            {
+              "title": "River",
+              "value": "river"
+            }
+          ]
+        },
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "name": "published",
+        "type": "boolean"
+      }
+    ],
+    "name": "cruiseLine",
+    "type": "document",
+    "title": "Cruise Lines"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Resort / Hotel Name"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "description": "e.g. North Malé Atoll, Maldives",
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            3,
+            4,
+            5
+          ]
+        },
+        "name": "starRating",
+        "type": "number"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Photo Gallery"
+      },
+      {
+        "rows": 4,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "highlights",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Honeymoon",
+              "value": "honeymoon"
+            },
+            {
+              "title": "Family",
+              "value": "family"
+            },
+            {
+              "title": "Solo",
+              "value": "solo"
+            },
+            {
+              "title": "Anniversary",
+              "value": "anniversary"
+            },
+            {
+              "title": "Groups",
+              "value": "groups"
+            },
+            {
+              "title": "Business",
+              "value": "business"
+            }
+          ]
+        },
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "bestFor",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Luxury (R15,000+ pp/night)",
+              "value": "luxury"
+            },
+            {
+              "title": "Premium (R8,000–R15,000 pp/night)",
+              "value": "premium"
+            },
+            {
+              "title": "Superior (R4,000–R8,000 pp/night)",
+              "value": "superior"
+            }
+          ]
+        },
+        "name": "priceRange",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "name": "published",
+        "type": "boolean"
+      }
+    ],
+    "name": "resort",
+    "type": "document",
+    "title": "Resorts & Hotels"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Safari Operator Name"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "description": "e.g. Serengeti, Okavango Delta, Kruger",
+        "name": "region",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Photo Gallery"
+      },
+      {
+        "rows": 4,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "highlights",
+        "type": "array"
+      },
+      {
+        "description": "e.g. Serengeti National Park, Ngorongoro Crater",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "parksAndReserves",
+        "type": "array",
+        "title": "Parks & Reserves Covered"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Luxury Tented Camp",
+              "value": "luxury-tented"
+            },
+            {
+              "title": "Lodge",
+              "value": "lodge"
+            },
+            {
+              "title": "Mobile Safari",
+              "value": "mobile"
+            },
+            {
+              "title": "Private Villa",
+              "value": "private-villa"
+            },
+            {
+              "title": "Mixed",
+              "value": "mixed"
+            }
+          ]
+        },
+        "name": "accommodationStyle",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Ultra Luxury (R30,000+ pp/night)",
+              "value": "ultra-luxury"
+            },
+            {
+              "title": "Luxury (R15,000–R30,000 pp/night)",
+              "value": "luxury"
+            },
+            {
+              "title": "Premium (R8,000–R15,000 pp/night)",
+              "value": "premium"
+            }
+          ]
+        },
+        "name": "priceRange",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "name": "published",
+        "type": "boolean"
+      }
+    ],
+    "name": "safari",
+    "type": "document",
+    "title": "Safaris"
+  }
+]
