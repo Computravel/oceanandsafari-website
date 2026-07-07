@@ -63,7 +63,7 @@ export function ViewOnSite({ document, type }: Props) {
               letterSpacing: '0.06em',
             }}
           >
-            {'→ View on Ocean & Safari'}
+            {'View on Ocean & Safari →'}
           </a>
           <p style={{ color: '#9C8E7A', fontSize: '12px', textAlign: 'center' }}>
             {'Opens in a new tab · Changes may take up to 30 seconds to appear'}
