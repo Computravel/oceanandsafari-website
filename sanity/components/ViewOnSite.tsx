@@ -85,7 +85,7 @@ export function ViewOnSite({ document, type }: Props) {
 export function ViewArticleOnSite({ document }: { document: any }) {
   return <ViewOnSite document={document} type="articles" />
 }
-
+ 
 export function ViewExperienceOnSite({ document }: { document: any }) {
   return <ViewOnSite document={document} type="experiences" />
 }
