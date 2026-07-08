@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/app/lib/supabase";
 
 interface Experience {
@@ -34,7 +34,22 @@ interface Props {
 }
 
 export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
-  const [formData, setFormData] = useState({
+  const [activeVideo, setActiveVideo] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (video) {
+        if (i === activeVideo) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      }
+    });
+  }, [activeVideo]);
+    const [formData, setFormData] = useState({
     name: "", email: "", phone: "", destination: "", message: ""
   });
 
@@ -176,16 +191,28 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         overflow: "hidden",
         padding: "80px 40px",
       }}>
-        <video autoPlay muted loop playsInline style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: 0,
-        }}>
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+        {["/hero-island.mp4", "/hero-safari.mp4", "/hero-cruise.mp4"].map((src, i) => (
+          <video
+            key={src}
+            autoPlay={i === 0}
+            muted
+            playsInline
+            ref={(el) => { videoRefs.current[i] = el; }}
+            onEnded={() => setActiveVideo((prev) => (prev + 1) % 3)}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 0,
+              opacity: activeVideo === i ? 1 : 0,
+              transition: "opacity 1.5s ease-in-out",
+            }}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ))}
 
         <div style={{
           position: "absolute",
