@@ -64,9 +64,9 @@ export default async function ArticlePage({
         </div>
       </nav>
 
-      <div style={{ height: "55vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
+      <div style={{ position: "relative", background: "var(--abyss)" }}>
         {article.heroImage && (
-          <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+          <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "auto", display: "block", opacity: 0.85 }} />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.8) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)" }} />
         <div style={{ position: "absolute", bottom: "40px", left: "40px", right: "40px", maxWidth: "800px" }}>
