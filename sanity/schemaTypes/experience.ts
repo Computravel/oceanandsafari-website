@@ -255,6 +255,19 @@ export const experience = {
       type: 'text',
       rows: 4,
     },
+   {
+      name: 'sourceUrl',
+      title: 'Source URL',
+      type: 'url',
+      description: 'Internal only — where this package information came from e.g. Thompsons, tour operator website',
+    },
+    {
+      name: 'internalNotes',
+      title: 'Internal Notes',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Internal only — notes about this experience, future updates needed, pricing review dates etc. Never shown on the website.',
+    },
     {
       name: 'published',
       title: 'Published',
