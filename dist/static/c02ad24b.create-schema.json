@@ -1622,6 +1622,87 @@
         "type": "string"
       },
       {
+        "description": "Add YouTube videos or upload video files to showcase this cruise line",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123",
+                "name": "url",
+                "type": "url",
+                "title": "YouTube URL"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "youtubeEmbed",
+            "title": "YouTube Video"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "accept": "video/*"
+                },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Upload an MP4 video file. Keep under 100MB for best performance.",
+                "name": "video",
+                "type": "file",
+                "title": "Video File"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "uploadedVideo"
+          }
+        ],
+        "name": "videos",
+        "type": "array"
+      },
+      {
         "initialValue": false,
         "name": "published",
         "type": "boolean"
@@ -1775,6 +1856,87 @@
         "type": "string"
       },
       {
+        "description": "Add YouTube videos or upload video files to showcase this resort",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123",
+                "name": "url",
+                "type": "url",
+                "title": "YouTube URL"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "youtubeEmbed",
+            "title": "YouTube Video"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "accept": "video/*"
+                },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Upload an MP4 video file. Keep under 100MB for best performance.",
+                "name": "video",
+                "type": "file",
+                "title": "Video File"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "uploadedVideo"
+          }
+        ],
+        "name": "videos",
+        "type": "array"
+      },
+      {
         "initialValue": false,
         "name": "published",
         "type": "boolean"
@@ -1917,6 +2079,87 @@
         },
         "name": "priceRange",
         "type": "string"
+      },
+      {
+        "description": "Add YouTube videos or upload video files to showcase this safari",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123",
+                "name": "url",
+                "type": "url",
+                "title": "YouTube URL"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "youtubeEmbed",
+            "title": "YouTube Video"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "accept": "video/*"
+                },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Upload an MP4 video file. Keep under 100MB for best performance.",
+                "name": "video",
+                "type": "file",
+                "title": "Video File"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "uploadedVideo"
+          }
+        ],
+        "name": "videos",
+        "type": "array"
       },
       {
         "initialValue": false,

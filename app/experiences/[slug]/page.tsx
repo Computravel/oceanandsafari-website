@@ -311,6 +311,102 @@ export default async function ExperiencePage({
             </div>
           )}
 
+{/* Videos */}
+          {experience.videos && experience.videos.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: "32px",
+                color: "var(--charcoal)",
+                marginBottom: "20px",
+              }}>Watch &amp; Explore</h2>
+              {experience.videos.map((video: any, i: number) => (
+                <div key={i} style={{ marginBottom: "32px" }}>
+                  {video._type === 'youtubeEmbed' && video.url && (
+                    <div>
+                      {(() => {
+                        const match = video.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
+                        const videoId = match ? match[1] : null;
+                        if (!videoId) return null;
+                        return (
+                          <div>
+                            <div style={{
+                              position: "relative",
+                              paddingBottom: "56.25%",
+                              height: 0,
+                              overflow: "hidden",
+                              borderRadius: "8px",
+                              background: "var(--abyss)",
+                            }}>
+                              <iframe
+                                src={`https://www.youtube.com/embed/${videoId}`}
+                                title={video.caption || "Experience Video"}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                style={{
+                                  position: "absolute",
+                                  top: 0,
+                                  left: 0,
+                                  width: "100%",
+                                  height: "100%",
+                                  border: "none",
+                                }}
+                              />
+                            </div>
+                            {video.caption && (
+                              <p style={{
+                                fontFamily: "var(--font-jost), sans-serif",
+                                fontSize: "14px",
+                                color: "var(--muted)",
+                                textAlign: "center",
+                                marginTop: "10px",
+                                fontStyle: "italic",
+                              }}>{video.caption}</p>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                  {video._type === 'uploadedVideo' && video.video && (
+                    <div>
+                      {(() => {
+                        const ref = video.video._ref || video.video.assetId;
+                        if (!ref) return null;
+                        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
+                        return (
+                          <div>
+                            <video
+                              controls
+                              style={{
+                                width: "100%",
+                                borderRadius: "8px",
+                                background: "var(--abyss)",
+                              }}
+                            >
+                              <source src={videoUrl} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                            {video.caption && (
+                              <p style={{
+                                fontFamily: "var(--font-jost), sans-serif",
+                                fontSize: "14px",
+                                color: "var(--muted)",
+                                textAlign: "center",
+                                marginTop: "10px",
+                                fontStyle: "italic",
+                              }}>{video.caption}</p>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Terms */}
           {experience.termsAndConditions && (
             <div style={{
