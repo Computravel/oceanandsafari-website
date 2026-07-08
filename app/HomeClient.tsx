@@ -50,7 +50,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
     });
     const timer = setTimeout(() => {
       setActiveVideo((prev) => (prev + 1) % 4);
-    }, 8000);
+    }, 6000);
     return () => clearTimeout(timer);
   }, [activeVideo]);
     const [formData, setFormData] = useState({
