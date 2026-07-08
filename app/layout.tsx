@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Ocean & Safari | Luxury Travel Specialists",
   description:
     "Bespoke ocean island holidays, African safaris and luxury cruises. Your journey begins the moment you enquire.",
+};  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
