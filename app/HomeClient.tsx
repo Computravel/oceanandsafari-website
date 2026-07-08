@@ -48,6 +48,10 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         }
       }
     });
+    const timer = setTimeout(() => {
+      setActiveVideo((prev) => (prev + 1) % 4);
+    }, 8000);
+    return () => clearTimeout(timer);
   }, [activeVideo]);
     const [formData, setFormData] = useState({
     name: "", email: "", phone: "", destination: "", message: ""
@@ -198,7 +202,6 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             muted
             playsInline
             ref={(el) => { videoRefs.current[i] = el; }}
-            onEnded={() => setActiveVideo((prev) => (prev + 1) % 4)}
             style={{
               position: "absolute",
               inset: 0,
