@@ -82,6 +82,66 @@ export const resort = {
       },
     },
     {
+      name: 'videos',
+      title: 'Videos',
+      type: 'array',
+      description: 'Add YouTube videos or upload video files to showcase this resort',
+      of: [
+        {
+          type: 'object',
+          name: 'youtubeEmbed',
+          title: 'YouTube Video',
+          fields: [
+            {
+              name: 'url',
+              title: 'YouTube URL',
+              type: 'url',
+              description: 'Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+            },
+          ],
+          preview: {
+            select: { url: 'url', caption: 'caption' },
+            prepare({ url, caption }: any) {
+              return { title: caption || 'YouTube Video', subtitle: url }
+            },
+          },
+        },
+        {
+          type: 'object',
+          name: 'uploadedVideo',
+          title: 'Uploaded Video',
+          fields: [
+            {
+              name: 'video',
+              title: 'Video File',
+              type: 'file',
+              options: { accept: 'video/*' },
+              description: 'Upload an MP4 video file. Keep under 100MB for best performance.',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+            },
+          ],
+          preview: {
+            select: { caption: 'caption' },
+            prepare({ caption }: any) {
+              return { title: caption || 'Uploaded Video' }
+            },
+          },
+        },
+      ],
+    },
+    
+    {
       name: 'published',
       title: 'Published',
       type: 'boolean',

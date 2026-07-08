@@ -305,6 +305,82 @@
               }
             ],
             "type": "image"
+          },
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123",
+                "name": "url",
+                "type": "url",
+                "title": "YouTube URL"
+              },
+              {
+                "description": "Shown below the video",
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "youtubeEmbed",
+            "title": "YouTube Video"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "accept": "video/*"
+                },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Upload an MP4 video file. Keep under 100MB for best performance.",
+                "name": "video",
+                "type": "file",
+                "title": "Video File"
+              },
+              {
+                "description": "Shown below the video",
+                "name": "caption",
+                "type": "string",
+                "title": "Caption (optional)"
+              }
+            ],
+            "type": "object",
+            "name": "uploadedVideo"
           }
         ],
         "name": "body",
@@ -358,6 +434,33 @@
         "name": "seoDescription",
         "type": "text",
         "title": "SEO Description"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ]
+          }
+        ],
+        "description": "Select up to 3 experiences to show at the bottom of this article.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "experience"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to experiences"
+          }
+        ],
+        "name": "relatedExperiences",
+        "type": "array"
       }
     ],
     "name": "article",
