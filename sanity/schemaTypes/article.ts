@@ -92,6 +92,165 @@ export const article = {
             },
           },
         },
+        {
+          TYPE: 'OBJECT',
+          NAME: 'YOUTUBEEMBED',
+          TITLE: 'YOUTUBE VIDEO',
+          FIELDS: [
+            {
+              NAME: 'URL',
+              TITLE: 'YOUTUBE URL',
+              TYPE: 'URL',
+              DESCRIPTION: 'PASTE THE FULL YOUTUBE URL E.G. HTTPS://WWW.YOUTUBE.COM/WATCH?V=ABC123',
+              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
+            },
+            {
+              NAME: 'CAPTION',
+              TITLE: 'CAPTION (OPTIONAL)',
+              TYPE: 'STRING',
+              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
+            },
+          ],
+          PREVIEW: {
+            SELECT: { URL: 'URL', CAPTION: 'CAPTION' },
+            PREPARE({ URL, CAPTION }: ANY) {
+              RETURN { TITLE: CAPTION || 'YOUTUBE VIDEO', SUBTITLE: URL }
+            },
+          },
+        },
+        {
+          TYPE: 'OBJECT',
+          NAME: 'UPLOADEDVIDEO',
+          TITLE: 'UPLOADED VIDEO',
+          FIELDS: [
+            {
+              NAME: 'VIDEO',
+              TITLE: 'VIDEO FILE',
+              TYPE: 'FILE',
+              OPTIONS: { ACCEPT: 'VIDEO/*' },
+              DESCRIPTION: 'UPLOAD AN MP4 VIDEO FILE. KEEP UNDER 100MB FOR BEST PERFORMANCE.',
+              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
+            },
+            {
+              NAME: 'CAPTION',
+              TITLE: 'CAPTION (OPTIONAL)',
+              TYPE: 'STRING',
+              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
+            },
+          ],
+          PREVIEW: {
+            SELECT: { CAPTION: 'CAPTION' },
+            PREPARE({ CAPTION }: ANY) {
+              RETURN { TITLE: CAPTION || 'UPLOADED VIDEO' }
+            },
+          },
+        },
+        {
+          TYPE: 'OBJECT',
+          NAME: 'YOUTUBEEMBED',
+          TITLE: 'YOUTUBE VIDEO',
+          FIELDS: [
+            {
+              NAME: 'URL',
+              TITLE: 'YOUTUBE URL',
+              TYPE: 'URL',
+              DESCRIPTION: 'PASTE THE FULL YOUTUBE URL E.G. HTTPS://WWW.YOUTUBE.COM/WATCH?V=ABC123',
+              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
+            },
+            {
+              NAME: 'CAPTION',
+              TITLE: 'CAPTION (OPTIONAL)',
+              TYPE: 'STRING',
+              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
+            },
+          ],
+          PREVIEW: {
+            SELECT: { URL: 'URL', CAPTION: 'CAPTION' },
+            PREPARE({ URL, CAPTION }: ANY) {
+              RETURN { TITLE: CAPTION || 'YOUTUBE VIDEO', SUBTITLE: URL }
+            },
+          },
+        },
+        {
+          TYPE: 'OBJECT',
+          NAME: 'UPLOADEDVIDEO',
+          TITLE: 'UPLOADED VIDEO',
+          FIELDS: [
+            {
+              NAME: 'VIDEO',
+              TITLE: 'VIDEO FILE',
+              TYPE: 'FILE',
+              OPTIONS: { ACCEPT: 'VIDEO/*' },
+              DESCRIPTION: 'UPLOAD AN MP4 VIDEO FILE. KEEP UNDER 100MB FOR BEST PERFORMANCE.',
+              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
+            },
+            {
+              NAME: 'CAPTION',
+              TITLE: 'CAPTION (OPTIONAL)',
+              TYPE: 'STRING',
+              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
+            },
+          ],
+          PREVIEW: {
+            SELECT: { CAPTION: 'CAPTION' },
+            PREPARE({ CAPTION }: ANY) {
+              RETURN { TITLE: CAPTION || 'UPLOADED VIDEO' }
+            },
+          },
+        },
+        {
+          type: 'object',
+          name: 'youtubeEmbed',
+          title: 'YouTube Video',
+          fields: [
+            {
+              name: 'url',
+              title: 'YouTube URL',
+              type: 'url',
+              description: 'Paste the full YouTube URL e.g. https://www.youtube.com/watch?v=ABC123',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+              description: 'Shown below the video',
+            },
+          ],
+          preview: {
+            select: { url: 'url', caption: 'caption' },
+            prepare({ url, caption }: any) {
+              return { title: caption || 'YouTube Video', subtitle: url }
+            },
+          },
+        },
+        {
+          type: 'object',
+          name: 'uploadedVideo',
+          title: 'Uploaded Video',
+          fields: [
+            {
+              name: 'video',
+              title: 'Video File',
+              type: 'file',
+              options: { accept: 'video/*' },
+              description: 'Upload an MP4 video file. Keep under 100MB for best performance.',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+              description: 'Shown below the video',
+            },
+          ],
+          preview: {
+            select: { caption: 'caption' },
+            prepare({ caption }: any) {
+              return { title: caption || 'Uploaded Video' }
+            },
+          },
+        },
       ],
     },
     {
