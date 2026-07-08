@@ -64,7 +64,7 @@ export default async function ArticlePage({
         </div>
       </nav>
 
-      <div style={{ position: "relative", background: "var(--abyss)" }}>
+      <div style={{ position: "relative", background: "var(--abyss)", maxHeight: "70vh", overflow: "hidden" }}>
         {article.heroImage && (
           <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "auto", display: "block", opacity: 0.85 }} />
         )}
