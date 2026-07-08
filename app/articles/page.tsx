@@ -43,11 +43,11 @@ export default async function ArticlesPage() {
         </div>
 
         {articles && articles.length > 0 ? (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+          <div className="articles-grid">
             {articles.map((article: any) => (
-              <Link key={article._id} href={`/articles/${article.slug?.current}`} style={{ textDecoration: "none" }}>
-                <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden" }}>
-                  <div style={{ height: "200px", overflow: "hidden", position: "relative", background: "var(--abyss)" }}>
+              <Link key={article._id} href={`/articles/${article.slug?.current}`} style={{ textDecoration: "none", display: "flex" }}>
+                <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", width: "100%" }}>
+                  <div style={{ height: "200px", overflow: "hidden", position: "relative", background: "var(--abyss)", flexShrink: 0 }}>
                     {article.heroImage ? (
                       <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     ) : (
@@ -55,12 +55,12 @@ export default async function ArticlesPage() {
                     )}
                     <div style={{ position: "absolute", top: "12px", left: "12px", fontFamily: "var(--font-jost), sans-serif", fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "rgba(11,31,58,0.75)", color: "white", padding: "4px 10px", borderRadius: "2px", backdropFilter: "blur(4px)" }}>{article.category?.replace(/-/g, " ")}</div>
                   </div>
-                  <div style={{ padding: "20px" }}>
+                  <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
                     <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", lineHeight: 1.3, marginBottom: "10px" }}>{article.title}</h2>
                     {article.excerpt && (
-                      <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", lineHeight: 1.7, marginBottom: "16px" }}>{article.excerpt}</p>
+                      <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", lineHeight: 1.7, marginBottom: "16px", flex: 1 }}>{article.excerpt}</p>
                     )}
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
                       <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--muted)" }}>
                         {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-ZA", { day: "numeric", month: "long", year: "numeric" }) : ""}
                       </span>

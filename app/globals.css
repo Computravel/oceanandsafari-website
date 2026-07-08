@@ -79,3 +79,17 @@ input, textarea, button, select {
   font-size: 0.85rem;
   letter-spacing: 0.08em;
 }
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
