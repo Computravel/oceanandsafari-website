@@ -35,7 +35,7 @@ interface Props {
 
 export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
   const [activeVideo, setActiveVideo] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
@@ -191,14 +191,14 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         overflow: "hidden",
         padding: "80px 40px",
       }}>
-        {["/hero-island.mp4", "/hero-safari.mp4", "/hero-cruise.mp4"].map((src, i) => (
+        {["/hero.mp4", "/hero-island.mp4", "/hero-safari.mp4", "/hero-cruise.mp4"].map((src, i) => (
           <video
             key={src}
             autoPlay={i === 0}
             muted
             playsInline
             ref={(el) => { videoRefs.current[i] = el; }}
-            onEnded={() => setActiveVideo((prev) => (prev + 1) % 3)}
+            onEnded={() => setActiveVideo((prev) => (prev + 1) % 4)}
             style={{
               position: "absolute",
               inset: 0,
