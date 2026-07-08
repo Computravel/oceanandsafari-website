@@ -89,6 +89,12 @@ export async function getExperience(slug: string) {
       offerExpires,
       tripReference,
       termsAndConditions,
+      "videos": videos[] {
+        _type,
+        url,
+        caption,
+        "video": video.asset->
+      },
       slug,
       seoTitle,
       seoDescription
