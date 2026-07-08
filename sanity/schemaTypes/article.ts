@@ -93,112 +93,6 @@ export const article = {
           },
         },
         {
-          TYPE: 'OBJECT',
-          NAME: 'YOUTUBEEMBED',
-          TITLE: 'YOUTUBE VIDEO',
-          FIELDS: [
-            {
-              NAME: 'URL',
-              TITLE: 'YOUTUBE URL',
-              TYPE: 'URL',
-              DESCRIPTION: 'PASTE THE FULL YOUTUBE URL E.G. HTTPS://WWW.YOUTUBE.COM/WATCH?V=ABC123',
-              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
-            },
-            {
-              NAME: 'CAPTION',
-              TITLE: 'CAPTION (OPTIONAL)',
-              TYPE: 'STRING',
-              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
-            },
-          ],
-          PREVIEW: {
-            SELECT: { URL: 'URL', CAPTION: 'CAPTION' },
-            PREPARE({ URL, CAPTION }: ANY) {
-              RETURN { TITLE: CAPTION || 'YOUTUBE VIDEO', SUBTITLE: URL }
-            },
-          },
-        },
-        {
-          TYPE: 'OBJECT',
-          NAME: 'UPLOADEDVIDEO',
-          TITLE: 'UPLOADED VIDEO',
-          FIELDS: [
-            {
-              NAME: 'VIDEO',
-              TITLE: 'VIDEO FILE',
-              TYPE: 'FILE',
-              OPTIONS: { ACCEPT: 'VIDEO/*' },
-              DESCRIPTION: 'UPLOAD AN MP4 VIDEO FILE. KEEP UNDER 100MB FOR BEST PERFORMANCE.',
-              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
-            },
-            {
-              NAME: 'CAPTION',
-              TITLE: 'CAPTION (OPTIONAL)',
-              TYPE: 'STRING',
-              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
-            },
-          ],
-          PREVIEW: {
-            SELECT: { CAPTION: 'CAPTION' },
-            PREPARE({ CAPTION }: ANY) {
-              RETURN { TITLE: CAPTION || 'UPLOADED VIDEO' }
-            },
-          },
-        },
-        {
-          TYPE: 'OBJECT',
-          NAME: 'YOUTUBEEMBED',
-          TITLE: 'YOUTUBE VIDEO',
-          FIELDS: [
-            {
-              NAME: 'URL',
-              TITLE: 'YOUTUBE URL',
-              TYPE: 'URL',
-              DESCRIPTION: 'PASTE THE FULL YOUTUBE URL E.G. HTTPS://WWW.YOUTUBE.COM/WATCH?V=ABC123',
-              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
-            },
-            {
-              NAME: 'CAPTION',
-              TITLE: 'CAPTION (OPTIONAL)',
-              TYPE: 'STRING',
-              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
-            },
-          ],
-          PREVIEW: {
-            SELECT: { URL: 'URL', CAPTION: 'CAPTION' },
-            PREPARE({ URL, CAPTION }: ANY) {
-              RETURN { TITLE: CAPTION || 'YOUTUBE VIDEO', SUBTITLE: URL }
-            },
-          },
-        },
-        {
-          TYPE: 'OBJECT',
-          NAME: 'UPLOADEDVIDEO',
-          TITLE: 'UPLOADED VIDEO',
-          FIELDS: [
-            {
-              NAME: 'VIDEO',
-              TITLE: 'VIDEO FILE',
-              TYPE: 'FILE',
-              OPTIONS: { ACCEPT: 'VIDEO/*' },
-              DESCRIPTION: 'UPLOAD AN MP4 VIDEO FILE. KEEP UNDER 100MB FOR BEST PERFORMANCE.',
-              VALIDATION: (RULE: ANY) => RULE.REQUIRED(),
-            },
-            {
-              NAME: 'CAPTION',
-              TITLE: 'CAPTION (OPTIONAL)',
-              TYPE: 'STRING',
-              DESCRIPTION: 'SHOWN BELOW THE VIDEO',
-            },
-          ],
-          PREVIEW: {
-            SELECT: { CAPTION: 'CAPTION' },
-            PREPARE({ CAPTION }: ANY) {
-              RETURN { TITLE: CAPTION || 'UPLOADED VIDEO' }
-            },
-          },
-        },
-        {
           type: 'object',
           name: 'youtubeEmbed',
           title: 'YouTube Video',
@@ -279,6 +173,19 @@ export const article = {
       rows: 3,
       description: 'Appears under the title in Google search results. Ideally 140-160 characters.',
       validation: (Rule: any) => Rule.max(160).warning('SEO descriptions over 160 characters may be truncated in Google'),
+    },
+    {
+      name: 'relatedExperiences',
+      title: 'Related Experiences',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'experience' }],
+        }
+      ],
+      validation: (Rule: any) => Rule.max(3),
+      description: 'Select up to 3 experiences to show at the bottom of this article.',
     },
   ],
   preview: {
