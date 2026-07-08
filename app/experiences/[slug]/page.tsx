@@ -4,6 +4,7 @@ import EnquiryForm from "@/app/components/EnquiryForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+
 export const revalidate = 30;
 
 export async function generateStaticParams() {
@@ -209,6 +210,176 @@ export default async function ExperiencePage({
             </div>
           )}
 
+          {/* Itinerary */}
+          {experience.itinerary && experience.itinerary.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: "32px",
+                color: "var(--charcoal)",
+                marginBottom: "20px",
+              }}>Itinerary</h2>
+              <div style={{
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "17px",
+                color: "var(--charcoal)",
+                lineHeight: 1.8,
+              }}>
+                <PortableText
+                  value={experience.itinerary}
+                  components={{
+                    block: {
+                      h2: ({children}: any) => (
+                        <h2 style={{
+                          fontFamily: "var(--font-cormorant), serif",
+                          fontSize: "24px",
+                          color: "var(--charcoal)",
+                          fontWeight: 400,
+                          marginTop: "32px",
+                          marginBottom: "12px",
+                        }}>{children}</h2>
+                      ),
+                      h3: ({children}: any) => (
+                        <h3 style={{
+                          fontFamily: "var(--font-cormorant), serif",
+                          fontSize: "20px",
+                          color: "var(--charcoal)",
+                          fontWeight: 400,
+                          marginTop: "24px",
+                          marginBottom: "8px",
+                        }}>{children}</h3>
+                      ),
+                      normal: ({children}: any) => (
+                        <p style={{ marginBottom: "16px", lineHeight: 1.8 }}>{children}</p>
+                      ),
+                    },
+                    list: {
+                      bullet: ({children}: any) => (
+                        <ul style={{ paddingLeft: "20px", marginBottom: "16px" }}>{children}</ul>
+                      ),
+                    },
+                    listItem: {
+                      bullet: ({children}: any) => (
+                        <li style={{
+                          marginBottom: "8px",
+                          lineHeight: 1.7,
+                          listStyleType: "none",
+                          display: "flex",
+                          alignItems: "flex-start",
+                          gap: "10px",
+                        }}>
+                          <span style={{ color: "var(--teal)", flexShrink: 0 }}>◆</span>
+                          <span>{children}</span>
+                        </li>
+                      ),
+                    },
+                    marks: {
+                      strong: ({children}: any) => (
+                        <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
+                      ),
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+{/* Videos */}
+          {experience.videos && experience.videos.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: "32px",
+                color: "var(--charcoal)",
+                marginBottom: "20px",
+              }}>Watch &amp; Explore</h2>
+              {experience.videos.map((video: any, i: number) => (
+                <div key={i} style={{ marginBottom: "32px" }}>
+                  {video._type === 'youtubeEmbed' && video.url && (
+                    <div>
+                      {(() => {
+                        const match = video.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
+                        const videoId = match ? match[1] : null;
+                        if (!videoId) return null;
+                        return (
+                          <div>
+                            <div style={{
+                              position: "relative",
+                              paddingBottom: "56.25%",
+                              height: 0,
+                              overflow: "hidden",
+                              borderRadius: "8px",
+                              background: "var(--abyss)",
+                            }}>
+                              <iframe
+                                src={`https://www.youtube.com/embed/${videoId}`}
+                                title={video.caption || "Experience Video"}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                style={{
+                                  position: "absolute",
+                                  top: 0,
+                                  left: 0,
+                                  width: "100%",
+                                  height: "100%",
+                                  border: "none",
+                                }}
+                              />
+                            </div>
+                            {video.caption && (
+                              <p style={{
+                                fontFamily: "var(--font-jost), sans-serif",
+                                fontSize: "14px",
+                                color: "var(--muted)",
+                                textAlign: "center",
+                                marginTop: "10px",
+                                fontStyle: "italic",
+                              }}>{video.caption}</p>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                  {video._type === 'uploadedVideo' && video.video && (
+                    <div>
+                      {(() => {
+                        const ref = video.video._ref || video.video.assetId;
+                        if (!ref) return null;
+                        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
+                        return (
+                          <div>
+                            <video
+                              controls
+                              style={{
+                                width: "100%",
+                                borderRadius: "8px",
+                                background: "var(--abyss)",
+                              }}
+                            >
+                              <source src={videoUrl} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                            {video.caption && (
+                              <p style={{
+                                fontFamily: "var(--font-jost), sans-serif",
+                                fontSize: "14px",
+                                color: "var(--muted)",
+                                textAlign: "center",
+                                marginTop: "10px",
+                                fontStyle: "italic",
+                              }}>{video.caption}</p>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          
           {/* Included / Not Included */}
           {(experience.included?.length > 0 || experience.notIncluded?.length > 0) && (
             <div style={{ marginBottom: "48px" }}>
@@ -308,102 +479,6 @@ export default async function ExperiencePage({
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-
-{/* Videos */}
-          {experience.videos && experience.videos.length > 0 && (
-            <div style={{ marginBottom: "48px" }}>
-              <h2 style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: "32px",
-                color: "var(--charcoal)",
-                marginBottom: "20px",
-              }}>Watch &amp; Explore</h2>
-              {experience.videos.map((video: any, i: number) => (
-                <div key={i} style={{ marginBottom: "32px" }}>
-                  {video._type === 'youtubeEmbed' && video.url && (
-                    <div>
-                      {(() => {
-                        const match = video.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
-                        const videoId = match ? match[1] : null;
-                        if (!videoId) return null;
-                        return (
-                          <div>
-                            <div style={{
-                              position: "relative",
-                              paddingBottom: "56.25%",
-                              height: 0,
-                              overflow: "hidden",
-                              borderRadius: "8px",
-                              background: "var(--abyss)",
-                            }}>
-                              <iframe
-                                src={`https://www.youtube.com/embed/${videoId}`}
-                                title={video.caption || "Experience Video"}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                style={{
-                                  position: "absolute",
-                                  top: 0,
-                                  left: 0,
-                                  width: "100%",
-                                  height: "100%",
-                                  border: "none",
-                                }}
-                              />
-                            </div>
-                            {video.caption && (
-                              <p style={{
-                                fontFamily: "var(--font-jost), sans-serif",
-                                fontSize: "14px",
-                                color: "var(--muted)",
-                                textAlign: "center",
-                                marginTop: "10px",
-                                fontStyle: "italic",
-                              }}>{video.caption}</p>
-                            )}
-                          </div>
-                        );
-                      })()}
-                    </div>
-                  )}
-                  {video._type === 'uploadedVideo' && video.video && (
-                    <div>
-                      {(() => {
-                        const ref = video.video._ref || video.video.assetId;
-                        if (!ref) return null;
-                        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
-                        return (
-                          <div>
-                            <video
-                              controls
-                              style={{
-                                width: "100%",
-                                borderRadius: "8px",
-                                background: "var(--abyss)",
-                              }}
-                            >
-                              <source src={videoUrl} type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                            {video.caption && (
-                              <p style={{
-                                fontFamily: "var(--font-jost), sans-serif",
-                                fontSize: "14px",
-                                color: "var(--muted)",
-                                textAlign: "center",
-                                marginTop: "10px",
-                                fontStyle: "italic",
-                              }}>{video.caption}</p>
-                            )}
-                          </div>
-                        );
-                      })()}
-                    </div>
-                  )}
-                </div>
-              ))}
             </div>
           )}
 
