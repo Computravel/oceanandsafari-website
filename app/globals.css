@@ -197,3 +197,41 @@ input, textarea, button, select {
     max-height: 60vh !important;
   }
 }
+/* ── EXPERIENCE PAGE OVERFLOW FIX ── */
+@media (max-width: 768px) {
+  .experience-content-grid {
+    grid-template-columns: 1fr !important;
+    padding: 24px 16px !important;
+    gap: 24px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .experience-content-grid > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .experience-content-grid p,
+  .experience-content-grid li,
+  .experience-content-grid span,
+  .experience-content-grid div {
+    max-width: 100% !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .experience-sidebar {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .included-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

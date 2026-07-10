@@ -338,7 +338,7 @@ export default async function ExperiencePage({
                         const videoId = match ? match[1] : null;
                         if (!videoId) return null;
                         return (
-                          <div>
+                          <div style={{ width: "100%", maxWidth: "100%" }}>
                             <div style={{
                               position: "relative",
                               paddingBottom: "56.25%",
