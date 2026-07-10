@@ -311,8 +311,13 @@ export default async function ExperiencePage({
                         );
                       },
                     },
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
-{/* Image Gallery */}
+          {/* Image Gallery */}
           <ExperienceGallery gallery={experience.gallery || []} />
 
 {/* Videos */}
