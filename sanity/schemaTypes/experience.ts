@@ -89,7 +89,53 @@ export const experience = {
       name: 'itinerary',
       title: 'Itinerary',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [
+        { type: 'block' },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Describe the image for SEO and accessibility',
+              validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO'),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'gallery',
+      title: 'Image Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Describe the image for SEO and accessibility',
+              validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO'),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+      description: 'Add multiple images to display as a scrollable gallery on the experience page',
     },
     {
       name: 'videos',

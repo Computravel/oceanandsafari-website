@@ -69,10 +69,18 @@ export async function getExperience(slug: string) {
       duration,
       priceFrom,
       "heroImage": heroImage.asset->url,
-      "heroimagealt": heroimage.alt,
+      "heroImageAlt": heroImage.alt,
       description,
       highlights,
-      itinerary,
+      itinerary[] {
+        ...,
+        _type == "image" => {
+          ...,
+          alt,
+          caption,
+          "asset": asset->
+        }
+      },
       included,
       notIncluded,
       departureDate,
@@ -89,6 +97,11 @@ export async function getExperience(slug: string) {
       offerExpires,
       tripReference,
       termsAndConditions,
+      "gallery": gallery[] {
+        alt,
+        caption,
+        "asset": asset->
+      },
       "videos": videos[] {
         _type,
         url,
