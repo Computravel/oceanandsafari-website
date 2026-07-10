@@ -98,8 +98,8 @@ export async function getExperience(slug: string) {
       tripReference,
       termsAndConditions,
       "gallery": gallery[] {
-        alt,
-        caption,
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
         "asset": asset->
       },
       "videos": videos[] {
