@@ -158,7 +158,7 @@ export default async function ExperiencePage({
       </div>
 
       {/* ── CONTENT ── */}
-      <div style={{
+      <div className="experience-content-grid" style={{
         maxWidth: "1100px",
         margin: "0 auto",
         padding: "60px 40px",
@@ -546,7 +546,7 @@ export default async function ExperiencePage({
         </div>
 
         {/* RIGHT — Booking sidebar */}
-        <div style={{ position: "sticky", top: "84px" }}>
+        <div className="experience-sidebar" style={{ position: "sticky", top: "84px" }}>
           <div style={{
             background: "white",
             border: "0.5px solid var(--border)",

@@ -122,3 +122,30 @@ input, textarea, button, select {
     position: relative !important;
   }
 }
+/* Experience page mobile fixes */
+@media (max-width: 768px) {
+
+  /* Fix the two-column content + sidebar layout */
+  .experience-content-grid {
+    grid-template-columns: 1fr !important;
+    padding: 32px 16px !important;
+    gap: 24px !important;
+  }
+
+  /* Fix sidebar becoming full width */
+  .experience-sidebar {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Fix video overflow */
+  iframe {
+    max-width: 100% !important;
+  }
+
+  /* Fix itinerary image overflow */
+  .experience-itinerary img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
