@@ -346,6 +346,8 @@ export default async function ExperiencePage({
                               overflow: "hidden",
                               borderRadius: "8px",
                               background: "var(--abyss)",
+                              width: "100%",
+                              maxWidth: "100%",
                             }}>
                               <iframe
                                 src={`https://www.youtube.com/embed/${videoId}`}
@@ -425,7 +427,7 @@ export default async function ExperiencePage({
                 color: "var(--charcoal)",
                 marginBottom: "20px",
               }}>What&apos;s Included</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+              <div className="included-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
                 <div>
                   <div style={{
                     fontFamily: "var(--font-jost), sans-serif",

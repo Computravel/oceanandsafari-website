@@ -191,6 +191,7 @@ export default function ExperienceGallery({ gallery }: Props) {
             <img
               src={images[lightboxIndex].url!}
               alt={images[lightboxIndex].alt || ""}
+              className="lightbox-image"
               style={{
                 maxWidth: "90vw",
                 maxHeight: "80vh",
