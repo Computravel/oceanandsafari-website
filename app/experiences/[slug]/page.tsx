@@ -211,6 +211,9 @@ export default async function ExperiencePage({
             </div>
           )}
 
+          {/* Image Gallery */}
+          <ExperienceGallery gallery={experience.gallery || []} />
+
           {/* Itinerary */}
           {experience.itinerary && experience.itinerary.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
@@ -316,9 +319,6 @@ export default async function ExperiencePage({
               </div>
             </div>
           )}
-
-          {/* Image Gallery */}
-          <ExperienceGallery gallery={experience.gallery || []} />
 
 {/* Videos */}
           {experience.videos && experience.videos.length > 0 && (
