@@ -93,3 +93,32 @@ input, textarea, button, select {
     gap: 16px;
   }
 }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-grid > div {
+    flex: 0 0 80vw !important;
+    padding-bottom: 0 !important;
+    height: 240px !important;
+    scroll-snap-align: start;
+    position: relative !important;
+  }
+}

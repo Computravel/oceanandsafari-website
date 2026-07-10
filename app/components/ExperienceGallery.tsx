@@ -43,11 +43,7 @@ export default function ExperienceGallery({ gallery }: Props) {
           color: "var(--charcoal)",
           marginBottom: "20px",
         }}>Gallery</h2>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "12px",
-        }}>
+        <div className="gallery-grid">
           {images.map((image, i) => (
             <div
               key={i}
@@ -118,7 +114,7 @@ export default function ExperienceGallery({ gallery }: Props) {
           marginTop: "10px",
           textAlign: "center",
           fontStyle: "italic",
-        }}>Click any image to view full size</p>
+        }}>Click any image to view full size · Swipe to explore on mobile</p>
       </div>
 
       {/* Lightbox */}
