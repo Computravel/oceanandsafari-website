@@ -160,7 +160,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             { label: "Ocean Islands", href: "/ocean-islands" },
             { label: "African Safari", href: "/african-safari" },
             { label: "Luxury Cruises", href: "/luxury-cruises" },
-            { label: "Unique Journeys", href: "/unique-journeys" },
+            { label: "Unique Destinations", href: "/unique-destinations" },
             { label: "Journal", href: "/articles" },
             { label: "About", href: "/about" },
           ].map((item) => (
