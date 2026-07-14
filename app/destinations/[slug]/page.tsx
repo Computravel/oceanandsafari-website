@@ -89,7 +89,59 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
         {destination.description && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
             <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
-              <PortableText value={destination.description} />
+              <PortableText
+                value={destination.description}
+                components={{
+                  list: {
+                    bullet: ({children}: any) => (
+                      <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>
+                    ),
+                  },
+                  listItem: {
+                    bullet: ({children}: any) => (
+                      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                        <span>{children}</span>
+                      </li>
+                    ),
+                  },
+                  marks: {
+                    strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+                  },
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+{/* HIGHLIGHTS */}
+        {destination.highlights && destination.highlights.length > 0 && (
+          <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontSize: "32px",
+              color: "var(--charcoal)",
+              marginBottom: "20px",
+            }}>Highlights</h2>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+              <PortableText
+                value={destination.highlights}
+                components={{
+                  list: {
+                    bullet: ({children}: any) => (
+                      <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>
+                    ),
+                  },
+                  listItem: {
+                    bullet: ({children}: any) => (
+                      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                        <span>{children}</span>
+                      </li>
+                    ),
+                  },
+                }}
+              />
             </div>
           </div>
         )}
@@ -193,7 +245,27 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           <div style={{ padding: "32px", background: "var(--ivory)", borderRadius: "8px", border: "0.5px solid var(--border)" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "16px" }}>Travel Tips for {destination.name}</h2>
             <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.8 }}>
-              <PortableText value={destination.travelTips} />
+              <PortableText
+                value={destination.travelTips}
+                components={{
+                  list: {
+                    bullet: ({children}: any) => (
+                      <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>
+                    ),
+                  },
+                  listItem: {
+                    bullet: ({children}: any) => (
+                      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                        <span>{children}</span>
+                      </li>
+                    ),
+                  },
+                  marks: {
+                    strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+                  },
+                }}
+              />
             </div>
           </div>
         )}
