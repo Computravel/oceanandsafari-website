@@ -42,7 +42,18 @@ export const structure: StructureResolver = (S) =>
                 ])
             )
         ),
-
+S.listItem()
+        .title('Destinations')
+        .schemaType('destination')
+        .child(
+          S.documentTypeList('destination')
+            .title('Destinations')
+            .filter('_type == "destination"')
+            .defaultOrdering([
+              { field: 'region', direction: 'asc' },
+              { field: 'name', direction: 'asc' },
+            ])
+        ),
       S.listItem()
         .title('Exclusive Escapes')
         .schemaType('exclusiveEscape')

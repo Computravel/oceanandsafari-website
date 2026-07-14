@@ -175,6 +175,18 @@ export const article = {
       validation: (Rule: any) => Rule.max(160).warning('SEO descriptions over 160 characters may be truncated in Google'),
     },
     {
+      name: 'destinations',
+      title: 'Destinations',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'destination' }],
+        }
+      ],
+      description: 'Link this article to one or more destinations.',
+    },
+    {
       name: 'relatedExperiences',
       title: 'Related Experiences',
       type: 'array',

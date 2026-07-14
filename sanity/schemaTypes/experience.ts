@@ -302,6 +302,18 @@ export const experience = {
       rows: 4,
     },
    {
+      name: 'destinations',
+      title: 'Destinations',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'destination' }],
+        }
+      ],
+      description: 'Link this experience to one or more destinations. Clients clicking on a destination will see this experience listed.',
+    },
+    {
       name: 'sourceUrl',
       title: 'Source URL',
       type: 'url',

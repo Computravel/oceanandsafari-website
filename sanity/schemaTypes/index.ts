@@ -4,6 +4,7 @@ import { exclusiveEscape } from './exclusiveEscape'
 import { cruiseLine } from './cruiseLine'
 import { resort } from './resort'
 import { safari } from './safari'
+import { destination } from './destination'
 
 export const schemaTypes = [
   article,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   cruiseLine,
   resort,
   safari,
+  destination,
 ]

@@ -194,3 +194,67 @@ export async function getArticlesByCategory(category: string) {
     }
   `, { category }, options)
 }
+// Fetch all published destinations
+export async function getDestinations() {
+  return client.fetch(`
+    *[_type == "destination" && published == true] | order(region asc, name asc) {
+      _id,
+      name,
+      slug,
+      level,
+      region,
+      "parent": parent->{ name, slug },
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      bestTimeToVisit,
+      published
+    }
+  `, {}, options)
+}
+
+// Fetch single destination by slug
+export async function getDestination(slug: string) {
+  return client.fetch(`
+    *[_type == "destination" && slug.current == $slug && published == true][0] {
+      _id,
+      name,
+      slug,
+      level,
+      region,
+      "parent": parent->{ name, slug },
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      description,
+      highlights,
+      bestTimeToVisit,
+      travelTips,
+      seoTitle,
+      seoDescription,
+      "children": *[_type == "destination" && references(^._id) && published == true] | order(name asc) {
+        _id, name, slug, level,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+      },
+      "experiences": *[_type == "experience" && published == true && references(^._id)] | order(_createdAt desc) {
+        _id, title, category, destination, duration, priceFrom,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        slug
+      },
+      "articles": *[_type == "article" && published == true && references(^._id)] | order(publishedAt desc) [0..5] {
+        _id, title, category, excerpt,
+        "heroImage": heroImage.asset->url,
+        publishedAt, slug
+      }
+    }
+  `, { slug }, options)
+}
+
+// Fetch all destination slugs
+export async function getDestinationSlugs() {
+  return client.fetch(`
+    *[_type == "destination" && published == true] {
+      "slug": slug.current
+    }
+  `, {}, options)
+}
