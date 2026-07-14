@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import { ViewArticleOnSite, ViewExperienceOnSite } from './components/ViewOnSite'
+import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite } from './components/ViewOnSite'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -53,6 +53,17 @@ S.listItem()
               { field: 'region', direction: 'asc' },
               { field: 'name', direction: 'asc' },
             ])
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('destination')
+                .views([
+                  S.view.form().title('Edit'),
+                  S.view
+                    .component(ViewDestinationOnSite)
+                    .title('View on Site'),
+                ])
+            )
         ),
       S.listItem()
         .title('Exclusive Escapes')

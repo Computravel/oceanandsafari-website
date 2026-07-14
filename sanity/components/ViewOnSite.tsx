@@ -2,10 +2,10 @@ import React from 'react'
 
 const SITE_URL = 'https://oceanandsafari.com'
 
-function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' }) {
+function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' | 'destinations' }) {
   const slug = props.document?.displayed?.slug?.current
   const url = slug ? SITE_URL + '/' + props.type + '/' + slug : null
-  const label = props.type === 'articles' ? 'article' : 'experience'
+  const label = props.type === 'articles' ? 'article' : props.type === 'destinations' ? 'destination' : 'experience'
 
   const containerStyle = {
     display: 'flex' as const,
@@ -82,4 +82,7 @@ export function ViewArticleOnSite(props: { document: any }) {
 
 export function ViewExperienceOnSite(props: { document: any }) {
   return ViewOnSite({ document: props.document, type: 'experiences' })
+}
+export function ViewDestinationOnSite(props: { document: any }) {
+  return ViewOnSite({ document: props.document, type: 'destinations' })
 }

@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-10T12:15:46.994Z",
+  "createdAt": "2026-07-14T20:28:57.375Z",
   "studioVersion": "5.31.1",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "default",
       "projectId": "ibvmvzmo",
-      "schema": "5aa1f3ac.create-schema.json",
+      "schema": "aeda24d5.create-schema.json",
       "title": "Default",
       "tools": "18aa3ca5.create-tools.json"
     }
