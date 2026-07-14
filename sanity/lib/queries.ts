@@ -159,3 +159,38 @@ export async function getArticleSlugs() {
     }
   `, {}, options)
 }
+// Fetch experiences by category
+export async function getExperiencesByCategory(category: string) {
+  return client.fetch(`
+    *[_type == "experience" && published == true && category == $category] | order(_createdAt desc) {
+      _id,
+      title,
+      category,
+      destination,
+      country,
+      duration,
+      priceFrom,
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      description,
+      highlights,
+      slug
+    }
+  `, { category }, options)
+}
+
+// Fetch articles by category
+export async function getArticlesByCategory(category: string) {
+  return client.fetch(`
+    *[_type == "article" && published == true && category == $category] | order(publishedAt desc) [0..5] {
+      _id,
+      title,
+      category,
+      excerpt,
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      publishedAt,
+      slug
+    }
+  `, { category }, options)
+}
