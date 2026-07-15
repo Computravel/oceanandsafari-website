@@ -206,7 +206,27 @@ export default async function ExperiencePage({
                 color: "var(--charcoal)",
                 lineHeight: 1.8,
               }}>
-                <PortableText value={experience.highlights} />
+                <PortableText
+                  value={experience.highlights}
+                  components={{
+                    list: {
+                      bullet: ({children}: any) => (
+                        <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>
+                      ),
+                    },
+                    listItem: {
+                      bullet: ({children}: any) => (
+                        <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                          <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                          <span>{children}</span>
+                        </li>
+                      ),
+                    },
+                    marks: {
+                      strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+                    },
+                  }}
+                />
               </div>
             </div>
           )}
