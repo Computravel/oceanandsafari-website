@@ -114,12 +114,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
         {destination.highlights && destination.highlights.length > 0 && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
-            <h2 style={{
-              fontFamily: "var(--font-cormorant), serif",
-              fontSize: "32px",
-              color: "var(--charcoal)",
-              marginBottom: "20px",
-            }}>Highlights</h2>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Highlights</h2>
             <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
               <PortableText value={destination.highlights} components={portableTextComponents} />
             </div>
@@ -235,5 +230,3 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
     </main>
   );
 }
-=======
->>>>>>> 3da2cd9781d64db52fe436c39a30b6eb14c8ee6a
