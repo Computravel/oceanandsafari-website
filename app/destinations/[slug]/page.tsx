@@ -20,6 +20,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+const portableTextComponents = {
+  block: {
+    normal: ({children}: any) => <p style={{ marginBottom: "16px", lineHeight: 1.75 }}>{children}</p>,
+    h2: ({children}: any) => <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "24px", color: "var(--charcoal)", fontWeight: 400, marginTop: "32px", marginBottom: "12px" }}>{children}</h2>,
+    h3: ({children}: any) => <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", fontWeight: 400, marginTop: "24px", marginBottom: "8px" }}>{children}</h3>,
+  },
+  list: {
+    bullet: ({children}: any) => <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>,
+  },
+  listItem: {
+    bullet: ({children}: any) => (
+      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+        <span>{children}</span>
+      </li>
+    ),
+  },
+  marks: {
+    strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+  },
+};
+
 export default async function DestinationPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const destination = await getDestination(slug);
@@ -28,7 +50,6 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
 
-      {/* NAV */}
       <nav style={{ background: "rgba(247,242,234,0.97)", borderBottom: "0.5px solid var(--border)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(8px)" }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
           <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", letterSpacing: "0.02em", lineHeight: 1 }}>
@@ -48,7 +69,6 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
         </div>
       </nav>
 
-      {/* HERO */}
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
         {destination.heroImage && (
           <img src={destination.heroImage} alt={destination.heroImageAlt || destination.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }} />
@@ -72,7 +92,6 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "60px 40px" }}>
 
-        {/* BREADCRUMB */}
         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", marginBottom: "40px", display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
           <Link href="/destinations" style={{ color: "var(--teal)", textDecoration: "none" }}>Destinations</Link>
           {destination.parent && (
@@ -85,10 +104,10 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           <span style={{ color: "var(--charcoal)" }}>{destination.name}</span>
         </div>
 
-        {/* DESCRIPTION */}
         {destination.description && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
             <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
+<<<<<<< HEAD
               <PortableText
                 value={destination.description}
                 components={{
@@ -110,13 +129,16 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                   },
                 }}
               />
+=======
+              <PortableText value={destination.description} components={portableTextComponents} />
+>>>>>>> c153cf38eae5fa972119167951221edcf97b8dce
             </div>
           </div>
         )}
 
-{/* HIGHLIGHTS */}
         {destination.highlights && destination.highlights.length > 0 && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
+<<<<<<< HEAD
             <h2 style={{
               fontFamily: "var(--font-cormorant), serif",
               fontSize: "32px",
@@ -142,16 +164,18 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                   },
                 }}
               />
+=======
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Highlights</h2>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
+              <PortableText value={destination.highlights} components={portableTextComponents} />
+>>>>>>> c153cf38eae5fa972119167951221edcf97b8dce
             </div>
           </div>
         )}
 
-        {/* SUB-DESTINATIONS */}
         {destination.children && destination.children.length > 0 && (
           <div style={{ marginBottom: "64px" }}>
-            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>
-              Explore {destination.name}
-            </h2>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Explore {destination.name}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
               {destination.children.map((child: any) => (
                 <Link key={child._id} href={`/destinations/${child.slug?.current}`} style={{ textDecoration: "none" }}>
@@ -174,9 +198,9 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           </div>
         )}
 
-        {/* EXPERIENCES */}
         {destination.experiences && destination.experiences.length > 0 && (
           <div style={{ marginBottom: "64px" }}>
+<<<<<<< HEAD
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>
               {destination.name} Experiences
             </h2>
@@ -288,3 +312,6 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
     </main>
   );
 }
+=======
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom:
+>>>>>>> c153cf38eae5fa972119167951221edcf97b8dce
