@@ -88,7 +88,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
         {/* DESCRIPTION */}
         {destination.description && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
-            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
               <PortableText
                 value={destination.description}
                 components={{
@@ -123,7 +123,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
               color: "var(--charcoal)",
               marginBottom: "20px",
             }}>Highlights</h2>
-            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
               <PortableText
                 value={destination.highlights}
                 components={{
@@ -244,7 +244,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
         {destination.travelTips && (
           <div style={{ padding: "32px", background: "var(--ivory)", borderRadius: "8px", border: "0.5px solid var(--border)" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "16px" }}>Travel Tips for {destination.name}</h2>
-            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.8 }}>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--charcoal)", lineHeight: 1.75 }}>
               <PortableText
                 value={destination.travelTips}
                 components={{
