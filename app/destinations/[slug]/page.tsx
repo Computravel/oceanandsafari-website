@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const portableTextComponents = {
   block: {
     normal: ({children}: any) => <p style={{ marginBottom: "16px", lineHeight: 1.75 }}>{children}</p>,
-    h2: ({children}: any) => <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "24px", color: "var(--charcoal)", fontWeight: 400, marginTop: "32px", marginBottom: "12px" }}>{children}</h2>,
+    h2: ({children}: any) => <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", fontWeight: 400, marginTop: "36px", marginBottom: "14px" }}>{children}</h2>,
     h3: ({children}: any) => <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", fontWeight: 400, marginTop: "24px", marginBottom: "8px" }}>{children}</h3>,
   },
   list: {
@@ -31,7 +31,7 @@ const portableTextComponents = {
   },
   listItem: {
     bullet: ({children}: any) => (
-      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "inherit", lineHeight: 1.75 }}>
         <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
         <span>{children}</span>
       </li>
