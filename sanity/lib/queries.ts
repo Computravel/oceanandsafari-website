@@ -258,3 +258,19 @@ export async function getDestinationSlugs() {
     }
   `, {}, options)
 }
+// Fetch all published consultants
+export async function getConsultants() {
+  return client.fetch(`
+    *[_type == "consultant" && published == true] | order(order asc) {
+      _id,
+      name,
+      role,
+      "photo": photo.asset->url,
+      "photoAlt": photo.alt,
+      bio,
+      specialities,
+      email,
+      quote,
+    }
+  `, {}, options)
+}

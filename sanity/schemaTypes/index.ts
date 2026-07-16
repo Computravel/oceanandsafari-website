@@ -5,6 +5,7 @@ import { cruiseLine } from './cruiseLine'
 import { resort } from './resort'
 import { safari } from './safari'
 import { destination } from './destination'
+import { consultant } from './consultant'
 
 export const schemaTypes = [
   article,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   resort,
   safari,
   destination,
+  consultant
 ]

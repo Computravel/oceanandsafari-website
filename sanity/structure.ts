@@ -66,6 +66,11 @@ S.listItem()
             )
         ),
       S.listItem()
+        .title('Consultants')
+        .schemaType('consultant')
+        .child(S.documentTypeList('consultant').title('Consultants')),
+
+      S.listItem()
         .title('Exclusive Escapes')
         .schemaType('exclusiveEscape')
         .child(S.documentTypeList('exclusiveEscape').title('Exclusive Escapes')),
