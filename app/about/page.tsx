@@ -56,7 +56,7 @@ export default async function AboutPage() {
         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", color: "var(--charcoal)", lineHeight: 1.85 }}>
           <p style={{ marginBottom: "20px" }}>Ocean & Safari is a luxury travel brand by Computravel — one of Southern Africa's first online travel agencies, co-founded in 2008. For over 25 years, we have helped discerning travellers explore unforgettable destinations across Africa, the Indian Ocean Islands and beyond.</p>
           <p style={{ marginBottom: "20px" }}>What sets us apart is simple: our consultants have been there. We have stayed in the lodges we recommend, sailed on the ships we book, and walked the shores we describe. When you plan a journey with us, you are not speaking to an algorithm — you are speaking to someone who has lived the experience.</p>
-          <p>As ASATA members and IATA accredited specialists, we bring the access, relationships and expertise of a fully established travel business — delivered with the personal attention of a boutique consultancy.</p>
+          <p>As ASATA members, we bring the access, relationships and expertise of a fully established travel business — delivered with the personal attention of a boutique consultancy.</p>
         </div>
       </section>
 
@@ -64,9 +64,8 @@ export default async function AboutPage() {
         <div style={{ maxWidth: "900px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "32px", justifyContent: "center", alignItems: "center" }}>
           {[
             { icon: "✦", label: "ASATA Member", desc: "Association of Southern African Travel Agents" },
-            { icon: "◈", label: "IATA Accredited", desc: "International Air Transport Association" },
             { icon: "◎", label: "25+ Years Experience", desc: "Serving discerning travellers since 2000" },
-            { icon: "✦", label: "Thompsons Partner", desc: "Official Thompsons Holidays partner" },
+            { icon: "✦", label: "Exclusive Partners", desc: "Our trusted partners in supplying exclusive experiences" },
           ].map((item, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "14px", maxWidth: "200px" }}>
               <div style={{ fontSize: "20px", color: "var(--gold)", flexShrink: 0, marginTop: "2px" }}>{item.icon}</div>
