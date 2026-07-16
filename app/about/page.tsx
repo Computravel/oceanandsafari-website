@@ -210,7 +210,7 @@ function ConsultantContent({ consultant }: { consultant: any }) {
                 strong: ({children}: any) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
                 link: ({value, children}: any) => (
                   
-                    href={value?.href}
+                    href={value && value.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "var(--teal)", textDecoration: "underline" }}
