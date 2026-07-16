@@ -312,7 +312,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
             paddingTop: "32px",
             borderTop: "0.5px solid rgba(255,255,255,0.1)",
           }}>
-            {["ASATA Member", "IATA Accredited", "25+ Years Experience", "A Computravel Company"].map((item) => (
+            {["ASATA Member", "25+ Years Experience", "A Computravel Company"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0 }} />
                 <span style={{
@@ -384,7 +384,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         }}>
           {[
             { icon: "✦", title: "Personal consultant", desc: "One dedicated specialist handles your entire journey from first enquiry to final farewell", color: "var(--gold)" },
-            { icon: "◈", title: "Exclusive access", desc: "Official partner relationships with Thompsons mean benefits no algorithm can find", color: "var(--teal)" },
+            { icon: "◈", title: "Exclusive access", desc: "Official partner relationships with exclusive suppliers", color: "var(--teal)" },
             { icon: "◎", title: "Every detail managed", desc: "From transfers to insurance — nothing is left to chance, nothing left to worry about", color: "var(--cobalt)" },
           ].map((item, i) => (
             <div key={i} style={{
