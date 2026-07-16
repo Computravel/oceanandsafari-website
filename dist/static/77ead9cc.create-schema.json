@@ -3027,5 +3027,218 @@
     "name": "destination",
     "type": "document",
     "title": "Destinations"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. Founder, CEO and Luxury Travel Specialist",
+        "name": "role",
+        "type": "string",
+        "title": "Role / Title"
+      },
+      {
+        "initialValue": 1,
+        "description": "1 = first, 2 = second etc.",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "e.g. Lindsay Quail, Founder of Ocean & Safari",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "photo",
+        "type": "image"
+      },
+      {
+        "description": "Full biography — shown on the About page",
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "bio",
+        "type": "array",
+        "title": "Biography"
+      },
+      {
+        "description": "e.g. Indian Ocean Islands, African Safaris, Luxury Cruises",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "specialities",
+        "type": "array"
+      },
+      {
+        "description": "Optional — shown on the About page",
+        "name": "email",
+        "type": "string",
+        "title": "Email Address"
+      },
+      {
+        "rows": 2,
+        "description": "A short personal quote shown on the profile card",
+        "name": "quote",
+        "type": "text",
+        "title": "Personal Quote"
+      },
+      {
+        "initialValue": true,
+        "name": "published",
+        "type": "boolean"
+      }
+    ],
+    "name": "consultant",
+    "type": "document",
+    "title": "Consultants"
   }
 ]
