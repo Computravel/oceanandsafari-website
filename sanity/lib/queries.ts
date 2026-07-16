@@ -1,6 +1,6 @@
 import { client } from './client'
 
-const options = { next: { revalidate: 30 } }
+const options = { next: { revalidate: 10 } }
 
 // Fetch all published experiences
 export async function getExperiences() {
