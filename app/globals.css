@@ -238,8 +238,19 @@ input, textarea, button, select {
 /* ── ABOUT PAGE MOBILE ── */
 @media (max-width: 768px) {
   .about-consultant-grid {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  .about-photo {
+    aspect-ratio: 4/3 !important;
+    max-height: 280px !important;
+    width: 100% !important;
+  }
+
+  .about-photo img {
+    object-position: center top !important;
   }
 
   .about-promise-grid {
@@ -253,19 +264,12 @@ input, textarea, button, select {
   }
 }
 @media (max-width: 768px) {
-  /* Global section padding fix */
-  section, .page-section {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+  .about-photo {
+    order: 0 !important;
   }
 
-  /* Fix nav padding */
-  nav {
-    padding: 0 16px !important;
-  }
-
-  /* Fix nav text overflow */
-  nav .nav-brand-subtitle {
-    display: none;
+  .about-consultant-grid > div:not(.about-photo) {
+    order: 1 !important;
+    padding-top: 0 !important;
   }
 }
