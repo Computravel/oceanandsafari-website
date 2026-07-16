@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 
 
-export const revalidate = 30;
+export const revalidate = 10;
 
 export async function generateStaticParams() {
   const slugs = await getExperienceSlugs();
@@ -186,7 +186,33 @@ export default async function ExperiencePage({
                 color: "var(--charcoal)",
                 lineHeight: 1.85,
               }}>
-                <PortableText value={experience.description} />
+                <PortableText
+  value={experience.description}
+  components={{
+    marks: {
+      strong: ({children}: any) => (
+        <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
+      ),
+    },
+    types: {
+      image: ({value}: any) => {
+        const ref = value.asset?._ref || '';
+        const imageUrl = value.asset?.url ||
+          (ref ? `https://cdn.sanity.io/images/ibvmvzmo/production/${ref.replace('image-', '').replace(/-(\w+)$/, '.$1')}` : null);
+        if (!imageUrl) return null;
+        return (
+          <div style={{ margin: "24px 0" }}>
+            <img
+              src={imageUrl}
+              alt={value.alt || ""}
+              style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "400px" }}
+            />
+          </div>
+        );
+      },
+    },
+  }}
+/>
               </div>
             </div>
           )}
