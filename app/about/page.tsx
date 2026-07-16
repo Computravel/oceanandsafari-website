@@ -208,6 +208,16 @@ function ConsultantContent({ consultant }: { consultant: any }) {
               },
               marks: {
                 strong: ({children}: any) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
+                link: ({value, children}: any) => (
+                  
+                    href={value?.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--teal)", textDecoration: "underline" }}
+                  >
+                    {children}
+                  </a>
+                ),
               },
             }}
           />
