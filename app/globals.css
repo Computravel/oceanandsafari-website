@@ -235,3 +235,37 @@ input, textarea, button, select {
     grid-template-columns: 1fr !important;
   }
 }
+/* ── ABOUT PAGE MOBILE ── */
+@media (max-width: 768px) {
+  .about-consultant-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .about-promise-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .about-credentials {
+    gap: 20px !important;
+    justify-content: flex-start !important;
+  }
+}
+@media (max-width: 768px) {
+  /* Global section padding fix */
+  section, .page-section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Fix nav padding */
+  nav {
+    padding: 0 16px !important;
+  }
+
+  /* Fix nav text overflow */
+  nav .nav-brand-subtitle {
+    display: none;
+  }
+}
