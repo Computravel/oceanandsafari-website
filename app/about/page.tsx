@@ -38,7 +38,7 @@ export default async function AboutPage() {
 
       {/* HERO */}
       <section style={{ background: "var(--abyss)", padding: "100px 40px 80px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/seychelles.jpg)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.2 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url(/lindsay-rikke.jpg)", backgroundSize: "cover", backgroundPosition: "center top", opacity: 0.35 }} />
         <div style={{ position: "relative", zIndex: 1, maxWidth: "700px", margin: "0 auto" }}>
           <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "16px" }}>Our Story</div>
           <h1 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(40px, 6vw, 68px)", fontWeight: 400, color: "var(--pearl)", lineHeight: 1.2, marginBottom: "24px" }}>
