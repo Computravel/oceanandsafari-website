@@ -227,6 +227,12 @@ export async function getDestination(slug: string) {
       description,
       whyYoullLoveIt,
       highlights,
+      "gallery": gallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
+      signatureLuxuryExperiencesIntro,
       signatureLuxuryExperiences,
       travelTips,
       practicalInformation,

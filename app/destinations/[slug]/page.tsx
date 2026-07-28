@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import ExperienceGallery from "@/app/components/ExperienceGallery";
 
 export const revalidate = 30;
 
@@ -129,17 +130,27 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           </div>
         )}
 
+        <ExperienceGallery gallery={destination.gallery || []} title="Gallery" />
+
         {destination.signatureLuxuryExperiences && destination.signatureLuxuryExperiences.length > 0 && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
-            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Signature Luxury Experiences</h2>
-            <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
-              {destination.signatureLuxuryExperiences.map((item: string, i: number) => (
-                <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                  <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: "4px" }}>✦</span>
-                  <span>{item}</span>
-                </li>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: destination.signatureLuxuryExperiencesIntro ? "12px" : "20px" }}>Signature Luxury Experiences</h2>
+            {destination.signatureLuxuryExperiencesIntro && (
+              <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", lineHeight: 1.75, marginBottom: "28px" }}>{destination.signatureLuxuryExperiencesIntro}</p>
+            )}
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              {destination.signatureLuxuryExperiences.map((item: { title: string; description?: string }, i: number) => (
+                <div key={i} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                  <span style={{ color: "var(--gold)", fontSize: "20px", flexShrink: 0, lineHeight: 1.4 }}>✦</span>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--charcoal)", marginBottom: "6px" }}>{item.title}</div>
+                    {item.description && (
+                      <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75, margin: 0 }}>{item.description}</p>
+                    )}
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 

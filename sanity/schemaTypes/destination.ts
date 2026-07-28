@@ -118,12 +118,70 @@ export const destination = {
       group: 'content',
     },
     {
+      name: 'gallery',
+      title: 'Image Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Describe the image for SEO and accessibility',
+              validation: (Rule: any) => Rule.required().warning('Alt text is important for SEO'),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+      description: 'Shown after the Highlights section on the destination page',
+      group: 'content',
+    },
+    {
+      name: 'signatureLuxuryExperiencesIntro',
+      title: 'Signature Luxury Experiences — Intro',
+      type: 'text',
+      rows: 2,
+      description: 'Optional short intro line shown above the list, e.g. "Every South African journey can be tailored to your interests, but these are among the country\'s most unforgettable luxury experiences."',
+      group: 'content',
+    },
+    {
       name: 'signatureLuxuryExperiences',
       title: 'Signature Luxury Experiences',
       type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-      description: 'Standout bespoke experiences unique to this destination, e.g. Sunset champagne cruises, Private sandbank dining, Swimming with whale sharks',
+      of: [
+        {
+          type: 'object',
+          name: 'signatureExperience',
+          title: 'Signature Experience',
+          fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              description: 'e.g. "Stay in a Private Safari Lodge"',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+            },
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'description' },
+          },
+        },
+      ],
+      description: 'Standout bespoke experiences unique to this destination, each with a short title and description',
       group: 'content',
     },
     {
