@@ -112,12 +112,59 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           </div>
         )}
 
+        {destination.whyYoullLoveIt && (
+          <div style={{ marginBottom: "48px", maxWidth: "780px", padding: "24px 28px", background: "var(--ivory)", borderLeft: "3px solid var(--gold)", borderRadius: "4px" }}>
+            <p style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", fontStyle: "italic", color: "var(--charcoal)", lineHeight: 1.6, margin: 0 }}>
+              &ldquo;{destination.whyYoullLoveIt}&rdquo;
+            </p>
+          </div>
+        )}
+
         {destination.highlights && destination.highlights.length > 0 && (
           <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Highlights</h2>
             <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
               <PortableText value={destination.highlights} components={portableTextComponents} />
             </div>
+          </div>
+        )}
+
+        {destination.signatureLuxuryExperiences && destination.signatureLuxuryExperiences.length > 0 && (
+          <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Signature Luxury Experiences</h2>
+            <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)", lineHeight: 1.75 }}>
+              {destination.signatureLuxuryExperiences.map((item: string, i: number) => (
+                <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                  <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: "4px" }}>✦</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {destination.perfectFor && destination.perfectFor.length > 0 && (
+          <div style={{ marginBottom: "48px" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Perfect For</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {destination.perfectFor.map((tag: string, i: number) => (
+                <span key={i} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--charcoal)", background: "var(--ivory)", border: "0.5px solid var(--border)", padding: "8px 16px", borderRadius: "20px" }}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {destination.bestTimeToVisitDetail && destination.bestTimeToVisitDetail.length > 0 && (
+          <div style={{ marginBottom: "48px", maxWidth: "780px" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Best Time to Visit</h2>
+            {destination.bestTimeToVisitDetail.map((season: any, i: number) => (
+              <div key={i} style={{ marginBottom: "18px", paddingBottom: "18px", borderBottom: i < destination.bestTimeToVisitDetail.length - 1 ? "0.5px solid var(--border)" : "none" }}>
+                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal)", marginBottom: "6px" }}>{season.period}</div>
+                {season.description && (
+                  <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--charcoal)", lineHeight: 1.7, margin: 0 }}>{season.description}</p>
+                )}
+              </div>
+            ))}
           </div>
         )}
 
@@ -206,6 +253,18 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           </div>
         )}
 
+        {destination.combineWith && destination.combineWith.length > 0 && (
+          <div style={{ marginBottom: "48px" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "12px" }}>Combine With</h2>
+            <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--muted)", marginBottom: "20px" }}>Pair {destination.name} with these destinations for an even more unforgettable journey.</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {destination.combineWith.map((item: string, i: number) => (
+                <span key={i} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "20px" }}>{item}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {destination.travelTips && (
           <div style={{ padding: "32px", background: "var(--ivory)", borderRadius: "8px", border: "0.5px solid var(--border)", marginBottom: "48px" }}>
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "16px" }}>Travel Tips for {destination.name}</h2>
@@ -215,12 +274,37 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
           </div>
         )}
 
+        {destination.practicalInformation && Object.values(destination.practicalInformation).some(Boolean) && (
+          <div style={{ padding: "32px", background: "white", borderRadius: "8px", border: "0.5px solid var(--border)", marginBottom: "48px" }}>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "20px" }}>Practical Information</h2>
+            <div className="practical-info-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 32px" }}>
+              {[
+                { label: "Currency", value: destination.practicalInformation.currency },
+                { label: "Language", value: destination.practicalInformation.language },
+                { label: "Flight Time", value: destination.practicalInformation.flightTime },
+                { label: "Time Zone", value: destination.practicalInformation.timeZone },
+                { label: "Visa Requirements", value: destination.practicalInformation.visaRequirements },
+                { label: "Getting Around", value: destination.practicalInformation.gettingAround },
+                { label: "Health", value: destination.practicalInformation.health },
+                { label: "Electricity", value: destination.practicalInformation.electricity },
+                { label: "Tipping", value: destination.practicalInformation.tipping },
+                { label: "Ideal Stay", value: destination.practicalInformation.idealStay },
+              ].filter(item => item.value).map((item, i) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "0.5px solid var(--border)", gap: "12px" }}>
+                  <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)" }}>{item.label}</span>
+                  <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--charcoal)", fontWeight: 500, textAlign: "right" }}>{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
 
       <section style={{ padding: "80px 40px", background: "var(--abyss)", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 44px)", color: "var(--pearl)", marginBottom: "16px" }}>Ready to explore {destination.name}?</h2>
-        <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", color: "rgba(247,242,234,0.6)", lineHeight: 1.7, marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px" }}>
-          Speak to an Ocean & Safari consultant and begin planning your bespoke journey.
+        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 44px)", color: "var(--pearl)", marginBottom: "16px" }}>Plan Your Unique Journey</h2>
+        <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", color: "rgba(247,242,234,0.6)", lineHeight: 1.7, marginBottom: "32px", maxWidth: "560px", margin: "0 auto 32px" }}>
+          Every Ocean & Safari itinerary is thoughtfully designed around your individual travel style. From exclusive villas and luxury lodges to private guides, yacht charters and seamless air travel, our specialists create journeys that are as unique as the destinations themselves.
         </p>
         <Link href="/#enquire" style={{ display: "inline-block", background: "var(--gold)", color: "var(--abyss)", fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", padding: "16px 40px", borderRadius: "4px", textDecoration: "none" }}>
           Plan My Journey
