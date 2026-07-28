@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite } from './components/ViewOnSite'
+import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite, ViewLodgeOnSite } from './components/ViewOnSite'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -86,7 +86,25 @@ S.listItem()
         .child(S.documentTypeList('resort').title('Resorts & Hotels')),
 
       S.listItem()
-        .title('Safaris')
-        .schemaType('safari')
-        .child(S.documentTypeList('safari').title('Safaris')),
+        .title('Safari Lodges & Reserves')
+        .schemaType('lodge')
+        .child(
+          S.documentTypeList('lodge')
+            .title('Safari Lodges & Reserves')
+            .defaultOrdering([
+              { field: 'region', direction: 'asc' },
+              { field: 'name', direction: 'asc' },
+            ])
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('lodge')
+                .views([
+                  S.view.form().title('Edit'),
+                  S.view
+                    .component(ViewLodgeOnSite)
+                    .title('View on Site'),
+                ])
+            )
+        ),
     ])

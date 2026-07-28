@@ -10,6 +10,7 @@ interface GalleryImage {
 
 interface Props {
   gallery: GalleryImage[];
+  title?: string;
 }
 
 function getImageUrl(image: GalleryImage): string | null {
@@ -22,7 +23,7 @@ function getImageUrl(image: GalleryImage): string | null {
   return null;
 }
 
-export default function ExperienceGallery({ gallery }: Props) {
+export default function ExperienceGallery({ gallery, title = "Gallery" }: Props) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!gallery || gallery.length === 0) return null;
@@ -42,7 +43,7 @@ export default function ExperienceGallery({ gallery }: Props) {
           fontSize: "32px",
           color: "var(--charcoal)",
           marginBottom: "20px",
-        }}>Gallery</h2>
+        }}>{title}</h2>
         <div className="gallery-grid">
           {images.map((image, i) => (
             <div

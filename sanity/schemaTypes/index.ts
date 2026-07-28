@@ -3,7 +3,7 @@ import { experience } from './experience'
 import { exclusiveEscape } from './exclusiveEscape'
 import { cruiseLine } from './cruiseLine'
 import { resort } from './resort'
-import { safari } from './safari'
+import { lodge } from './lodge'
 import { destination } from './destination'
 import { consultant } from './consultant'
 
@@ -13,7 +13,7 @@ export const schemaTypes = [
   exclusiveEscape,
   cruiseLine,
   resort,
-  safari,
+  lodge,
   destination,
   consultant
 ]

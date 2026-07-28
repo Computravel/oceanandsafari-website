@@ -258,6 +258,112 @@ export async function getDestinationSlugs() {
     }
   `, {}, options)
 }
+// Fetch all published lodges
+export async function getLodges() {
+  return client.fetch(`
+    *[_type == "lodge" && published == true] | order(region asc, name asc) {
+      _id,
+      name,
+      region,
+      country,
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      description,
+      highlights,
+      accommodationStyle,
+      priceRange,
+      slug
+    }
+  `, {}, options)
+}
+
+// Fetch single lodge by slug
+export async function getLodge(slug: string) {
+  return client.fetch(`
+    *[_type == "lodge" && slug.current == $slug && published == true][0] {
+      _id,
+      name,
+      region,
+      country,
+      "heroImage": heroImage.asset->url,
+      "heroImageAlt": heroImage.alt,
+      "heroVideo": heroVideo[] {
+        _type,
+        url,
+        caption,
+        "video": video.asset->
+      },
+      description[] {
+        ...,
+        _type == "image" => {
+          ...,
+          alt,
+          caption,
+          "asset": asset->
+        }
+      },
+      highlights,
+      safariExperience[] {
+        ...,
+        _type == "image" => {
+          ...,
+          alt,
+          caption,
+          "asset": asset->
+        }
+      },
+      wildlifeHighlights,
+      "experienceGallery": experienceGallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
+      parksAndReserves,
+      accommodationStyle,
+      "accommodationGallery": accommodationGallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
+      suitableFor,
+      bestTimeToVisit,
+      conservationAndCommunity,
+      "videos": videos[] {
+        _type,
+        url,
+        caption,
+        "video": video.asset->
+      },
+      priceRange,
+      seoTitle,
+      seoDescription,
+      "relatedExperiences": relatedExperiences[]-> {
+        _id,
+        title,
+        category,
+        destination,
+        country,
+        duration,
+        priceFrom,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        slug
+      },
+      callToAction,
+      slug
+    }
+  `, { slug }, options)
+}
+
+// Fetch all lodge slugs for static generation
+export async function getLodgeSlugs() {
+  return client.fetch(`
+    *[_type == "lodge" && published == true] {
+      "slug": slug.current
+    }
+  `, {}, options)
+}
+
 // Fetch all published consultants
 export async function getConsultants() {
   return client.fetch(`

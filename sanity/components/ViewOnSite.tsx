@@ -2,10 +2,13 @@ import React from 'react'
 
 const SITE_URL = 'https://oceanandsafari.com'
 
-function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' | 'destinations' }) {
+function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' | 'destinations' | 'safari-lodges' }) {
   const slug = props.document?.displayed?.slug?.current
   const url = slug ? SITE_URL + '/' + props.type + '/' + slug : null
-  const label = props.type === 'articles' ? 'article' : props.type === 'destinations' ? 'destination' : 'experience'
+  const label = props.type === 'articles' ? 'article'
+    : props.type === 'destinations' ? 'destination'
+    : props.type === 'safari-lodges' ? 'safari lodge'
+    : 'experience'
 
   const containerStyle = {
     display: 'flex' as const,
@@ -85,4 +88,7 @@ export function ViewExperienceOnSite(props: { document: any }) {
 }
 export function ViewDestinationOnSite(props: { document: any }) {
   return ViewOnSite({ document: props.document, type: 'destinations' })
+}
+export function ViewLodgeOnSite(props: { document: any }) {
+  return ViewOnSite({ document: props.document, type: 'safari-lodges' })
 }

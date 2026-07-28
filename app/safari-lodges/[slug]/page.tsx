@@ -1,0 +1,506 @@
+import { getLodge, getLodgeSlugs } from "@/sanity/lib/queries";
+import { PortableText } from "@portabletext/react";
+import EnquiryForm from "@/app/components/EnquiryForm";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import ExperienceGallery from "@/app/components/ExperienceGallery";
+import type { Metadata } from "next";
+
+export const revalidate = 10;
+
+const ACCOMMODATION_STYLE_LABELS: Record<string, string> = {
+  "luxury-tented": "Luxury Tented Camp",
+  lodge: "Lodge",
+  mobile: "Mobile Safari",
+  "private-villa": "Private Villa",
+  mixed: "Mixed",
+};
+
+const PRICE_RANGE_LABELS: Record<string, string> = {
+  "ultra-luxury": "Ultra Luxury",
+  luxury: "Luxury",
+  premium: "Premium",
+};
+
+const SUITABLE_FOR_LABELS: Record<string, string> = {
+  families: "Families",
+  honeymooners: "Honeymooners",
+  solo: "Solo Travellers",
+  couples: "Couples",
+  groups: "Groups of Friends",
+  "multi-generational": "Multi-Generational",
+  "active-adventure": "Active & Adventure Travellers",
+};
+
+function renderVideo(video: any, i: number) {
+  return (
+    <div key={i} style={{ marginBottom: "32px" }}>
+      {video._type === "youtubeEmbed" && video.url && (() => {
+        const match = video.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
+        const videoId = match ? match[1] : null;
+        if (!videoId) return null;
+        return (
+          <div style={{ width: "100%", maxWidth: "100%" }}>
+            <div style={{
+              position: "relative",
+              paddingBottom: "56.25%",
+              height: 0,
+              overflow: "hidden",
+              borderRadius: "8px",
+              background: "var(--abyss)",
+              width: "100%",
+              maxWidth: "100%",
+            }}>
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}`}
+                title={video.caption || "Lodge Video"}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+              />
+            </div>
+            {video.caption && (
+              <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{video.caption}</p>
+            )}
+          </div>
+        );
+      })()}
+      {video._type === "uploadedVideo" && video.video && (() => {
+        const ref = video.video._ref || video.video.assetId;
+        if (!ref) return null;
+        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
+        return (
+          <div>
+            <video controls style={{ width: "100%", borderRadius: "8px", background: "var(--abyss)" }}>
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {video.caption && (
+              <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{video.caption}</p>
+            )}
+          </div>
+        );
+      })()}
+    </div>
+  );
+}
+
+const portableTextComponents = {
+  marks: {
+    strong: ({ children }: any) => (
+      <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
+    ),
+  },
+  list: {
+    bullet: ({ children }: any) => (
+      <ul style={{ paddingLeft: "0", margin: "8px 0", listStyle: "none" }}>{children}</ul>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }: any) => (
+      <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+        <span>{children}</span>
+      </li>
+    ),
+  },
+  types: {
+    image: ({ value }: any) => {
+      const ref = value.asset?._ref || '';
+      const imageUrl = value.asset?.url ||
+        (ref ? `https://cdn.sanity.io/images/ibvmvzmo/production/${ref.replace('image-', '').replace(/-(\w+)$/, '.$1')}` : null);
+      if (!imageUrl) return null;
+      return (
+        <div style={{ margin: "24px 0" }}>
+          <img
+            src={imageUrl}
+            alt={value.alt || ""}
+            style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "400px" }}
+          />
+          {value.caption && (
+            <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", textAlign: "center", marginTop: "8px", fontStyle: "italic" }}>{value.caption}</p>
+          )}
+        </div>
+      );
+    },
+  },
+};
+
+export async function generateStaticParams() {
+  const slugs = await getLodgeSlugs();
+  return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const lodge = await getLodge(slug);
+  return {
+    title: lodge?.seoTitle || `${lodge?.name} | Ocean & Safari`,
+    description: lodge?.seoDescription || `Discover ${lodge?.name}, a luxury safari lodge in ${lodge?.region || lodge?.country || "Africa"}.`,
+  };
+}
+
+export default async function LodgePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const lodge = await getLodge(slug);
+
+  if (!lodge) notFound();
+
+  const ctaHeading = lodge.callToAction?.heading || "Enquire About This Lodge";
+  const ctaSubtext = lodge.callToAction?.subtext || "One of our consultants will be in touch within 24 hours to begin crafting your personalised safari.";
+  const ctaButtonLabel = lodge.callToAction?.buttonLabel || "Enquire Now";
+
+  return (
+    <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
+
+      {/* ── NAVIGATION ── */}
+      <nav style={{
+        background: "rgba(247,242,234,0.97)",
+        borderBottom: "0.5px solid var(--border)",
+        padding: "0 40px",
+        height: "64px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        backdropFilter: "blur(8px)",
+      }}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
+          <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", letterSpacing: "0.02em", lineHeight: 1 }}>
+            <span style={{ color: "var(--abyss)" }}>O</span>
+            <span style={{ color: "var(--gold)", margin: "0 2px" }}>&</span>
+            <span style={{ color: "var(--teal)" }}>S</span>
+          </div>
+          <div style={{ width: "0.5px", height: "24px", background: "var(--border)" }} />
+          <div>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", fontWeight: 500, letterSpacing: "0.16em", color: "var(--charcoal)", textTransform: "uppercase" }}>Ocean & Safari</div>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.12em", color: "var(--muted)", textTransform: "uppercase" }}>Luxury Travel · by Computravel</div>
+          </div>
+        </Link>
+
+        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+          <Link href="/safari-lodges" style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--muted)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>← Back to lodges</Link>
+          <a href="#enquire-form" style={{ background: "var(--gold)", color: "var(--pearl)", fontSize: "15px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", padding: "10px 20px", borderRadius: "3px", textDecoration: "none" }}>Enquire Now</a>
+        </div>
+      </nav>
+
+      {/* ── HERO ── */}
+      <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
+        {lodge.heroVideo && lodge.heroVideo.length > 0 ? (
+          <div style={{ width: "100%", height: "100%" }}>
+            {lodge.heroVideo[0]._type === "youtubeEmbed" && lodge.heroVideo[0].url && (() => {
+              const match = lodge.heroVideo[0].url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
+              const videoId = match ? match[1] : null;
+              if (!videoId) return null;
+              return (
+                <iframe
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1&loop=1&playlist=${videoId}`}
+                  title={lodge.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ width: "100%", height: "100%", border: "none", opacity: 0.85 }}
+                />
+              );
+            })()}
+            {lodge.heroVideo[0]._type === "uploadedVideo" && lodge.heroVideo[0].video && (() => {
+              const ref = lodge.heroVideo[0].video._ref || lodge.heroVideo[0].video.assetId;
+              if (!ref) return null;
+              const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
+              return (
+                <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}>
+                  <source src={videoUrl} type="video/mp4" />
+                </video>
+              );
+            })()}
+          </div>
+        ) : lodge.heroImage && (
+          <img
+            src={lodge.heroImage}
+            alt={lodge.heroImageAlt || lodge.name}
+            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
+          />
+        )}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.8) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "40px", left: "40px", right: "40px" }}>
+          <div style={{
+            display: "inline-block",
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            fontWeight: 500,
+            background: "rgba(29,165,160,0.8)",
+            color: "white",
+            padding: "4px 12px",
+            borderRadius: "2px",
+            marginBottom: "12px",
+            backdropFilter: "blur(4px)",
+          }}>Safari Lodge & Reserve</div>
+          <h1 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 400, color: "var(--pearl)", lineHeight: 1.15, marginBottom: "8px" }}>{lodge.name}</h1>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "rgba(247,242,234,0.7)" }}>
+            {[lodge.region, lodge.country].filter(Boolean).join(", ")}
+          </div>
+        </div>
+      </div>
+
+      {/* ── CONTENT ── */}
+      <div className="experience-content-grid" style={{
+        maxWidth: "1100px",
+        margin: "0 auto",
+        padding: "60px 40px",
+        display: "grid",
+        gridTemplateColumns: "1fr 360px",
+        gap: "48px",
+        alignItems: "start",
+      }}>
+
+        {/* LEFT — Main content */}
+        <div>
+
+          {/* Description */}
+          {lodge.description && lodge.description.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "16px" }}>About {lodge.name}</h2>
+              <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+                <PortableText value={lodge.description} components={portableTextComponents} />
+              </div>
+            </div>
+          )}
+
+          {/* Highlights */}
+          {lodge.highlights && lodge.highlights.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Highlights</h2>
+              <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
+                {lodge.highlights.map((h: string, i: number) => (
+                  <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Safari Experience */}
+          {lodge.safariExperience && lodge.safariExperience.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "16px" }}>Safari Experience</h2>
+              <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+                <PortableText value={lodge.safariExperience} components={portableTextComponents} />
+              </div>
+            </div>
+          )}
+
+          {/* Wildlife Highlights */}
+          {lodge.wildlifeHighlights && lodge.wildlifeHighlights.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "16px" }}>Wildlife to Expect</h2>
+              <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+                <PortableText value={lodge.wildlifeHighlights} components={portableTextComponents} />
+              </div>
+            </div>
+          )}
+
+          {/* Experience Image Gallery */}
+          <ExperienceGallery gallery={lodge.experienceGallery || []} title="Safari Experience Gallery" />
+
+          {/* Parks & Reserves Covered */}
+          {lodge.parksAndReserves && lodge.parksAndReserves.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Parks & Reserves Covered</h2>
+              <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
+                {lodge.parksAndReserves.map((p: string, i: number) => (
+                  <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Accommodation */}
+          {(lodge.accommodationStyle || (lodge.accommodationGallery && lodge.accommodationGallery.length > 0)) && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "16px" }}>Accommodation</h2>
+              {lodge.accommodationStyle && (
+                <div style={{
+                  display: "inline-block",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "var(--teal)",
+                  background: "rgba(29,165,160,0.1)",
+                  padding: "6px 14px",
+                  borderRadius: "3px",
+                  marginBottom: "24px",
+                }}>{ACCOMMODATION_STYLE_LABELS[lodge.accommodationStyle] || lodge.accommodationStyle}</div>
+              )}
+              <ExperienceGallery gallery={lodge.accommodationGallery || []} title="Accommodation Gallery" />
+            </div>
+          )}
+
+          {/* Suitable For */}
+          {lodge.suitableFor && lodge.suitableFor.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Suitable For</h2>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                {lodge.suitableFor.map((s: string, i: number) => (
+                  <span key={i} style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    color: "var(--charcoal)",
+                    background: "var(--ivory)",
+                    border: "0.5px solid var(--border)",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                  }}>{SUITABLE_FOR_LABELS[s] || s}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Conservation & Community */}
+          {lodge.conservationAndCommunity && lodge.conservationAndCommunity.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "16px" }}>Conservation & Community</h2>
+              <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.85 }}>
+                <PortableText value={lodge.conservationAndCommunity} components={portableTextComponents} />
+              </div>
+            </div>
+          )}
+
+          {/* Videos */}
+          {lodge.videos && lodge.videos.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Watch & Explore</h2>
+              {lodge.videos.map((video: any, i: number) => renderVideo(video, i))}
+            </div>
+          )}
+
+          {/* Related Experiences */}
+          {lodge.relatedExperiences && lodge.relatedExperiences.length > 0 && (
+            <div style={{ marginBottom: "48px" }}>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Packages Featuring This Lodge</h2>
+              <div className="packages-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
+                {lodge.relatedExperiences.map((exp: any) => (
+                  <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
+                    <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
+                      <div style={{ height: "180px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
+                        {exp.heroImage ? (
+                          <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        ) : (
+                          <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
+                        )}
+                        {exp.category && (
+                          <div style={{ position: "absolute", top: "12px", left: "12px", fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "rgba(11,31,58,0.75)", color: "white", padding: "4px 10px", borderRadius: "2px" }}>{exp.category}</div>
+                        )}
+                      </div>
+                      <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
+                        <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", marginBottom: "6px", lineHeight: 1.3 }}>{exp.title}</div>
+                        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", marginBottom: "16px" }}>
+                          {[exp.duration ? `${exp.duration} nights` : null, exp.destination].filter(Boolean).join(" · ")}
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
+                          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold)" }}>
+                            {exp.priceFrom ? <>From R{exp.priceFrom.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></> : ""}
+                          </div>
+                          <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>View</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT — Sidebar */}
+        <div className="experience-sidebar" style={{ position: "sticky", top: "84px" }}>
+          <div style={{
+            background: "white",
+            border: "0.5px solid var(--border)",
+            borderRadius: "12px",
+            overflow: "hidden",
+            boxShadow: "0 4px 24px rgba(11,31,58,0.08)",
+          }}>
+            {lodge.priceRange && (
+              <div style={{ background: "var(--abyss)", padding: "24px" }}>
+                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(247,242,234,0.5)", marginBottom: "8px" }}>Price Range</div>
+                <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--gold)", lineHeight: 1.2 }}>{PRICE_RANGE_LABELS[lodge.priceRange] || lodge.priceRange}</div>
+              </div>
+            )}
+
+            <div style={{ padding: "20px 24px" }}>
+              {[
+                { label: "Region", value: lodge.region },
+                { label: "Country", value: lodge.country },
+                { label: "Accommodation Style", value: lodge.accommodationStyle ? (ACCOMMODATION_STYLE_LABELS[lodge.accommodationStyle] || lodge.accommodationStyle) : null },
+                { label: "Best Time to Visit", value: lodge.bestTimeToVisit },
+              ].filter(item => item.value).map((item, i) => (
+                <div key={i} style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  padding: "10px 0",
+                  borderBottom: "0.5px solid var(--border)",
+                  gap: "12px",
+                }}>
+                  <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--muted)", flexShrink: 0 }}>{item.label}</span>
+                  <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--charcoal)", fontWeight: 500, textAlign: "right" }}>{item.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ padding: "0 24px 24px" }}>
+              <a href="#enquire-form" style={{
+                display: "block",
+                width: "100%",
+                background: "var(--gold)",
+                color: "var(--abyss)",
+                fontFamily: "var(--font-jost), sans-serif",
+                fontSize: "16px",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                padding: "16px",
+                borderRadius: "6px",
+                textDecoration: "none",
+                textAlign: "center",
+              }}>{ctaButtonLabel}</a>
+              <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", textAlign: "center", marginTop: "12px", lineHeight: 1.5 }}>
+                One of our consultants will be in touch within 24 hours
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── ENQUIRY FORM ── */}
+      <section id="enquire-form" style={{ padding: "80px 40px", background: "var(--ivory)", borderTop: "0.5px solid var(--border)" }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>{ctaHeading}</div>
+          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 40px)", color: "var(--charcoal)", textAlign: "center", marginBottom: "12px" }}>{lodge.name}</h2>
+          <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", textAlign: "center", lineHeight: 1.7, marginBottom: "40px" }}>
+            {ctaSubtext}
+          </p>
+          <EnquiryForm
+            experienceTitle={lodge.name}
+            experienceUrl={`https://oceanandsafari.com/safari-lodges/${lodge.slug?.current}`}
+          />
+        </div>
+      </section>
+
+    </main>
+  );
+}
