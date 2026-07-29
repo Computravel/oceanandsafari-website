@@ -159,6 +159,7 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
           {[
             { label: "Ocean Islands", href: "/ocean-islands" },
             { label: "African Safaris", href: "/african-safaris" },
+            { label: "Safari Lodges", href: "/safari-lodges" },
             { label: "Luxury Cruises", href: "/luxury-cruises" },
             { label: "Unique Journeys", href: "/unique-journeys" },
             { label: "Destinations", href: "/destinations" },

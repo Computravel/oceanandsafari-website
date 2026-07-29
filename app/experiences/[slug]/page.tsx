@@ -425,38 +425,29 @@ export default async function ExperiencePage({
                       })()}
                     </div>
                   )}
-                  {video._type === 'uploadedVideo' && video.video && (
+                  {video._type === 'uploadedVideo' && video.video?.url && (
                     <div>
-                      {(() => {
-                        const ref = video.video._ref || video.video.assetId;
-                        if (!ref) return null;
-                        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
-                        return (
-                          <div>
-                            <video
-                              controls
-                              style={{
-                                width: "100%",
-                                borderRadius: "8px",
-                                background: "var(--abyss)",
-                              }}
-                            >
-                              <source src={videoUrl} type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                            {video.caption && (
-                              <p style={{
-                                fontFamily: "var(--font-jost), sans-serif",
-                                fontSize: "14px",
-                                color: "var(--muted)",
-                                textAlign: "center",
-                                marginTop: "10px",
-                                fontStyle: "italic",
-                              }}>{video.caption}</p>
-                            )}
-                          </div>
-                        );
-                      })()}
+                      <video
+                        controls
+                        style={{
+                          width: "100%",
+                          borderRadius: "8px",
+                          background: "var(--abyss)",
+                        }}
+                      >
+                        <source src={video.video.url} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                      {video.caption && (
+                        <p style={{
+                          fontFamily: "var(--font-jost), sans-serif",
+                          fontSize: "14px",
+                          color: "var(--muted)",
+                          textAlign: "center",
+                          marginTop: "10px",
+                          fontStyle: "italic",
+                        }}>{video.caption}</p>
+                      )}
                     </div>
                   )}
                 </div>

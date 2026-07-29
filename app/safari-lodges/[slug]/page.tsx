@@ -65,22 +65,17 @@ function renderVideo(video: any, i: number) {
           </div>
         );
       })()}
-      {video._type === "uploadedVideo" && video.video && (() => {
-        const ref = video.video._ref || video.video.assetId;
-        if (!ref) return null;
-        const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
-        return (
-          <div>
-            <video controls style={{ width: "100%", borderRadius: "8px", background: "var(--abyss)" }}>
-              <source src={videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            {video.caption && (
-              <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{video.caption}</p>
-            )}
-          </div>
-        );
-      })()}
+      {video._type === "uploadedVideo" && video.video?.url && (
+        <div>
+          <video controls style={{ width: "100%", borderRadius: "8px", background: "var(--abyss)" }}>
+            <source src={video.video.url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {video.caption && (
+            <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{video.caption}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -208,16 +203,11 @@ export default async function LodgePage({
                 />
               );
             })()}
-            {lodge.heroVideo[0]._type === "uploadedVideo" && lodge.heroVideo[0].video && (() => {
-              const ref = lodge.heroVideo[0].video._ref || lodge.heroVideo[0].video.assetId;
-              if (!ref) return null;
-              const videoUrl = `https://cdn.sanity.io/files/ibvmvzmo/production/${ref.replace('file-', '').replace(/-(\w+)$/, '.$1')}`;
-              return (
-                <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}>
-                  <source src={videoUrl} type="video/mp4" />
-                </video>
-              );
-            })()}
+            {lodge.heroVideo[0]._type === "uploadedVideo" && lodge.heroVideo[0].video?.url && (
+              <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}>
+                <source src={lodge.heroVideo[0].video.url} type="video/mp4" />
+              </video>
+            )}
           </div>
         ) : lodge.heroImage && (
           <img
