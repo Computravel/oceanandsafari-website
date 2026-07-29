@@ -3,6 +3,7 @@ import { getArticle, getArticleSlugs } from "@/sanity/lib/queries";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { linkMark } from "@/app/components/portableTextComponents";
 import type { Metadata } from "next";
 
 export const revalidate = 30;
@@ -109,6 +110,7 @@ export default async function ArticlePage({
                 marks: {
                   strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
                   em: ({children}: any) => <em style={{ fontStyle: "italic", color: "var(--charcoal)" }}>{children}</em>,
+                  link: linkMark,
                 },
                 types: {
                   image: ({value}: any) => {

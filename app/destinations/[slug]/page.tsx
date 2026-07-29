@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
+import { linkMark } from "@/app/components/portableTextComponents";
 
 export const revalidate = 30;
 
@@ -40,6 +41,7 @@ const portableTextComponents = {
   },
   marks: {
     strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+    link: linkMark,
   },
 };
 

@@ -1,3 +1,5 @@
+import { richTextBlock } from './richTextBlock'
+
 export const lodge = {
   name: 'lodge',
   title: 'Safari Lodges & Reserves',
@@ -44,7 +46,7 @@ export const lodge = {
       title: 'Description',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
         { type: 'image', options: { hotspot: true } },
       ],
       description: 'Full formatted description, ~180–250 words, with rich text support',
@@ -64,7 +66,7 @@ export const lodge = {
       title: 'Safari Experience',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
         { type: 'image', options: { hotspot: true } },
       ],
       description: 'Describe what the safari experience is actually like — game drives, guiding style, pace, etc.',
@@ -74,7 +76,7 @@ export const lodge = {
       name: 'wildlifeHighlights',
       title: 'Wildlife Highlights',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'What animals and wildlife guests can expect to see — Big Five, birdlife, marine life, etc.',
       group: 'content',
     },
@@ -132,7 +134,7 @@ export const lodge = {
       name: 'conservationAndCommunity',
       title: 'Conservation & Community',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'Conservation initiatives, community partnerships, sustainability practices',
       group: 'content',
     },

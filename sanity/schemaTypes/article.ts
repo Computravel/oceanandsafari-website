@@ -1,3 +1,5 @@
+import { richTextBlock } from './richTextBlock'
+
 export const article = {
   name: 'article',
   title: 'Articles',
@@ -66,7 +68,7 @@ export const article = {
       title: 'Article Body',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
         {
           type: 'image',
           options: { hotspot: true },

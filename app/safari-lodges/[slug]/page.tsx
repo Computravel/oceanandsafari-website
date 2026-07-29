@@ -4,6 +4,7 @@ import EnquiryForm from "@/app/components/EnquiryForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
+import { linkMark } from "@/app/components/portableTextComponents";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -86,6 +87,7 @@ const portableTextComponents = {
     strong: ({ children }: any) => (
       <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
     ),
+    link: linkMark,
   },
   list: {
     bullet: ({ children }: any) => (

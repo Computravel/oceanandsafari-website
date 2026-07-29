@@ -1,5 +1,16 @@
 import React from 'react'
 
+export function linkMark({ value, children }: any) {
+  const href = value && value.href
+  if (!href) return React.createElement(React.Fragment, null, children)
+  return React.createElement('a', {
+    href,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    style: { color: 'var(--teal)', textDecoration: 'underline' },
+  }, children)
+}
+
 export const portableTextComponents = {
   block: {
     normal: ({children}: any) => React.createElement('p', { style: { marginBottom: "16px", lineHeight: 1.85 } }, children),
@@ -20,15 +31,6 @@ export const portableTextComponents = {
   marks: {
     strong: ({children}: any) => React.createElement('strong', { style: { fontWeight: 600, color: "var(--abyss)" } }, children),
     em: ({children}: any) => React.createElement('em', { style: { fontStyle: "italic" } }, children),
-    link: ({value, children}: any) => {
-      const href = value && value.href
-      const isExternal = href && (href.startsWith('http') || href.startsWith('//'))
-      return React.createElement('a', {
-        href,
-        target: isExternal ? "_blank" : "_self",
-        rel: isExternal ? "noopener noreferrer" : undefined,
-        style: { color: "var(--teal)", textDecoration: "underline" }
-      }, children)
-    },
+    link: linkMark,
   },
 }

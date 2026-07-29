@@ -1,3 +1,5 @@
+import { richTextBlock } from './richTextBlock'
+
 export const experience = {
   name: 'experience',
   title: 'Experiences',
@@ -71,7 +73,7 @@ export const experience = {
       title: 'Description',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
         { type: 'image', options: { hotspot: true } },
       ],
       description: 'Full formatted description with rich text support',
@@ -81,7 +83,7 @@ export const experience = {
       title: 'Highlights',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
       ],
       description: 'Key selling points — paste multiple lines at once, use bullet points',
     },
@@ -90,7 +92,7 @@ export const experience = {
       title: 'Itinerary',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
         {
           type: 'image',
           options: { hotspot: true },
@@ -201,7 +203,7 @@ export const experience = {
       title: 'What is Included',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
       ],
       description: 'Paste multiple items at once — use bullet points or numbered list',
     },
@@ -210,7 +212,7 @@ export const experience = {
       title: 'What is Not Included',
       type: 'array',
       of: [
-        { type: 'block' },
+        richTextBlock,
       ],
       description: 'Paste multiple items at once — use bullet points or numbered list',
     },

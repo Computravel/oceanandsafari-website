@@ -4,6 +4,7 @@ import EnquiryForm from "@/app/components/EnquiryForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
+import { linkMark } from "@/app/components/portableTextComponents";
 
 
 export const revalidate = 10;
@@ -193,6 +194,7 @@ export default async function ExperiencePage({
       strong: ({children}: any) => (
         <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
       ),
+      link: linkMark,
     },
     types: {
       image: ({value}: any) => {
@@ -250,6 +252,7 @@ export default async function ExperiencePage({
                     },
                     marks: {
                       strong: ({children}: any) => <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>,
+                      link: linkMark,
                     },
                   }}
                 />
@@ -327,6 +330,7 @@ export default async function ExperiencePage({
                       strong: ({children}: any) => (
                         <strong style={{ fontWeight: 600, color: "var(--abyss)" }}>{children}</strong>
                       ),
+                      link: linkMark,
                     },
                     types: {
                       image: ({value}: any) => {
@@ -504,6 +508,7 @@ export default async function ExperiencePage({
                               </li>
                             ),
                           },
+                          marks: { link: linkMark },
                         }}
                       />
                     )}
@@ -548,6 +553,7 @@ export default async function ExperiencePage({
                               </li>
                             ),
                           },
+                          marks: { link: linkMark },
                         }}
                       />
                     )}

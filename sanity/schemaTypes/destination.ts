@@ -1,3 +1,5 @@
+import { richTextBlock } from './richTextBlock'
+
 export const destination = {
   name: 'destination',
   title: 'Destinations',
@@ -97,7 +99,7 @@ export const destination = {
       name: 'description',
       title: 'Description',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'A beautifully written introduction that captures the imagination — naturally incorporate primary SEO keywords. Shown at the top of the destination page.',
       group: 'content',
     },
@@ -113,7 +115,7 @@ export const destination = {
       name: 'highlights',
       title: 'Highlights',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'Key highlights for this destination',
       group: 'content',
     },
@@ -188,7 +190,7 @@ export const destination = {
       name: 'travelTips',
       title: 'Travel Tips',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'Insider advice rather than generic recommendations, e.g. which areas suit honeymooners, when to book, how to combine destinations',
       group: 'content',
     },

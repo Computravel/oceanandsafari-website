@@ -1,3 +1,5 @@
+import { richTextBlock } from './richTextBlock'
+
 export const consultant = {
   name: 'consultant',
   title: 'Consultants',
@@ -41,7 +43,7 @@ export const consultant = {
       name: 'bio',
       title: 'Biography',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [richTextBlock],
       description: 'Full biography — shown on the About page',
     },
     {
