@@ -357,7 +357,7 @@ export const lodge = {
     // — Related & CTA —
     {
       name: 'relatedExperiences',
-      title: 'Related Experiences (Packages for this Lodge or Reserve)',
+      title: 'Related Experiences (Experiences for this Lodge or Reserve)',
       type: 'array',
       of: [
         {

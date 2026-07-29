@@ -383,7 +383,7 @@ export default async function LodgePage({
           {/* Related Experiences */}
           {lodge.relatedExperiences && lodge.relatedExperiences.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Packages Featuring This Lodge</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Experiences Featuring This Lodge</h2>
               <div className="packages-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
                 {lodge.relatedExperiences.map((exp: any) => (
                   <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
