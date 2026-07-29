@@ -94,6 +94,7 @@ export const lodge = {
         list: [
           { title: 'Luxury Tented Camp', value: 'luxury-tented' },
           { title: 'Lodge', value: 'lodge' },
+          { title: 'Luxury Suite', value: 'luxury-suite' },
           { title: 'Mobile Safari', value: 'mobile' },
           { title: 'Private Villa', value: 'private-villa' },
           { title: 'Mixed', value: 'mixed' },

@@ -11,6 +11,7 @@ export const revalidate = 10;
 const ACCOMMODATION_STYLE_LABELS: Record<string, string> = {
   "luxury-tented": "Luxury Tented Camp",
   lodge: "Lodge",
+  "luxury-suite": "Luxury Suite",
   mobile: "Mobile Safari",
   "private-villa": "Private Villa",
   mixed: "Mixed",
