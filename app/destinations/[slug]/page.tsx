@@ -195,7 +195,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>{destination.name} Experiences</h2>
             <div className="packages-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
               {destination.experiences.map((exp: any) => (
-                <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
+                <Link key={exp._id} href={exp.href || `/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
                   <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
                     <div style={{ height: "200px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                       {exp.heroImage ? (

@@ -1,4 +1,5 @@
 import { client, writeClient } from './client'
+import { getCheapestPackage } from '@/app/lib/beachcomber/pricing'
 
 const options = { next: { revalidate: 10 } }
 
@@ -254,7 +255,7 @@ export async function getDestinations() {
 
 // Fetch single destination by slug
 export async function getDestination(slug: string) {
-  return client.fetch(`
+  const destination = await client.fetch(`
     *[_type == "destination" && slug.current == $slug && published == true][0] {
       _id,
       name,
@@ -300,6 +301,24 @@ export async function getDestination(slug: string) {
       }
     }
   `, { slug }, options)
+
+  if (destination) {
+    const specials = await getDestinationSpecials(destination.name)
+    const specialCards = specials.map((special: any) => ({
+      _id: special._id,
+      title: special.title,
+      category: "Exclusive Offer",
+      destination: destination.name,
+      duration: special.numberOfNights,
+      priceFrom: getCheapestPackage(special.packages)?.pricePerPersonZARFrom,
+      heroImage: special.heroImage,
+      heroImageAlt: special.title,
+      href: `/ocean-islands/specials/${special.beachcomberIdentity}`,
+    }))
+    destination.experiences = [...specialCards, ...(destination.experiences || [])]
+  }
+
+  return destination
 }
 
 // Fetch all destination slugs
@@ -588,17 +607,35 @@ export async function getConsultants() {
   `, {}, options)
 }
 
+// All beachcomberSpecial reads below go through writeClient, not the public
+// client: anonymous/CDN reads of this document type currently return an
+// empty result set even for published, non-hidden documents (confirmed
+// directly against the Sanity API — dataset ACL is public and every other
+// document type reads fine anonymously, so this looks like a Sanity-side
+// quirk specific to this type/project rather than anything wrong with these
+// queries). Using the existing server-only write token sidesteps it; this is
+// safe since these functions only ever run in server components and the
+// token never reaches the browser.
+
+// Fetch all visible Beachcomber specials whose `country` matches a
+// destination's name, for merging into that Destination page's Experiences
+// section. Matches on the plain-text country field rather than requiring
+// editors to manually link each special via `destinationRef` — every
+// current and future special for that country picks this up automatically.
+export async function getDestinationSpecials(country: string) {
+  return writeClient.fetch(`
+    *[_type == "beachcomberSpecial" && isHidden != true && country == $country] | order(featured desc, coalesce(displayOrder, 9999) asc, travelFromDate asc) {
+      _id,
+      beachcomberIdentity,
+      "title": coalesce(customTitle, bcReference, hotelName),
+      numberOfNights,
+      "heroImage": coalesce(curatedImage.asset->url, hotelImages[0].imageURL),
+      packages
+    }
+  `, { country }, options)
+}
+
 // Fetch all visible Beachcomber specials for the Ocean Islands Experiences listing
-//
-// Uses writeClient, not the public client: anonymous/CDN reads of
-// beachcomberSpecial documents currently return an empty result set even for
-// published, non-hidden documents (confirmed directly against the Sanity API
-// — dataset ACL is public and every other document type reads fine
-// anonymously, so this looks like a Sanity-side quirk specific to this
-// type/project rather than anything wrong with these queries). Using the
-// existing server-only write token sidesteps it; this is safe since these
-// functions only ever run in server components and the token never reaches
-// the browser.
 export async function getOceanIslandSpecials() {
   return writeClient.fetch(`
     *[_type == "beachcomberSpecial" && isHidden != true] | order(featured desc, coalesce(displayOrder, 9999) asc, travelFromDate asc) {
