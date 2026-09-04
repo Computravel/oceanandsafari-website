@@ -313,7 +313,6 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
         <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
           {[
             { label: "Ocean Islands", href: "/ocean-islands" },
-            { label: "Luxury Cruises", href: "/luxury-cruises" },
           ].map((item) => (
             <Link key={item.label} href={item.href} style={{
               fontFamily: "var(--font-jost), sans-serif",
@@ -324,6 +323,57 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
               opacity: 0.75,
             }}>{item.label}</Link>
           ))}
+
+          <div className="nav-dropdown" style={{ position: "relative" }}>
+            <Link href="/luxury-cruises" style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "18px",
+              letterSpacing: "0.08em",
+              color: "var(--charcoal)",
+              textDecoration: "none",
+              opacity: 0.75,
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+            }}>
+              Luxury Cruises
+              <span style={{ fontSize: "11px", marginTop: "2px" }}>▾</span>
+            </Link>
+            <div className="nav-dropdown-menu" style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              paddingTop: "12px",
+              minWidth: "230px",
+              zIndex: 200,
+            }}>
+              <div style={{
+                background: "white",
+                border: "0.5px solid var(--border)",
+                borderRadius: "6px",
+                boxShadow: "0 8px 24px rgba(11,31,58,0.14)",
+                overflow: "hidden",
+              }}>
+                <Link href="/luxury-cruises" style={{
+                  display: "block",
+                  padding: "14px 20px",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  color: "var(--charcoal)",
+                  textDecoration: "none",
+                  borderBottom: "0.5px solid var(--border)",
+                }}>Cruise Experiences</Link>
+                <Link href="/luxury-cruises/cruise-lines" style={{
+                  display: "block",
+                  padding: "14px 20px",
+                  fontFamily: "var(--font-jost), sans-serif",
+                  fontSize: "16px",
+                  color: "var(--charcoal)",
+                  textDecoration: "none",
+                }}>Cruise Lines</Link>
+              </div>
+            </div>
+          </div>
 
           <div className="nav-dropdown" style={{ position: "relative" }}>
             <Link href="/african-safaris" style={{
