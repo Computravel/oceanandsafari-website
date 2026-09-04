@@ -503,6 +503,11 @@ export async function getCruiseLine(slug: string) {
         "video": video.asset->
       },
       "section01Introduction": section01Introduction${richSection},
+      "introGallery": introGallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
       "section02Experience": section02Experience${richSection},
       lifeOnBoard {
         "dining": dining${richSection},

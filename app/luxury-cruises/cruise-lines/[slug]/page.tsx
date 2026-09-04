@@ -269,6 +269,7 @@ export default async function CruiseLinePage({
 
           {/* 01 — The Cruise Line */}
           <Section heading="The Cruise Line" value={cruiseLine.section01Introduction} />
+          <ExperienceGallery gallery={cruiseLine.introGallery || []} title="The Cruise Line Gallery" />
 
           {/* 02 — The Experience */}
           <Section heading="The Experience" value={cruiseLine.section02Experience} />

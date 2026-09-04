@@ -194,6 +194,22 @@ export const cruiseLine = {
       group: 'story',
     },
     {
+      name: 'introGallery',
+      title: 'The Cruise Line Gallery',
+      type: 'array',
+      group: 'story',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            { name: 'alt', title: 'Alt Text', type: 'string', description: 'Describe the image for SEO and accessibility' },
+            { name: 'caption', title: 'Caption (optional)', type: 'string' },
+          ],
+        },
+      ],
+    },
+    {
       name: 'section02Experience',
       title: 'The Experience: What It Feels Like to Travel With Them',
       type: 'array',
