@@ -161,6 +161,10 @@ export async function getArticle(slug: string) {
           alt,
           caption,
           "asset": asset->
+        },
+        _type == "uploadedVideo" => {
+          ...,
+          "video": video.asset->
         }
       },
       publishedAt,
@@ -424,6 +428,77 @@ export async function getCruiseLines() {
       shipClasses,
       destinationsServed,
       "logo": logo.asset->url
+    }
+  `, {}, options)
+}
+
+// Fetch single resort by slug
+export async function getResort(slug: string) {
+  return client.fetch(`
+    *[_type == "resort" && slug.current == $slug && published == true][0] {
+      _id,
+      name,
+      slug,
+      location,
+      starRating,
+      "heroImage": heroImage.asset->url,
+      "gallery": gallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
+      description,
+      highlights,
+      bestFor,
+      priceRange,
+      "videos": videos[] {
+        _type,
+        url,
+        caption,
+        "video": video.asset->
+      }
+    }
+  `, { slug }, options)
+}
+
+// Fetch all resort slugs for static generation
+export async function getResortSlugs() {
+  return client.fetch(`
+    *[_type == "resort" && published == true] {
+      "slug": slug.current
+    }
+  `, {}, options)
+}
+
+// Fetch single cruise line by slug
+export async function getCruiseLine(slug: string) {
+  return client.fetch(`
+    *[_type == "cruiseLine" && slug.current == $slug && published == true][0] {
+      _id,
+      name,
+      slug,
+      "logo": logo.asset->url,
+      description,
+      highlights,
+      shipClasses,
+      destinationsServed,
+      starRating,
+      category,
+      "videos": videos[] {
+        _type,
+        url,
+        caption,
+        "video": video.asset->
+      }
+    }
+  `, { slug }, options)
+}
+
+// Fetch all cruise line slugs for static generation
+export async function getCruiseLineSlugs() {
+  return client.fetch(`
+    *[_type == "cruiseLine" && published == true] {
+      "slug": slug.current
     }
   `, {}, options)
 }

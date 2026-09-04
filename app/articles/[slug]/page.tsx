@@ -123,6 +123,38 @@ export default async function ArticlePage({
                       </div>
                     );
                   },
+                  youtubeEmbed: ({value}: any) => {
+                    if (!value.url) return null;
+                    const match = value.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?\s]+)/);
+                    const videoId = match ? match[1] : null;
+                    if (!videoId) return null;
+                    return (
+                      <div style={{ margin: "40px 0" }}>
+                        <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "8px", background: "var(--abyss)" }}>
+                          <iframe
+                            src={`https://www.youtube.com/embed/${videoId}`}
+                            title={value.caption || "Article Video"}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+                          />
+                        </div>
+                        {value.caption && <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{value.caption}</p>}
+                      </div>
+                    );
+                  },
+                  uploadedVideo: ({value}: any) => {
+                    if (!value.video?.url) return null;
+                    return (
+                      <div style={{ margin: "40px 0" }}>
+                        <video controls style={{ width: "100%", borderRadius: "8px", background: "var(--abyss)" }}>
+                          <source src={value.video.url} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        {value.caption && <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{value.caption}</p>}
+                      </div>
+                    );
+                  },
                 },
               }}
             />

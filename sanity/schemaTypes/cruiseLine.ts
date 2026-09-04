@@ -14,6 +14,7 @@ export const cruiseLine = {
       title: 'URL Slug',
       type: 'slug',
       options: { source: 'name' },
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'logo',

@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite, ViewLodgeOnSite } from './components/ViewOnSite'
+import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite, ViewLodgeOnSite, ViewResortOnSite, ViewCruiseLineOnSite } from './components/ViewOnSite'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -78,12 +78,40 @@ S.listItem()
       S.listItem()
         .title('Cruise Lines')
         .schemaType('cruiseLine')
-        .child(S.documentTypeList('cruiseLine').title('Cruise Lines')),
+        .child(
+          S.documentTypeList('cruiseLine')
+            .title('Cruise Lines')
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('cruiseLine')
+                .views([
+                  S.view.form().title('Edit'),
+                  S.view
+                    .component(ViewCruiseLineOnSite)
+                    .title('View on Site'),
+                ])
+            )
+        ),
 
       S.listItem()
         .title('Resorts & Hotels')
         .schemaType('resort')
-        .child(S.documentTypeList('resort').title('Resorts & Hotels')),
+        .child(
+          S.documentTypeList('resort')
+            .title('Resorts & Hotels')
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('resort')
+                .views([
+                  S.view.form().title('Edit'),
+                  S.view
+                    .component(ViewResortOnSite)
+                    .title('View on Site'),
+                ])
+            )
+        ),
 
       S.listItem()
         .title('Safari Lodges & Reserves')
