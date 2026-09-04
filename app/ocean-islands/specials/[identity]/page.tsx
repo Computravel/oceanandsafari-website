@@ -75,7 +75,7 @@ export default async function BeachcomberSpecialPage({
             borderRadius: "2px",
             marginBottom: "12px",
             backdropFilter: "blur(4px)",
-          }}>{special.accSpecial1 || "Special Offer"}</div>
+          }}>{special.accSpecial1 || "Exclusive Offer"}</div>
           <h1 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 400, color: "var(--pearl)", lineHeight: 1.15, marginBottom: "8px" }}>{special.title}</h1>
           <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "rgba(247,242,234,0.7)" }}>
             {special.country}
