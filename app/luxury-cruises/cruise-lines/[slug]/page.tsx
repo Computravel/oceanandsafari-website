@@ -258,15 +258,15 @@ export default async function CruiseLinePage({
           )}
 
           {/* 01 — The Cruise Line */}
-          <Section heading="01 — The Cruise Line" value={cruiseLine.section01Introduction} />
+          <Section heading="The Cruise Line" value={cruiseLine.section01Introduction} />
 
           {/* 02 — The Experience */}
-          <Section heading="02 — The Experience" value={cruiseLine.section02Experience} />
+          <Section heading="The Experience" value={cruiseLine.section02Experience} />
 
           {/* 03 — Life On Board */}
           {hasLifeOnBoard && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>03 — Life On Board</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Life On Board</h2>
               {[
                 { label: "Dining", value: lifeOnBoard.dining },
                 { label: "Wellness", value: lifeOnBoard.wellness },
@@ -284,11 +284,11 @@ export default async function CruiseLinePage({
           )}
 
           {/* 04 — Suites & Accommodation */}
-          <Section heading="04 — Suites & Accommodation" value={cruiseLine.section04Accommodation} />
+          <Section heading="Suites & Accommodation" value={cruiseLine.section04Accommodation} />
           <ExperienceGallery gallery={cruiseLine.accommodationGallery || []} title="Suites & Accommodation Gallery" />
 
           {/* 05 — Destinations */}
-          <Section heading="05 — Destinations" value={cruiseLine.section05Destinations} />
+          <Section heading="Destinations" value={cruiseLine.section05Destinations} />
           {cruiseLine.destinationsServed && cruiseLine.destinationsServed.length > 0 && (
             <div style={{ marginBottom: "48px", marginTop: "-24px" }}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
@@ -310,7 +310,7 @@ export default async function CruiseLinePage({
           {/* 06 — Signature Experiences */}
           {cruiseLine.signatureExperiences && cruiseLine.signatureExperiences.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: cruiseLine.signatureExperiencesIntro ? "12px" : "20px" }}>06 — Signature Experiences</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: cruiseLine.signatureExperiencesIntro ? "12px" : "20px" }}>Signature Experiences</h2>
               {cruiseLine.signatureExperiencesIntro && (
                 <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", lineHeight: 1.75, marginBottom: "28px" }}>{cruiseLine.signatureExperiencesIntro}</p>
               )}
@@ -331,7 +331,7 @@ export default async function CruiseLinePage({
           )}
 
           {/* 07 — Why Choose Them? */}
-          <Section heading="07 — Why Choose Them?" value={cruiseLine.section07WhyChooseThem} />
+          <Section heading="Why Choose Them?" value={cruiseLine.section07WhyChooseThem} />
 
           {/* Legacy Ship Classes — kept, factual list */}
           {cruiseLine.shipClasses && cruiseLine.shipClasses.length > 0 && (
@@ -351,7 +351,7 @@ export default async function CruiseLinePage({
           {/* 08 — Who Is It For? */}
           {cruiseLine.whoIsItFor && cruiseLine.whoIsItFor.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>08 — Who Is It For?</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Who Is It For?</h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                 {cruiseLine.whoIsItFor.map((tag: string, i: number) => (
                   <span key={i} style={{
@@ -371,7 +371,7 @@ export default async function CruiseLinePage({
           {/* 09 — When to Go */}
           {cruiseLine.whenToGo && cruiseLine.whenToGo.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>09 — When to Go</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>When to Go</h2>
               {cruiseLine.whenToGo.map((season: any, i: number) => (
                 <div key={i} style={{ marginBottom: "18px", paddingBottom: "18px", borderBottom: i < cruiseLine.whenToGo.length - 1 ? "0.5px solid var(--border)" : "none" }}>
                   <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal)", marginBottom: "6px" }}>{season.period}</div>
@@ -384,12 +384,12 @@ export default async function CruiseLinePage({
           )}
 
           {/* 10 — Our Perspective */}
-          <Section heading="10 — Our Perspective" value={cruiseLine.ourPerspective} />
+          <Section heading="Our Perspective" value={cruiseLine.ourPerspective} />
 
           {/* 11 — Selected Voyages */}
           {cruiseLine.selectedVoyages && cruiseLine.selectedVoyages.length > 0 && (
             <div style={{ marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>11 — Selected Voyages</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Selected Voyages</h2>
               <div className="packages-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
                 {cruiseLine.selectedVoyages.map((exp: any) => (
                   <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
@@ -423,7 +423,7 @@ export default async function CruiseLinePage({
           {/* 12 — At a Glance */}
           {atAGlanceEntries.length > 0 && (
             <div style={{ padding: "32px", background: "var(--ivory)", borderRadius: "8px", border: "0.5px solid var(--border)", marginBottom: "48px" }}>
-              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "20px" }}>12 — At a Glance</h2>
+              <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", color: "var(--charcoal)", marginBottom: "20px" }}>At a Glance</h2>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 32px" }}>
                 {atAGlanceEntries.map(([key, value], i) => (
                   <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "0.5px solid var(--border)", gap: "12px" }}>
