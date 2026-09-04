@@ -43,9 +43,9 @@ export const cruiseLine = {
   type: 'document',
   groups: [
     { name: 'core', title: 'Core', default: true },
-    { name: 'story', title: '01–07 The Story' },
-    { name: 'planning', title: '08–11 Planning' },
-    { name: 'glance', title: '12 At a Glance' },
+    { name: 'story', title: 'The Story' },
+    { name: 'planning', title: 'Planning' },
+    { name: 'glance', title: 'At a Glance' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -188,21 +188,21 @@ export const cruiseLine = {
     // — 01–07 The Story —
     {
       name: 'section01Introduction',
-      title: '01 — The Cruise Line: Introduction & Philosophy',
+      title: 'The Cruise Line: Introduction & Philosophy',
       type: 'array',
       of: richSectionOf,
       group: 'story',
     },
     {
       name: 'section02Experience',
-      title: '02 — The Experience: What It Feels Like to Travel With Them',
+      title: 'The Experience: What It Feels Like to Travel With Them',
       type: 'array',
       of: richSectionOf,
       group: 'story',
     },
     {
       name: 'lifeOnBoard',
-      title: '03 — Life On Board',
+      title: 'Life On Board',
       type: 'object',
       group: 'story',
       description: 'Dining & Cuisine · Wellness & Relaxation · Entertainment & Enrichment',
@@ -214,7 +214,7 @@ export const cruiseLine = {
     },
     {
       name: 'section04Accommodation',
-      title: '04 — Suites & Accommodation',
+      title: 'Suites & Accommodation',
       type: 'array',
       of: richSectionOf,
       group: 'story',
@@ -237,14 +237,14 @@ export const cruiseLine = {
     },
     {
       name: 'section05Destinations',
-      title: '05 — Destinations: Where They Go',
+      title: 'Destinations: Where They Go',
       type: 'array',
       of: richSectionOf,
       group: 'story',
     },
     {
       name: 'signatureExperiencesIntro',
-      title: '06 — Signature Experiences — Intro',
+      title: 'Signature Experiences — Intro',
       type: 'text',
       rows: 2,
       group: 'story',
@@ -252,7 +252,7 @@ export const cruiseLine = {
     },
     {
       name: 'signatureExperiences',
-      title: '06 — Signature Experiences',
+      title: 'Signature Experiences',
       type: 'array',
       group: 'story',
       description: 'What makes this cruise line distinctive — each with a short title and description',
@@ -271,7 +271,7 @@ export const cruiseLine = {
     },
     {
       name: 'section07WhyChooseThem',
-      title: '07 — Why Choose Them?',
+      title: 'Why Choose Them?',
       type: 'array',
       of: richSectionOf,
       group: 'story',
@@ -281,7 +281,7 @@ export const cruiseLine = {
     // — 08–11 Planning —
     {
       name: 'whoIsItFor',
-      title: '08 — Who Is It For?',
+      title: 'Who Is It For?',
       type: 'array',
       of: [{ type: 'string' }],
       options: {
@@ -298,7 +298,7 @@ export const cruiseLine = {
     },
     {
       name: 'whenToGo',
-      title: '09 — When to Go',
+      title: 'When to Go',
       type: 'array',
       group: 'planning',
       description: 'Seasonality and planning, broken down by period',
@@ -317,7 +317,7 @@ export const cruiseLine = {
     },
     {
       name: 'ourPerspective',
-      title: "10 — Our Perspective",
+      title: "Our Perspective",
       type: 'array',
       of: richSectionOf,
       group: 'planning',
@@ -325,7 +325,7 @@ export const cruiseLine = {
     },
     {
       name: 'selectedVoyages',
-      title: '11 — Selected Voyages',
+      title: 'Selected Voyages',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'experience' }] }],
       validation: (Rule: any) => Rule.max(6),
@@ -336,7 +336,7 @@ export const cruiseLine = {
     // — 12 At a Glance —
     {
       name: 'atAGlance',
-      title: '12 — At a Glance',
+      title: 'At a Glance',
       type: 'object',
       group: 'glance',
       description: 'Useful factual summary — adjust these fields to whatever facts matter most',
