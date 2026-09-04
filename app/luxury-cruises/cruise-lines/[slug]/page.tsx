@@ -28,14 +28,22 @@ const WHO_IS_IT_FOR_LABELS: Record<string, string> = {
 };
 
 const AT_A_GLANCE_LABELS: Record<string, string> = {
+  style: "Style",
+  experience: "Experience",
+  bestFor: "Best For",
+  accommodation: "Accommodation",
+  dining: "Dining",
+  entertainment: "Entertainment",
+  destinations: "Destinations",
+  standoutFeature: "Standout Feature",
+  considerUpgradingTo: "Consider Upgrading To",
+  ourView: "Our View",
   founded: "Founded",
   fleetSize: "Fleet Size",
   flagship: "Flagship",
   onboardCurrency: "Onboard Currency",
   gratuities: "Gratuities",
   dressCode: "Dress Code",
-  idealVoyageLength: "Ideal Voyage Length",
-  pricePositioning: "Price Positioning",
 };
 
 const portableTextComponents = {
@@ -179,7 +187,9 @@ export default async function CruiseLinePage({
   const lifeOnBoard = cruiseLine.lifeOnBoard || {};
   const hasLifeOnBoard = lifeOnBoard.dining?.length || lifeOnBoard.wellness?.length || lifeOnBoard.entertainment?.length;
   const atAGlanceEntries = cruiseLine.atAGlance
-    ? Object.entries(cruiseLine.atAGlance).filter(([, value]) => value)
+    ? Object.keys(AT_A_GLANCE_LABELS)
+        .map((key) => [key, cruiseLine.atAGlance[key]])
+        .filter(([, value]) => value)
     : [];
 
   return (
