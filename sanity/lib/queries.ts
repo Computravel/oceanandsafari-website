@@ -507,8 +507,7 @@ export async function getCruiseLine(slug: string) {
       lifeOnBoard {
         "dining": dining${richSection},
         "wellness": wellness${richSection},
-        "entertainment": entertainment${richSection},
-        "enrichment": enrichment${richSection}
+        "entertainment": entertainment${richSection}
       },
       "section04Accommodation": section04Accommodation${richSection},
       "accommodationGallery": accommodationGallery[] {

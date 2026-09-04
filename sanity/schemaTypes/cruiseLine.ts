@@ -205,12 +205,11 @@ export const cruiseLine = {
       title: '03 — Life On Board',
       type: 'object',
       group: 'story',
-      description: 'Dining · Wellness · Entertainment · Enrichment',
+      description: 'Dining & Cuisine · Wellness & Relaxation · Entertainment & Enrichment',
       fields: [
-        { name: 'dining', title: 'Dining', type: 'array', of: richSectionOf },
-        { name: 'wellness', title: 'Wellness', type: 'array', of: richSectionOf },
-        { name: 'entertainment', title: 'Entertainment', type: 'array', of: richSectionOf },
-        { name: 'enrichment', title: 'Enrichment', type: 'array', of: richSectionOf },
+        { name: 'dining', title: 'Dining & Cuisine', type: 'array', of: richSectionOf },
+        { name: 'wellness', title: 'Wellness & Relaxation', type: 'array', of: richSectionOf },
+        { name: 'entertainment', title: 'Entertainment & Enrichment', type: 'array', of: richSectionOf },
       ],
     },
     {

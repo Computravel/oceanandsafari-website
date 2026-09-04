@@ -177,7 +177,7 @@ export default async function CruiseLinePage({
   if (!cruiseLine) notFound();
 
   const lifeOnBoard = cruiseLine.lifeOnBoard || {};
-  const hasLifeOnBoard = lifeOnBoard.dining?.length || lifeOnBoard.wellness?.length || lifeOnBoard.entertainment?.length || lifeOnBoard.enrichment?.length;
+  const hasLifeOnBoard = lifeOnBoard.dining?.length || lifeOnBoard.wellness?.length || lifeOnBoard.entertainment?.length;
   const atAGlanceEntries = cruiseLine.atAGlance
     ? Object.entries(cruiseLine.atAGlance).filter(([, value]) => value)
     : [];
@@ -268,10 +268,9 @@ export default async function CruiseLinePage({
             <div style={{ marginBottom: "48px" }}>
               <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "24px" }}>Life On Board</h2>
               {[
-                { label: "Dining", value: lifeOnBoard.dining },
-                { label: "Wellness", value: lifeOnBoard.wellness },
-                { label: "Entertainment", value: lifeOnBoard.entertainment },
-                { label: "Enrichment", value: lifeOnBoard.enrichment },
+                { label: "Dining & Cuisine", value: lifeOnBoard.dining },
+                { label: "Wellness & Relaxation", value: lifeOnBoard.wellness },
+                { label: "Entertainment & Enrichment", value: lifeOnBoard.entertainment },
               ].filter(s => s.value?.length).map((s, i) => (
                 <div key={i} style={{ marginBottom: "28px" }}>
                   <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--teal)", marginBottom: "10px" }}>{s.label}</h3>
