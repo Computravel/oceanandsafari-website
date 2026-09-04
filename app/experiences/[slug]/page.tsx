@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
+import SpecialOfferCard from "@/app/components/SpecialOfferCard";
 
 
 export const revalidate = 10;
@@ -599,6 +600,13 @@ export default async function ExperiencePage({
             overflow: "hidden",
             boxShadow: "0 4px 24px rgba(11,31,58,0.08)",
           }}>
+            {/* Current special, if one is linked to this experience — sits above
+                the regular price header so it reads as "here's the current deal
+                on this trip", not a bolted-on separate feature */}
+            {experience.currentSpecials?.length > 0 && (
+              <SpecialOfferCard special={experience.currentSpecials[0]} />
+            )}
+
             {/* Price header */}
             <div style={{ background: "var(--abyss)", padding: "24px" }}>
               <div style={{

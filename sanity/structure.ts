@@ -107,4 +107,12 @@ S.listItem()
                 ])
             )
         ),
+
+      S.listItem()
+        .title('Beachcomber Specials')
+        .schemaType('beachcomberSpecial')
+        .child(
+          S.documentTypeList('beachcomberSpecial')
+            .title('Beachcomber Specials')
+        ),
     ])

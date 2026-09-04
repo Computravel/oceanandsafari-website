@@ -110,7 +110,27 @@ export async function getExperience(slug: string) {
       },
       slug,
       seoTitle,
-      seoDescription
+      seoDescription,
+      "currentSpecials": *[
+        _type == "beachcomberSpecial" &&
+        isHidden != true &&
+        references(^._id)
+      ] | order(featured desc, travelFromDate asc) {
+        _id,
+        beachcomberIdentity,
+        "title": coalesce(customTitle, bcReference),
+        accSpecial1,
+        travelFromDate,
+        travelToDate,
+        bookingToDate,
+        numberOfNights,
+        totalPax,
+        includeAir,
+        includeTransfers,
+        roomStatus,
+        packages,
+        "curatedImageUrl": curatedImage.asset->url
+      }
     }
   `, { slug }, options)
 }

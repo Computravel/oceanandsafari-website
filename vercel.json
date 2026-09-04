@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sync-beachcomber-rates",
+      "schedule": "0 4 * * *"
+    }
+  ]
+}
