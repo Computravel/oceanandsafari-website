@@ -472,6 +472,18 @@ export async function getResortSlugs() {
 
 // Fetch single cruise line by slug
 export async function getCruiseLine(slug: string) {
+  // Shared sub-projection for the free-text sections that allow inline
+  // images alongside rich text blocks — dereferences the image asset so the
+  // frontend gets a usable URL. youtubeEmbed items pass through as-is.
+  const richSection = `[] {
+    ...,
+    _type == "image" => {
+      ...,
+      alt,
+      caption,
+      "asset": asset->
+    }
+  }`
   return client.fetch(`
     *[_type == "cruiseLine" && slug.current == $slug && published == true][0] {
       _id,
@@ -489,7 +501,43 @@ export async function getCruiseLine(slug: string) {
         url,
         caption,
         "video": video.asset->
-      }
+      },
+      "section01Introduction": section01Introduction${richSection},
+      "section02Experience": section02Experience${richSection},
+      lifeOnBoard {
+        "dining": dining${richSection},
+        "wellness": wellness${richSection},
+        "entertainment": entertainment${richSection},
+        "enrichment": enrichment${richSection}
+      },
+      "section04Accommodation": section04Accommodation${richSection},
+      "accommodationGallery": accommodationGallery[] {
+        "alt": coalesce(alt, asset->altText, asset->originalFilename),
+        "caption": coalesce(caption, asset->description),
+        "asset": asset->
+      },
+      "section05Destinations": section05Destinations${richSection},
+      signatureExperiencesIntro,
+      signatureExperiences,
+      "section07WhyChooseThem": section07WhyChooseThem${richSection},
+      whoIsItFor,
+      whenToGo,
+      "ourPerspective": ourPerspective${richSection},
+      "selectedVoyages": selectedVoyages[]-> {
+        _id,
+        title,
+        category,
+        destination,
+        country,
+        duration,
+        priceFrom,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        slug
+      },
+      atAGlance,
+      seoTitle,
+      seoDescription
     }
   `, { slug }, options)
 }
