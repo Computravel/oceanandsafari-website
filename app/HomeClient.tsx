@@ -191,10 +191,6 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
               left: 0,
               paddingTop: "12px",
               minWidth: "230px",
-              opacity: 0,
-              visibility: "hidden",
-              transform: "translateY(4px)",
-              transition: "opacity 0.15s ease, transform 0.15s ease, visibility 0.15s",
               zIndex: 200,
             }}>
               <div style={{

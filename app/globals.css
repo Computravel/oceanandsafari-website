@@ -31,6 +31,13 @@ html {
   box-shadow: 0 6px 20px rgba(11, 31, 58, 0.35);
 }
 
+.nav-dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
