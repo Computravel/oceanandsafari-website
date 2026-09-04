@@ -31,6 +31,12 @@ html {
   box-shadow: 0 6px 20px rgba(11, 31, 58, 0.35);
 }
 
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 body {
   background-color: var(--pearl);
   color: var(--charcoal);
