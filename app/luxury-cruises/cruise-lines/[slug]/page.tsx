@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
+import SiteNav from "@/app/components/SiteNav";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -185,37 +186,7 @@ export default async function CruiseLinePage({
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
 
       {/* ── NAVIGATION ── */}
-      <nav style={{
-        background: "rgba(247,242,234,0.97)",
-        borderBottom: "0.5px solid var(--border)",
-        padding: "0 40px",
-        height: "64px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        position: "sticky",
-        top: 0,
-        zIndex: 100,
-        backdropFilter: "blur(8px)",
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
-          <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "28px", letterSpacing: "0.02em", lineHeight: 1 }}>
-            <span style={{ color: "var(--abyss)" }}>O</span>
-            <span style={{ color: "var(--gold)", margin: "0 2px" }}>&</span>
-            <span style={{ color: "var(--teal)" }}>S</span>
-          </div>
-          <div style={{ width: "0.5px", height: "24px", background: "var(--border)" }} />
-          <div>
-            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", fontWeight: 500, letterSpacing: "0.16em", color: "var(--charcoal)", textTransform: "uppercase" }}>Ocean & Safari</div>
-            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.12em", color: "var(--muted)", textTransform: "uppercase" }}>Luxury Travel · by Computravel</div>
-          </div>
-        </Link>
-
-        <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <Link href="/luxury-cruises" style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--muted)", textDecoration: "none" }}>← Back to Luxury Cruises</Link>
-          <a href="#enquire-form" style={{ background: "var(--gold)", color: "var(--pearl)", fontSize: "15px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", padding: "10px 20px", borderRadius: "3px", textDecoration: "none" }}>Enquire Now</a>
-        </div>
-      </nav>
+      <SiteNav ctaHref="#enquire-form" ctaLabel="Enquire Now" />
 
       {/* ── HEADER (no hero image field on this schema — logo-led banner instead) ── */}
       <div style={{ background: "var(--abyss)", padding: "64px 40px" }}>
