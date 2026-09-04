@@ -1,5 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
-import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite, ViewLodgeOnSite, ViewResortOnSite, ViewCruiseLineOnSite } from './components/ViewOnSite'
+import { ViewArticleOnSite, ViewExperienceOnSite, ViewDestinationOnSite, ViewLodgeOnSite, ViewResortOnSite, ViewCruiseLineOnSite, ViewBeachcomberSpecialOnSite } from './components/ViewOnSite'
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -142,5 +142,16 @@ S.listItem()
         .child(
           S.documentTypeList('beachcomberSpecial')
             .title('Beachcomber Specials')
+            .child((documentId) =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('beachcomberSpecial')
+                .views([
+                  S.view.form().title('Edit'),
+                  S.view
+                    .component(ViewBeachcomberSpecialOnSite)
+                    .title('View on Site'),
+                ])
+            )
         ),
     ])

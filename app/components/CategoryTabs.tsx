@@ -6,10 +6,10 @@ import Link from 'next/link'
 interface ExperienceItem {
   _id: string
   title: string
-  slug?: { current: string }
+  href: string
   category?: string
   destination?: string
-  duration?: number
+  duration?: number | string
   priceFrom?: number
   heroImage?: string
   heroImageAlt?: string
@@ -122,7 +122,7 @@ export default function CategoryTabs({
             style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}
           >
             {experiences.map((exp) => (
-              <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: 'none' }}>
+              <Link key={exp._id} href={exp.href} style={{ textDecoration: 'none' }}>
                 <div style={cardStyle}>
                   <div style={{ height: '220px', position: 'relative', overflow: 'hidden', background: 'var(--abyss)', flexShrink: 0 }}>
                     {exp.heroImage ? (

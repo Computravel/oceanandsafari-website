@@ -571,3 +571,66 @@ export async function getConsultants() {
     }
   `, {}, options)
 }
+
+// Fetch all visible Beachcomber specials for the Ocean Islands Experiences listing
+export async function getOceanIslandSpecials() {
+  return client.fetch(`
+    *[_type == "beachcomberSpecial" && isHidden != true] | order(featured desc, coalesce(displayOrder, 9999) asc, travelFromDate asc) {
+      _id,
+      beachcomberIdentity,
+      "title": coalesce(customTitle, bcReference, hotelName),
+      "destination": country,
+      numberOfNights,
+      "heroImage": coalesce(curatedImage.asset->url, hotelImages[0].imageURL),
+      packages
+    }
+  `, {}, options)
+}
+
+// Fetch a single Beachcomber special by its Beachcomber identity, for its detail page
+export async function getBeachcomberSpecial(identity: string) {
+  return client.fetch(`
+    *[_type == "beachcomberSpecial" && beachcomberIdentity == $identity && isHidden != true][0] {
+      _id,
+      beachcomberIdentity,
+      "title": coalesce(customTitle, bcReference, hotelName),
+      "description": coalesce(customDescription, hotelDescription),
+      hotelName,
+      country,
+      accSpecial1,
+      includeAir,
+      carrierCode,
+      departFrom,
+      includeTransfers,
+      transferType,
+      accomProductName,
+      accomProdDescription,
+      roomAllocation,
+      roomStatus,
+      totalPax,
+      numberOfNights,
+      travelFromDate,
+      travelToDate,
+      bookingFromDate,
+      bookingToDate,
+      "heroImage": coalesce(curatedImage.asset->url, hotelImages[0].imageURL),
+      hotelImages,
+      productImages,
+      packages,
+      packageInclusions,
+      packageExclusions,
+      termsAndConditions,
+      beachcomberPlusFactors,
+      lastSyncedAt
+    }
+  `, { identity }, options)
+}
+
+// Fetch all visible Beachcomber special identities for static generation
+export async function getBeachcomberSpecialIdentities() {
+  return client.fetch(`
+    *[_type == "beachcomberSpecial" && isHidden != true && defined(beachcomberIdentity)] {
+      "identity": beachcomberIdentity
+    }
+  `, {}, options)
+}

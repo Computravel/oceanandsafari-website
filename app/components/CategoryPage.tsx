@@ -4,7 +4,9 @@ import {
   getResorts,
   getCruiseLines,
   getLodges,
+  getOceanIslandSpecials,
 } from "@/sanity/lib/queries";
+import { getCheapestPackage } from "@/app/lib/beachcomber/pricing";
 import Link from "next/link";
 import CategoryTabs from "./CategoryTabs";
 import SiteNav from "./SiteNav";
@@ -27,6 +29,8 @@ interface Props {
   exploreHeading?: string;
   /** Overrides the default "Ready to plan your {subtitle}?" closing question. */
   ctaQuestion?: string;
+  /** Merges live Beachcomber specials into the Experiences tab — Ocean Islands only. */
+  includeOceanIslandSpecials?: boolean;
 }
 
 const WHO_CONFIG: Record<string, { label: string; basePath: string }> = {
@@ -46,6 +50,7 @@ export default async function CategoryPage({
   whoType = "none",
   exploreHeading,
   ctaQuestion,
+  includeOceanIslandSpecials = false,
 }: Props) {
   const categories = Array.isArray(experienceCategory) ? experienceCategory : [experienceCategory];
   const articleCategories = Array.isArray(articleCategory) ? articleCategory : [articleCategory];
@@ -53,11 +58,34 @@ export default async function CategoryPage({
   const experiencePromises = categories.map(cat => getExperiencesByCategory(cat));
   const articlePromises = articleCategories.map(cat => getArticlesByCategory(cat));
 
-  const experienceArrays = await Promise.all(experiencePromises);
-  const articleArrays = await Promise.all(articlePromises);
+  const [experienceArrays, articleArrays, specials] = await Promise.all([
+    Promise.all(experiencePromises),
+    Promise.all(articlePromises),
+    includeOceanIslandSpecials ? getOceanIslandSpecials() : Promise.resolve([]),
+  ]);
 
   const experiences = experienceArrays.flat();
   const articles = articleArrays.flat();
+
+  // Experience cards link to /experiences/[slug]; Beachcomber specials link to
+  // their own detail page. Both are mapped into the same card shape so
+  // CategoryTabs can render them as one unified list.
+  const experienceCards = experiences.map((exp: any) => ({
+    ...exp,
+    href: `/experiences/${exp.slug?.current}`,
+  }));
+  const specialCards = specials.map((special: any) => ({
+    _id: special._id,
+    title: special.title,
+    category: "Special Offer",
+    destination: special.destination,
+    duration: special.numberOfNights,
+    priceFrom: getCheapestPackage(special.packages)?.pricePerPersonZARFrom,
+    heroImage: special.heroImage,
+    heroImageAlt: special.title,
+    href: `/ocean-islands/specials/${special.beachcomberIdentity}`,
+  }));
+  const allExperienceCards = [...specialCards, ...experienceCards];
 
   // Fetch the "who" content (Resorts / Cruise Lines / Safari Lodges) based
   // on which type this category uses. Each fetch function already filters
@@ -161,7 +189,7 @@ export default async function CategoryPage({
 
         <CategoryTabs
           accentColor={accentColor}
-          experiences={experiences}
+          experiences={allExperienceCards}
           whoLabel={whoConfig?.label}
           whoItems={whoItems}
           whoBasePath={whoConfig?.basePath}

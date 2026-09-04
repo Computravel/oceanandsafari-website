@@ -2,13 +2,14 @@ import React from 'react'
 
 const SITE_URL = 'https://oceanandsafari.com'
 
-function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' | 'destinations' | 'safari-lodges' | 'ocean-islands/resorts' | 'luxury-cruises/cruise-lines' }) {
-  const slug = props.document?.displayed?.slug?.current
-  const url = slug ? SITE_URL + '/' + props.type + '/' + slug : null
+function ViewOnSite(props: { document: any; type: 'articles' | 'experiences' | 'destinations' | 'safari-lodges' | 'ocean-islands/resorts' | 'ocean-islands/specials' | 'luxury-cruises/cruise-lines' }) {
+  const slugField = props.type === 'ocean-islands/specials' ? props.document?.displayed?.beachcomberIdentity : props.document?.displayed?.slug?.current
+  const url = slugField ? SITE_URL + '/' + props.type + '/' + slugField : null
   const label = props.type === 'articles' ? 'article'
     : props.type === 'destinations' ? 'destination'
     : props.type === 'safari-lodges' ? 'safari lodge'
     : props.type === 'ocean-islands/resorts' ? 'resort'
+    : props.type === 'ocean-islands/specials' ? 'special offer'
     : props.type === 'luxury-cruises/cruise-lines' ? 'cruise line'
     : 'experience'
 
@@ -99,4 +100,7 @@ export function ViewResortOnSite(props: { document: any }) {
 }
 export function ViewCruiseLineOnSite(props: { document: any }) {
   return ViewOnSite({ document: props.document, type: 'luxury-cruises/cruise-lines' })
+}
+export function ViewBeachcomberSpecialOnSite(props: { document: any }) {
+  return ViewOnSite({ document: props.document, type: 'ocean-islands/specials' })
 }

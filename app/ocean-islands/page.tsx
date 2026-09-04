@@ -15,6 +15,7 @@ export default function OceanIslandsPage() {
       whoType="resort"
       exploreHeading="Explore Island Escapes"
       ctaQuestion="Ready to plan your island escape?"
+      includeOceanIslandSpecials
     />
   );
 }
