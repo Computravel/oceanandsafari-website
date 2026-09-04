@@ -158,9 +158,9 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
           {[
             { label: "Ocean Islands", href: "/ocean-islands" },
+            { label: "Luxury Cruises", href: "/luxury-cruises" },
             { label: "African Safaris", href: "/african-safaris" },
             { label: "Safari Lodges", href: "/safari-lodges" },
-            { label: "Luxury Cruises", href: "/luxury-cruises" },
             { label: "Unique Journeys", href: "/unique-journeys" },
             { label: "Destinations", href: "/destinations" },
             { label: "Journal", href: "/articles" },
