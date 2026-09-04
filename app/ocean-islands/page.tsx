@@ -13,6 +13,8 @@ export default function OceanIslandsPage() {
       articleCategory={["destination-guide", "travel-tips"]}
       accentColor="var(--teal)"
       whoType="resort"
+      exploreHeading="Explore Island Escapes"
+      ctaQuestion="Ready to plan your island escape?"
     />
   );
 }

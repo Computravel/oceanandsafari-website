@@ -23,6 +23,10 @@ interface Props {
    * Unique Journeys, which doesn't have an equivalent property type.
    */
   whoType?: "resort" | "cruiseLine" | "lodge" | "none";
+  /** Overrides the default "Explore {subtitle}" heading, if a different phrasing reads better. */
+  exploreHeading?: string;
+  /** Overrides the default "Ready to plan your {subtitle}?" closing question. */
+  ctaQuestion?: string;
 }
 
 const WHO_CONFIG: Record<string, { label: string; basePath: string }> = {
@@ -40,6 +44,8 @@ export default async function CategoryPage({
   articleCategory,
   accentColor = "var(--teal)",
   whoType = "none",
+  exploreHeading,
+  ctaQuestion,
 }: Props) {
   const categories = Array.isArray(experienceCategory) ? experienceCategory : [experienceCategory];
   const articleCategories = Array.isArray(articleCategory) ? articleCategory : [articleCategory];
@@ -143,7 +149,7 @@ export default async function CategoryPage({
           color: "var(--charcoal)",
           marginBottom: "12px",
           textAlign: "center",
-        }}>Explore {subtitle}</h2>
+        }}>{exploreHeading || `Explore ${subtitle}`}</h2>
         <p style={{
           fontFamily: "var(--font-jost), sans-serif",
           fontSize: "16px",
@@ -221,7 +227,7 @@ export default async function CategoryPage({
           fontFamily: "var(--font-cormorant), serif",
           fontSize: "clamp(28px, 4vw, 44px)",
           color: "var(--charcoal)", marginBottom: "16px",
-        }}>Ready to plan your {subtitle.toLowerCase()}?</h2>
+        }}>{ctaQuestion || `Ready to plan your ${subtitle.toLowerCase()}?`}</h2>
         <p style={{
           fontFamily: "var(--font-jost), sans-serif", fontSize: "17px",
           color: "var(--muted)", lineHeight: 1.7, marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px",
