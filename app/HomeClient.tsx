@@ -29,11 +29,166 @@ interface ExclusiveEscape {
 }
 
 interface Props {
-  experiences: Experience[];
+  oceanIslandsExperiences: Experience[];
+  luxuryCruisesExperiences: Experience[];
+  africanSafarisExperiences: Experience[];
+  uniqueJourneysExperiences: Experience[];
   exclusiveEscapes: ExclusiveEscape[];
 }
 
-export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
+function ExperienceCard({ pkg }: { pkg: Experience }) {
+  return (
+    <Link href={`/experiences/${pkg.slug?.current}`} style={{ textDecoration: "none" }}>
+      <div
+        style={{
+          background: "white",
+          border: "0.5px solid var(--border)",
+          borderRadius: "8px",
+          overflow: "hidden",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          transition: "transform 0.2s ease, box-shadow 0.2s ease",
+        }}
+        onMouseEnter={e => {
+          (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
+          (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
+        }}
+        onMouseLeave={e => {
+          (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+          (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+        }}
+      >
+        <div style={{ height: "220px", position: "relative", overflow: "hidden", flexShrink: 0 }}>
+          {pkg.heroImage ? (
+            <img
+              src={pkg.heroImage}
+              alt={pkg.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                transition: "transform 0.4s ease",
+              }}
+            />
+          ) : (
+            <div style={{
+              width: "100%",
+              height: "100%",
+              background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)",
+            }} />
+          )}
+          <div style={{
+            position: "absolute",
+            top: "12px",
+            left: "12px",
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "11px",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            fontWeight: 500,
+            background: "rgba(11,31,58,0.75)",
+            color: "white",
+            padding: "4px 10px",
+            borderRadius: "2px",
+            backdropFilter: "blur(4px)",
+          }}>{pkg.category}</div>
+          <div style={{
+            position: "absolute",
+            bottom: 0, left: 0, right: 0,
+            height: "60px",
+            background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
+          }} />
+        </div>
+
+        <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
+          <div style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: "22px",
+            color: "var(--charcoal)",
+            marginBottom: "6px",
+            lineHeight: 1.3,
+          }}>{pkg.title}</div>
+          <div style={{
+            fontFamily: "var(--font-jost), sans-serif",
+            fontSize: "15px",
+            color: "var(--muted)",
+            marginBottom: "16px",
+          }}>{pkg.duration} nights · {pkg.destination}</div>
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingTop: "16px",
+            borderTop: "0.5px solid var(--border)",
+            marginTop: "auto",
+          }}>
+            <div style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "18px",
+              fontWeight: 500,
+              color: "var(--gold)",
+            }}>From R{pkg.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+            <span style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "13px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--pearl)",
+              textDecoration: "none",
+              background: "var(--indigo)",
+              padding: "9px 18px",
+              borderRadius: "3px",
+              fontWeight: 500,
+            }}>View details</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ExperienceCategorySection({ title, viewAllHref, items }: { title: string; viewAllHref: string; items: Experience[] }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div style={{ marginBottom: "56px" }}>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "baseline",
+        marginBottom: "32px",
+      }}>
+        <h2 style={{
+          fontFamily: "var(--font-cormorant), serif",
+          fontSize: "clamp(28px, 4vw, 40px)",
+          color: "var(--charcoal)",
+        }}>{title}</h2>
+        <Link href={viewAllHref} style={{
+          fontFamily: "var(--font-jost), sans-serif",
+          fontSize: "17px",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "var(--gold)",
+          textDecoration: "none",
+          fontWeight: 500,
+        }}>View all →</Link>
+      </div>
+      <div className="packages-grid" style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "16px",
+        alignItems: "stretch",
+      }}>
+        {items.map((pkg) => (
+          <ExperienceCard key={pkg._id} pkg={pkg} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExperiences, africanSafarisExperiences, uniqueJourneysExperiences, exclusiveEscapes }: Props) {
   const [activeVideo, setActiveVideo] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
 
@@ -572,230 +727,16 @@ export default function HomeClient({ experiences, exclusiveEscapes }: Props) {
         </div>
       </section>
 
-      {/* ── FEATURED EXPERIENCES — FROM SANITY ── */}
+      {/* ── FEATURED EXPERIENCES BY CATEGORY — FROM SANITY ── */}
       <section id="packages" style={{
         padding: "64px 40px",
         background: "var(--pearl)",
         borderBottom: "0.5px solid var(--border)",
       }}>
-        <div style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: "32px",
-        }}>
-          <h2 style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "clamp(28px, 4vw, 40px)",
-            color: "var(--charcoal)",
-          }}>Featured experiences</h2>
-          <Link href="#" style={{
-            fontFamily: "var(--font-jost), sans-serif",
-            fontSize: "17px",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--gold)",
-            textDecoration: "none",
-            fontWeight: 500,
-          }}>View all →</Link>
-        </div>
-
-        {experiences && experiences.length > 0 ? (
-          <div className="packages-grid" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "16px",
-          }}>
-            {experiences.map((pkg) => (
-            <Link key={pkg._id} href={`/experiences/${pkg.slug?.current}`} style={{ textDecoration: "none" }}>
-              <div
-                style={{
-                  background: "white",
-                  border: "0.5px solid var(--border)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "0 12px 40px rgba(11,31,58,0.12)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                }}
-              >
-                <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
-                  {pkg.heroImage ? (
-                    <img
-                      src={pkg.heroImage}
-                      alt={pkg.title}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        transition: "transform 0.4s ease",
-                      }}
-                    />
-                  ) : (
-                    <div style={{
-                      width: "100%",
-                      height: "100%",
-                      background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)",
-                    }} />
-                  )}
-                  <div style={{
-                    position: "absolute",
-                    top: "12px",
-                    left: "12px",
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "11px",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    fontWeight: 500,
-                    background: "rgba(11,31,58,0.75)",
-                    color: "white",
-                    padding: "4px 10px",
-                    borderRadius: "2px",
-                    backdropFilter: "blur(4px)",
-                  }}>{pkg.category}</div>
-                  <div style={{
-                    position: "absolute",
-                    bottom: 0, left: 0, right: 0,
-                    height: "60px",
-                    background: "linear-gradient(to top, rgba(11,31,58,0.5), transparent)",
-                  }} />
-                </div>
-
-                <div style={{ padding: "20px" }}>
-                  <div style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontSize: "22px",
-                    color: "var(--charcoal)",
-                    marginBottom: "6px",
-                    lineHeight: 1.3,
-                  }}>{pkg.title}</div>
-                  <div style={{
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "15px",
-                    color: "var(--muted)",
-                    marginBottom: "16px",
-                  }}>{pkg.duration} nights · {pkg.destination}</div>
-                  <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingTop: "16px",
-                    borderTop: "0.5px solid var(--border)",
-                  }}>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      color: "var(--gold)",
-                    }}>From R{pkg.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
-                    <span style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "13px",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--pearl)",
-                      textDecoration: "none",
-                      background: "var(--indigo)",
-                      padding: "9px 18px",
-                      borderRadius: "3px",
-                      fontWeight: 500,
-                    }}>View details</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-          </div>
-        ) : (
-          <div className="packages-grid" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "16px",
-          }}>
-            {[
-              { image: "/serengeti.jpg", category: "Safari", title: "Serengeti & Zanzibar", nights: "10 nights · Tanzania", price: "From R42,500" },
-              { image: "/mediterranean.jpg", category: "Cruise", title: "Seabourne Cruise Experience", nights: "12 nights · Luxury Ocean Cruise", price: "From R38,900" },
-              { image: "/mauritius.jpg", category: "Island", title: "Mauritius Escape", nights: "7 nights · Beachfront villa", price: "From R54,200" },
-              { image: "/maldives.jpg", category: "Island", title: "Maldives Overwater", nights: "8 nights · Private villa", price: "From R78,000" },
-              { image: "/okavango.jpg", category: "Safari", title: "Okavango & Victoria Falls", nights: "9 nights · Botswana & Zimbabwe", price: "From R65,500" },
-              { image: "/seychelles.jpg", category: "Island", title: "Seychelles Island Escape", nights: "10 nights · Private island", price: "From R92,000" },
-            ].map((pkg, i) => (
-              <div key={i}
-                style={{
-                  background: "white",
-                  border: "0.5px solid var(--border)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                }}
-              >
-                <div style={{ height: "220px", position: "relative", overflow: "hidden" }}>
-                  <img src={pkg.image} alt={pkg.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  <div style={{
-                    position: "absolute",
-                    top: "12px", left: "12px",
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "11px",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    fontWeight: 500,
-                    background: "rgba(11,31,58,0.75)",
-                    color: "white",
-                    padding: "4px 10px",
-                    borderRadius: "2px",
-                  }}>{pkg.category}</div>
-                </div>
-                <div style={{ padding: "20px" }}>
-                  <div style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontSize: "22px",
-                    color: "var(--charcoal)",
-                    marginBottom: "6px",
-                  }}>{pkg.title}</div>
-                  <div style={{
-                    fontFamily: "var(--font-jost), sans-serif",
-                    fontSize: "15px",
-                    color: "var(--muted)",
-                    marginBottom: "16px",
-                  }}>{pkg.nights}</div>
-                  <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingTop: "16px",
-                    borderTop: "0.5px solid var(--border)",
-                  }}>
-                    <div style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      color: "var(--gold)",
-                    }}>{pkg.price} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
-                    <a href="#enquire" style={{
-                      fontFamily: "var(--font-jost), sans-serif",
-                      fontSize: "13px",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--pearl)",
-                      textDecoration: "none",
-                      background: "var(--indigo)",
-                      padding: "9px 18px",
-                      borderRadius: "3px",
-                      fontWeight: 500,
-                    }}>Enquire</a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <ExperienceCategorySection title="Ocean Island Escapes" viewAllHref="/ocean-islands" items={oceanIslandsExperiences} />
+        <ExperienceCategorySection title="Luxury Cruises" viewAllHref="/luxury-cruises" items={luxuryCruisesExperiences} />
+        <ExperienceCategorySection title="African Safaris" viewAllHref="/african-safaris" items={africanSafarisExperiences} />
+        <ExperienceCategorySection title="Unique Journeys" viewAllHref="/unique-journeys" items={uniqueJourneysExperiences} />
       </section>
 
       {/* ── EXCLUSIVE ESCAPES — FROM SANITY ── */}
