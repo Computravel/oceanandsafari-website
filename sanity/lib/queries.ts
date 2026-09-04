@@ -376,6 +376,38 @@ export async function getLodgeSlugs() {
   `, {}, options)
 }
 
+// Fetch all published resorts
+export async function getResorts() {
+  return client.fetch(`
+    *[_type == "resort" && published == true] | order(name asc) {
+      _id,
+      name,
+      slug,
+      location,
+      starRating,
+      priceRange,
+      bestFor,
+      "heroImage": heroImage.asset->url
+    }
+  `, {}, options)
+}
+
+// Fetch all published cruise lines
+export async function getCruiseLines() {
+  return client.fetch(`
+    *[_type == "cruiseLine" && published == true] | order(name asc) {
+      _id,
+      name,
+      slug,
+      category,
+      starRating,
+      shipClasses,
+      destinationsServed,
+      "logo": logo.asset->url
+    }
+  `, {}, options)
+}
+
 // Fetch all published consultants
 export async function getConsultants() {
   return client.fetch(`

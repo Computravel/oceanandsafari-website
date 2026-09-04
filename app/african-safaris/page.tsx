@@ -12,6 +12,7 @@ export default function AfricanSafarisPage() {
       experienceCategory="safari"
       articleCategory="safari-guides"
       accentColor="var(--gold)"
+      whoType="lodge"
     />
   );
 }

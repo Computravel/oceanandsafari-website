@@ -12,6 +12,7 @@ export default function LuxuryCruisesPage() {
       experienceCategory="cruise"
       articleCategory="cruise-guides"
       accentColor="var(--cobalt)"
+      whoType="cruiseLine"
     />
   );
 }

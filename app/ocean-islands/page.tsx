@@ -12,6 +12,7 @@ export default function OceanIslandsPage() {
       experienceCategory="island"
       articleCategory={["destination-guide", "travel-tips"]}
       accentColor="var(--teal)"
+      whoType="resort"
     />
   );
 }

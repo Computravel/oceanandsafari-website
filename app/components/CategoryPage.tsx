@@ -1,5 +1,12 @@
-import { getExperiencesByCategory, getArticlesByCategory } from "@/sanity/lib/queries";
+import {
+  getExperiencesByCategory,
+  getArticlesByCategory,
+  getResorts,
+  getCruiseLines,
+  getLodges,
+} from "@/sanity/lib/queries";
 import Link from "next/link";
+import CategoryTabs from "./CategoryTabs";
 
 interface Props {
   title: string;
@@ -9,7 +16,19 @@ interface Props {
   experienceCategory: string | string[];
   articleCategory: string | string[];
   accentColor?: string;
+  /**
+   * Which "who" content type this category surfaces alongside its
+   * Experiences. 'none' (default) hides the Who tab entirely — e.g. for
+   * Unique Journeys, which doesn't have an equivalent property type.
+   */
+  whoType?: "resort" | "cruiseLine" | "lodge" | "none";
 }
+
+const WHO_CONFIG: Record<string, { label: string; basePath: string }> = {
+  resort: { label: "Resorts & Hotels", basePath: "/ocean-islands/resorts" },
+  cruiseLine: { label: "Cruise Lines", basePath: "/luxury-cruises/cruise-lines" },
+  lodge: { label: "Safari Lodges & Reserves", basePath: "/safari-lodges" },
+};
 
 export default async function CategoryPage({
   title,
@@ -19,6 +38,7 @@ export default async function CategoryPage({
   experienceCategory,
   articleCategory,
   accentColor = "var(--teal)",
+  whoType = "none",
 }: Props) {
   const categories = Array.isArray(experienceCategory) ? experienceCategory : [experienceCategory];
   const articleCategories = Array.isArray(articleCategory) ? articleCategory : [articleCategory];
@@ -32,9 +52,28 @@ export default async function CategoryPage({
   const experiences = experienceArrays.flat();
   const articles = articleArrays.flat();
 
+  // Fetch the "who" content (Resorts / Cruise Lines / Safari Lodges) based
+  // on which type this category uses. Each fetch function already filters
+  // to published:true and is safe to call even before a schema/content
+  // exists (returns []).
+  let whoItems: any[] = [];
+  if (whoType === "resort") whoItems = await getResorts();
+  if (whoType === "cruiseLine") whoItems = await getCruiseLines();
+  if (whoType === "lodge") whoItems = await getLodges();
+  const whoConfig = whoType !== "none" ? WHO_CONFIG[whoType] : undefined;
+
+  // Derive unique destination names directly from this category's
+  // experiences (exp.destination is a free-text field on Experience).
+  // NOTE: links assume a naive slugify matches the real destination slug —
+  // worth verifying against sanity/schemaTypes/destination.ts and swapping
+  // for a real lookup query if slugs differ (e.g. "Mauritius" -> "mauritius"
+  // vs a custom slug).
+  const destinationNames = Array.from(
+    new Set(experiences.map((exp: any) => exp.destination).filter(Boolean))
+  ) as string[];
+
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
-
       {/* ── NAVIGATION ── */}
       <nav style={{
         background: "rgba(247,242,234,0.97)",
@@ -124,76 +163,32 @@ export default async function CategoryPage({
         </div>
       </section>
 
-      {/* ── EXPERIENCES ── */}
+      {/* ── EXPERIENCES / WHO / WHERE TABS ── */}
       <section style={{ padding: "64px 40px", maxWidth: "1100px", margin: "0 auto" }}>
         <h2 style={{
           fontFamily: "var(--font-cormorant), serif",
           fontSize: "clamp(28px, 4vw, 40px)",
           color: "var(--charcoal)",
           marginBottom: "12px",
-        }}>{subtitle} Experiences</h2>
+          textAlign: "center",
+        }}>Explore {subtitle}</h2>
         <p style={{
           fontFamily: "var(--font-jost), sans-serif",
           fontSize: "16px",
           color: "var(--muted)",
           marginBottom: "40px",
           lineHeight: 1.7,
+          textAlign: "center",
         }}>Hand-selected by our consultants — each experience crafted for the discerning traveller.</p>
 
-        {experiences.length > 0 ? (
-          <div className="packages-grid" style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "24px",
-          }}>
-            {experiences.map((exp: any) => (
-              <Link key={exp._id} href={`/experiences/${exp.slug?.current}`} style={{ textDecoration: "none" }}>
-                <div style={{
-                  background: "white",
-                  border: "0.5px solid var(--border)",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                }}>
-                  <div style={{ height: "220px", position: "relative", overflow: "hidden", background: "var(--abyss)", flexShrink: 0 }}>
-                    {exp.heroImage ? (
-                      <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    ) : (
-                      <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
-                    )}
-                    <div style={{
-                      position: "absolute", top: "12px", left: "12px",
-                      fontFamily: "var(--font-jost), sans-serif", fontSize: "11px",
-                      letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500,
-                      background: "rgba(11,31,58,0.75)", color: "white",
-                      padding: "4px 10px", borderRadius: "2px", backdropFilter: "blur(4px)",
-                    }}>{exp.category}</div>
-                  </div>
-                  <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
-                    <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--charcoal)", marginBottom: "6px", lineHeight: 1.3 }}>{exp.title}</div>
-                    <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--muted)", marginBottom: "16px" }}>{exp.duration} nights · {exp.destination}</div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "16px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                      <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", fontWeight: 500, color: "var(--gold)" }}>
-                        From R{exp.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span>
-                      </div>
-                      <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "9px 18px", borderRadius: "3px", fontWeight: 500 }}>View details</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div style={{
-            textAlign: "center", padding: "60px 40px",
-            fontFamily: "var(--font-cormorant), serif", fontSize: "24px", color: "var(--muted)",
-            border: "0.5px solid var(--border)", borderRadius: "8px",
-          }}>
-            New experiences coming soon — speak to a consultant to plan your bespoke journey.
-          </div>
-        )}
+        <CategoryTabs
+          accentColor={accentColor}
+          experiences={experiences}
+          whoLabel={whoConfig?.label}
+          whoItems={whoItems}
+          whoBasePath={whoConfig?.basePath}
+          destinationNames={destinationNames}
+        />
       </section>
 
       {/* ── RELATED ARTICLES ── */}
@@ -266,7 +261,6 @@ export default async function CategoryPage({
           borderRadius: "4px", textDecoration: "none",
         }}>Plan My Exclusive Experience</Link>
       </section>
-
     </main>
   );
 }
