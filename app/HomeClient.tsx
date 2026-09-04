@@ -628,6 +628,18 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
         </div>
       </section>
 
+      {/* ── FEATURED EXPERIENCES BY CATEGORY — FROM SANITY ── */}
+      <section id="packages" style={{
+        padding: "64px 40px",
+        background: "var(--pearl)",
+        borderBottom: "0.5px solid var(--border)",
+      }}>
+        <ExperienceCategorySection title="Ocean Island Escapes" viewAllHref="/ocean-islands" items={oceanIslandsExperiences} />
+        <ExperienceCategorySection title="Luxury Cruises" viewAllHref="/luxury-cruises" items={luxuryCruisesExperiences} />
+        <ExperienceCategorySection title="African Safaris" viewAllHref="/african-safaris" items={africanSafarisExperiences} />
+        <ExperienceCategorySection title="Unique Journeys" viewAllHref="/unique-journeys" items={uniqueJourneysExperiences} />
+      </section>
+
       {/* ── DUAL AUDIENCE ── */}
       <section className="dual-section" style={{
         display: "grid",
@@ -725,18 +737,6 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             gap: "8px",
           }}>See all experiences <span>→</span></Link>
         </div>
-      </section>
-
-      {/* ── FEATURED EXPERIENCES BY CATEGORY — FROM SANITY ── */}
-      <section id="packages" style={{
-        padding: "64px 40px",
-        background: "var(--pearl)",
-        borderBottom: "0.5px solid var(--border)",
-      }}>
-        <ExperienceCategorySection title="Ocean Island Escapes" viewAllHref="/ocean-islands" items={oceanIslandsExperiences} />
-        <ExperienceCategorySection title="Luxury Cruises" viewAllHref="/luxury-cruises" items={luxuryCruisesExperiences} />
-        <ExperienceCategorySection title="African Safaris" viewAllHref="/african-safaris" items={africanSafarisExperiences} />
-        <ExperienceCategorySection title="Unique Journeys" viewAllHref="/unique-journeys" items={uniqueJourneysExperiences} />
       </section>
 
       {/* ── EXCLUSIVE ESCAPES — FROM SANITY ── */}
