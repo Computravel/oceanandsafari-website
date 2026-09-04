@@ -195,11 +195,11 @@ export const article = {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'experience' }],
+          to: [{ type: 'experience' }, { type: 'beachcomberSpecial' }],
         }
       ],
       validation: (Rule: any) => Rule.max(3),
-      description: 'Select up to 3 experiences to show at the bottom of this article.',
+      description: 'Select up to 3 experiences or Beachcomber specials to show at the bottom of this article.',
     },
   ],
   preview: {

@@ -163,7 +163,7 @@ export async function getExperienceSlugs() {
 
 // Fetch single article by slug
 export async function getArticle(slug: string) {
-  return client.fetch(`
+  const article = await client.fetch(`
     *[_type == "article" && slug.current == $slug && published == true][0] {
       _id,
       title,
@@ -187,9 +187,87 @@ export async function getArticle(slug: string) {
       publishedAt,
       seoTitle,
       seoDescription,
-      slug
+      slug,
+      "relatedExperienceIds": relatedExperiences[]._ref
     }
   `, { slug }, options)
+
+  if (article) {
+    article.relatedExperiences = await resolveRelatedExperiences(article.relatedExperienceIds)
+  }
+
+  return article
+}
+
+// Resolves a list of document IDs that may point to either `experience` or
+// `beachcomberSpecial` documents (the Related Experiences field on articles
+// and lodges accepts both), preserving the editor's original selection
+// order. Beachcomber specials use a deterministic "beachcomberSpecial.
+// <identity>" _id (see sync.ts), so the target type can be inferred from the
+// _id prefix without an extra round-trip. Specials are resolved via
+// writeClient — see the comment above getDestinationSpecials for why.
+async function resolveRelatedExperiences(ids: string[] | undefined) {
+  if (!ids || ids.length === 0) return []
+
+  const experienceIds = ids.filter(id => !id.startsWith('beachcomberSpecial.'))
+  const specialIds = ids.filter(id => id.startsWith('beachcomberSpecial.'))
+
+  const [experiences, specials] = await Promise.all([
+    experienceIds.length > 0
+      ? client.fetch(`
+          *[_id in $ids] {
+            _id, title, category, destination, duration, priceFrom,
+            "heroImage": heroImage.asset->url,
+            "heroImageAlt": heroImage.alt,
+            slug
+          }
+        `, { ids: experienceIds }, options)
+      : [],
+    specialIds.length > 0
+      ? writeClient.fetch(`
+          *[_id in $ids && isHidden != true] {
+            _id,
+            beachcomberIdentity,
+            "title": coalesce(customTitle, bcReference, hotelName),
+            "destination": country,
+            numberOfNights,
+            "heroImage": coalesce(curatedImage.asset->url, hotelImages[0].imageURL),
+            packages
+          }
+        `, { ids: specialIds }, options)
+      : [],
+  ])
+
+  const byId = new Map<string, any>()
+  for (const exp of experiences) {
+    byId.set(exp._id, {
+      _id: exp._id,
+      title: exp.title,
+      category: exp.category,
+      destination: exp.destination,
+      duration: exp.duration,
+      priceFrom: exp.priceFrom,
+      heroImage: exp.heroImage,
+      heroImageAlt: exp.heroImageAlt,
+      href: `/experiences/${exp.slug?.current}`,
+    })
+  }
+  for (const special of specials) {
+    byId.set(special._id, {
+      _id: special._id,
+      title: special.title,
+      tags: ['Island', 'Exclusive Offer'],
+      destination: special.destination,
+      duration: special.numberOfNights,
+      priceFrom: getCheapestPackage(special.packages)?.pricePerPersonZARFrom,
+      heroImage: special.heroImage,
+      heroImageAlt: special.title,
+      href: `/ocean-islands/specials/${special.beachcomberIdentity}`,
+    })
+  }
+
+  // Drop any refs that failed to resolve (e.g. unpublished or since-hidden).
+  return ids.map(id => byId.get(id)).filter(Boolean)
 }
 
 // Fetch all article slugs for static generation
