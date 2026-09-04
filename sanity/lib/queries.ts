@@ -1,4 +1,4 @@
-import { client } from './client'
+import { client, writeClient } from './client'
 
 const options = { next: { revalidate: 10 } }
 
@@ -59,7 +59,7 @@ export async function getArticles() {
 
 // Fetch single experience by slug
 export async function getExperience(slug: string) {
-  return client.fetch(`
+  const experience = await client.fetch(`
     *[_type == "experience" && slug.current == $slug && published == true][0] {
       _id,
       title,
@@ -110,29 +110,45 @@ export async function getExperience(slug: string) {
       },
       slug,
       seoTitle,
-      seoDescription,
-      "currentSpecials": *[
-        _type == "beachcomberSpecial" &&
-        isHidden != true &&
-        references(^._id)
-      ] | order(featured desc, travelFromDate asc) {
-        _id,
-        beachcomberIdentity,
-        "title": coalesce(customTitle, bcReference),
-        accSpecial1,
-        travelFromDate,
-        travelToDate,
-        bookingToDate,
-        numberOfNights,
-        totalPax,
-        includeAir,
-        includeTransfers,
-        roomStatus,
-        packages,
-        "curatedImageUrl": curatedImage.asset->url
-      }
+      seoDescription
     }
   `, { slug }, options)
+
+  if (experience) {
+    experience.currentSpecials = await getCurrentSpecialsFor(experience._id)
+  }
+
+  return experience
+}
+
+// beachcomberSpecial documents are currently invisible to anonymous/CDN reads
+// (a Sanity-side quirk, confirmed even for published, non-hidden documents —
+// see the code comment on getOceanIslandSpecials below), so every read of
+// this type goes through the authenticated writeClient instead of the public
+// client used everywhere else in this file.
+async function getCurrentSpecialsFor(refId: string) {
+  return writeClient.fetch(`
+    *[
+      _type == "beachcomberSpecial" &&
+      isHidden != true &&
+      references($refId)
+    ] | order(featured desc, travelFromDate asc) {
+      _id,
+      beachcomberIdentity,
+      "title": coalesce(customTitle, bcReference),
+      accSpecial1,
+      travelFromDate,
+      travelToDate,
+      bookingToDate,
+      numberOfNights,
+      totalPax,
+      includeAir,
+      includeTransfers,
+      roomStatus,
+      packages,
+      "curatedImageUrl": curatedImage.asset->url
+    }
+  `, { refId })
 }
 
 // Fetch all experience slugs for static generation
@@ -573,8 +589,18 @@ export async function getConsultants() {
 }
 
 // Fetch all visible Beachcomber specials for the Ocean Islands Experiences listing
+//
+// Uses writeClient, not the public client: anonymous/CDN reads of
+// beachcomberSpecial documents currently return an empty result set even for
+// published, non-hidden documents (confirmed directly against the Sanity API
+// — dataset ACL is public and every other document type reads fine
+// anonymously, so this looks like a Sanity-side quirk specific to this
+// type/project rather than anything wrong with these queries). Using the
+// existing server-only write token sidesteps it; this is safe since these
+// functions only ever run in server components and the token never reaches
+// the browser.
 export async function getOceanIslandSpecials() {
-  return client.fetch(`
+  return writeClient.fetch(`
     *[_type == "beachcomberSpecial" && isHidden != true] | order(featured desc, coalesce(displayOrder, 9999) asc, travelFromDate asc) {
       _id,
       beachcomberIdentity,
@@ -589,7 +615,7 @@ export async function getOceanIslandSpecials() {
 
 // Fetch a single Beachcomber special by its Beachcomber identity, for its detail page
 export async function getBeachcomberSpecial(identity: string) {
-  return client.fetch(`
+  return writeClient.fetch(`
     *[_type == "beachcomberSpecial" && beachcomberIdentity == $identity && isHidden != true][0] {
       _id,
       beachcomberIdentity,
@@ -628,7 +654,7 @@ export async function getBeachcomberSpecial(identity: string) {
 
 // Fetch all visible Beachcomber special identities for static generation
 export async function getBeachcomberSpecialIdentities() {
-  return client.fetch(`
+  return writeClient.fetch(`
     *[_type == "beachcomberSpecial" && isHidden != true && defined(beachcomberIdentity)] {
       "identity": beachcomberIdentity
     }

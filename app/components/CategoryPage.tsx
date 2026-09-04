@@ -29,6 +29,8 @@ interface Props {
   exploreHeading?: string;
   /** Overrides the default "Ready to plan your {subtitle}?" closing question. */
   ctaQuestion?: string;
+  /** Overrides the default "Plan My {subtitle}" hero button label. */
+  heroCtaLabel?: string;
   /** Merges live Beachcomber specials into the Experiences tab — Ocean Islands only. */
   includeOceanIslandSpecials?: boolean;
 }
@@ -50,6 +52,7 @@ export default async function CategoryPage({
   whoType = "none",
   exploreHeading,
   ctaQuestion,
+  heroCtaLabel,
   includeOceanIslandSpecials = false,
 }: Props) {
   const categories = Array.isArray(experienceCategory) ? experienceCategory : [experienceCategory];
@@ -165,7 +168,7 @@ export default async function CategoryPage({
             padding: "14px 32px",
             borderRadius: "3px",
             textDecoration: "none",
-          }}>Plan My {subtitle}</Link>
+          }}>{heroCtaLabel || `Plan My ${subtitle}`}</Link>
         </div>
       </section>
 
