@@ -80,7 +80,7 @@ export default async function CategoryPage({
   const specialCards = specials.map((special: any) => ({
     _id: special._id,
     title: special.title,
-    category: "Exclusive Offer",
+    tags: ["Island", "Exclusive Offer"],
     destination: special.destination,
     duration: special.numberOfNights,
     priceFrom: getCheapestPackage(special.packages)?.pricePerPersonZARFrom,

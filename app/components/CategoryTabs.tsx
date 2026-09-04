@@ -8,6 +8,8 @@ interface ExperienceItem {
   title: string
   href: string
   category?: string
+  /** One or more badge labels shown over the card image. Falls back to `category` when omitted. */
+  tags?: string[]
   destination?: string
   duration?: number | string
   priceFrom?: number
@@ -132,14 +134,23 @@ export default function CategoryTabs({
                     )}
                     <div
                       style={{
-                        position: 'absolute', top: '12px', left: '12px',
-                        fontFamily: 'var(--font-jost), sans-serif', fontSize: '11px',
-                        letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 500,
-                        background: 'rgba(11,31,58,0.75)', color: 'white',
-                        padding: '4px 10px', borderRadius: '2px', backdropFilter: 'blur(4px)',
+                        position: 'absolute', top: '12px', left: '12px', right: '12px',
+                        display: 'flex', flexWrap: 'wrap', gap: '6px',
                       }}
                     >
-                      {exp.category}
+                      {(exp.tags && exp.tags.length > 0 ? exp.tags : exp.category ? [exp.category] : []).map((tag, i) => (
+                        <div
+                          key={i}
+                          style={{
+                            fontFamily: 'var(--font-jost), sans-serif', fontSize: '11px',
+                            letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 500,
+                            background: 'rgba(11,31,58,0.75)', color: 'white',
+                            padding: '4px 10px', borderRadius: '2px', backdropFilter: 'blur(4px)',
+                          }}
+                        >
+                          {tag}
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
