@@ -62,7 +62,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section style={{ padding: "80px 40px", maxWidth: "1100px", margin: "0 auto" }}>
+      <section id="consultants" style={{ padding: "80px 40px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
           <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "16px" }}>The People Behind Your Journey</div>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(32px, 5vw, 48px)", color: "var(--charcoal)", lineHeight: 1.2 }}>Meet Our Consultants</h2>

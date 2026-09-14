@@ -1092,9 +1092,33 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
           </div>
 
           {[
-            { heading: "Experiences", links: ["Ocean Islands", "African Safari", "Luxury Cruises", "Unique Journeys"] },
-            { heading: "Destinations", links: ["Mauritius", "Maldives", "Serengeti", "Seychelles"] },
-            { heading: "Company", links: ["About Us", "Our Consultants", "ASATA Member", "Contact"] },
+            {
+              heading: "Experiences", links: [
+                { label: "Ocean Islands", href: "/ocean-islands" },
+                { label: "African Safari", href: "/african-safaris" },
+                { label: "Luxury Cruises", href: "/luxury-cruises" },
+                { label: "Unique Journeys", href: "/unique-journeys" },
+              ]
+            },
+            {
+              heading: "Destinations", links: [
+                { label: "Mauritius", href: "/destinations/mauritius" },
+                { label: "Maldives", href: "/destinations/maldives" },
+                // No dedicated Serengeti/Seychelles destination pages exist yet —
+                // Serengeti falls back to its country page, Seychelles to the
+                // general listing. Swap these for real pages once they exist.
+                { label: "Serengeti", href: "/destinations/tanzania" },
+                { label: "Seychelles", href: "/destinations" },
+              ]
+            },
+            {
+              heading: "Company", links: [
+                { label: "About Us", href: "/about" },
+                { label: "Our Consultants", href: "/about#consultants" },
+                { label: "ASATA Member", href: "/about" },
+                { label: "Contact", href: "/#enquire" },
+              ]
+            },
           ].map((col, i) => (
             <div key={i}>
               <div style={{
@@ -1107,14 +1131,14 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                 marginBottom: "16px",
               }}>{col.heading}</div>
               {col.links.map((link) => (
-                <div key={link} style={{ marginBottom: "12px" }}>
-                  <Link href="#" style={{
+                <div key={link.label} style={{ marginBottom: "12px" }}>
+                  <Link href={link.href} style={{
                     fontFamily: "var(--font-jost), sans-serif",
                     fontSize: "16px",
                     color: "rgba(247,242,234,0.45)",
                     textDecoration: "none",
                     letterSpacing: "0.04em",
-                  }}>{link}</Link>
+                  }}>{link.label}</Link>
                 </div>
               ))}
             </div>
@@ -1135,14 +1159,18 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             letterSpacing: "0.04em",
           }}>© 2026 Ocean & Safari · A Computravel Company · All rights reserved</div>
           <div style={{ display: "flex", gap: "20px" }}>
-            {["Privacy Policy", "Terms", "POPIA Compliance"].map((item) => (
-              <Link key={item} href="#" style={{
+            {[
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms", href: "/terms" },
+              { label: "POPIA Compliance", href: "/popia" },
+            ].map((item) => (
+              <Link key={item.label} href={item.href} style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "15px",
                 color: "rgba(247,242,234,0.25)",
                 textDecoration: "none",
                 letterSpacing: "0.04em",
-              }}>{item}</Link>
+              }}>{item.label}</Link>
             ))}
           </div>
         </div>
