@@ -191,7 +191,7 @@ function ExperienceCategorySection({ title, viewAllHref, items }: { title: strin
 
 export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExperiences, africanSafarisExperiences, uniqueJourneysExperiences, exclusiveEscapes }: Props) {
   const [activeVideo, setActiveVideo] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null]);
 
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
@@ -205,7 +205,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
       }
     });
     const timer = setTimeout(() => {
-      setActiveVideo((prev) => (prev + 1) % 4);
+      setActiveVideo((prev) => (prev + 1) % 3);
     }, 6000);
     return () => clearTimeout(timer);
   }, [activeVideo]);
@@ -277,7 +277,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
         overflow: "hidden",
         padding: "80px 40px",
       }}>
-        {["/hero.mp4", "/hero-island.mp4", "/hero-safari.mp4", "/hero-cruise.mp4"].map((src, i) => (
+        {["/hero.mp4", "/hero-safari.mp4", "/hero-cruise.mp4"].map((src, i) => (
           <video
             key={src}
             autoPlay={i === 0}
