@@ -3,6 +3,25 @@ import { getCheapestPackage } from '@/app/lib/beachcomber/pricing'
 
 const options = { next: { revalidate: 10 } }
 
+// Fetch a legal page (terms/privacy/popia) by its pageKey. If more than one
+// document shares a pageKey (shouldn't normally happen — see the schema
+// description), the most recently updated one wins.
+//
+// Uses writeClient, not the public client: confirmed the same anonymous-read
+// gap here as with beachcomberSpecial (see the comment above
+// getDestinationSpecials) — freshly-created documents of this type return
+// empty for anonymous reads even though the dataset ACL is public. The
+// existing server-only write token sidesteps it.
+export async function getLegalPage(pageKey: string) {
+  return writeClient.fetch(`
+    *[_type == "legalPage" && pageKey == $pageKey] | order(_updatedAt desc) [0] {
+      title,
+      lastUpdated,
+      body
+    }
+  `, { pageKey }, options)
+}
+
 // Fetch all published experiences
 export async function getExperiences() {
   return client.fetch(`

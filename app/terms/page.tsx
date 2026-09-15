@@ -1,5 +1,7 @@
-import LegalPlaceholderPage from "@/app/components/LegalPlaceholderPage";
+import LegalPageView from "@/app/components/LegalPageView";
 import type { Metadata } from "next";
+
+export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: "Terms | Ocean & Safari Luxury Travel",
@@ -7,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
-  return <LegalPlaceholderPage title="Terms & Conditions" />;
+  return <LegalPageView pageKey="terms" fallbackTitle="Terms & Conditions" />;
 }
