@@ -154,17 +154,24 @@ function ExperienceCategorySection({ title, viewAllHref, items }: { title: strin
   if (!items || items.length === 0) return null;
   return (
     <div style={{ marginBottom: "56px" }}>
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "baseline",
+      <h2 style={{
+        fontFamily: "var(--font-cormorant), serif",
+        fontSize: "clamp(28px, 4vw, 40px)",
+        color: "var(--charcoal)",
+        marginBottom: "32px",
+      }}>{title}</h2>
+      <div className="packages-grid" style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "16px",
+        alignItems: "stretch",
         marginBottom: "32px",
       }}>
-        <h2 style={{
-          fontFamily: "var(--font-cormorant), serif",
-          fontSize: "clamp(28px, 4vw, 40px)",
-          color: "var(--charcoal)",
-        }}>{title}</h2>
+        {items.map((pkg) => (
+          <ExperienceCard key={pkg._id} pkg={pkg} />
+        ))}
+      </div>
+      <div style={{ textAlign: "center" }}>
         <Link href={viewAllHref} style={{
           fontFamily: "var(--font-jost), sans-serif",
           fontSize: "17px",
@@ -174,16 +181,6 @@ function ExperienceCategorySection({ title, viewAllHref, items }: { title: strin
           textDecoration: "none",
           fontWeight: 500,
         }}>View all →</Link>
-      </div>
-      <div className="packages-grid" style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "16px",
-        alignItems: "stretch",
-      }}>
-        {items.map((pkg) => (
-          <ExperienceCard key={pkg._id} pkg={pkg} />
-        ))}
       </div>
     </div>
   );
