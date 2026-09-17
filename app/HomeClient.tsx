@@ -1077,10 +1077,10 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             </p>
             <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
               <img
-                src="/asata.png"
+                src="/asata.jpg"
                 alt="ASATA Member"
                 style={{
-                  height: "100px",
+                  height: "56px",
                   width: "auto",
                   opacity: 0.9,
                 }}
