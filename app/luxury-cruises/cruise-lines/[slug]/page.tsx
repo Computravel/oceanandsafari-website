@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -57,7 +58,7 @@ const portableTextComponents = {
   listItem: {
     bullet: ({ children }: any) => (
       <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+        <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
         <span>{children}</span>
       </li>
     ),
@@ -68,7 +69,7 @@ const portableTextComponents = {
       if (!imageUrl) return null;
       return (
         <div style={{ margin: "32px 0" }}>
-          <img src={imageUrl} alt={value.alt || ""} style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "480px" }} />
+          <img src={sanityThumb(imageUrl, 1000)} alt={value.alt || ""} loading="lazy" style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "480px" }} />
           {value.caption && (
             <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", textAlign: "center", marginTop: "8px", fontStyle: "italic" }}>{value.caption}</p>
           )}
@@ -203,7 +204,7 @@ export default async function CruiseLinePage({
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
           {cruiseLine.logo && (
             <div style={{ width: "120px", height: "120px", flexShrink: 0, background: "white", borderRadius: "12px", padding: "16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src={cruiseLine.logo} alt={cruiseLine.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+              <img src={sanityThumb(cruiseLine.logo, 240)} alt={cruiseLine.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
             </div>
           )}
           <div>
@@ -259,7 +260,7 @@ export default async function CruiseLinePage({
               <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                 {cruiseLine.highlights.map((h: string, i: number) => (
                   <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -284,7 +285,7 @@ export default async function CruiseLinePage({
                 { label: "Entertainment & Enrichment", value: lifeOnBoard.entertainment },
               ].filter(s => s.value?.length).map((s, i) => (
                 <div key={i} style={{ marginBottom: "28px" }}>
-                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--teal)", marginBottom: "10px" }}>{s.label}</h3>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--teal-text)", marginBottom: "10px" }}>{s.label}</h3>
                   <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                     <PortableText value={s.value} components={portableTextComponents} />
                   </div>
@@ -327,7 +328,7 @@ export default async function CruiseLinePage({
               <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
                 {cruiseLine.signatureExperiences.map((item: { title: string; description?: string }, i: number) => (
                   <div key={i} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                    <span style={{ color: "var(--gold)", fontSize: "20px", flexShrink: 0, lineHeight: 1.4 }}>✦</span>
+                    <span style={{ color: "var(--gold-text)", fontSize: "20px", flexShrink: 0, lineHeight: 1.4 }}>✦</span>
                     <div>
                       <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--charcoal)", marginBottom: "6px" }}>{item.title}</div>
                       {item.description && (
@@ -350,7 +351,7 @@ export default async function CruiseLinePage({
               <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                 {cruiseLine.shipClasses.map((s: string, i: number) => (
                   <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                     <span>{s}</span>
                   </li>
                 ))}
@@ -384,7 +385,7 @@ export default async function CruiseLinePage({
               <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>When to Go</h2>
               {cruiseLine.whenToGo.map((season: any, i: number) => (
                 <div key={i} style={{ marginBottom: "18px", paddingBottom: "18px", borderBottom: i < cruiseLine.whenToGo.length - 1 ? "0.5px solid var(--border)" : "none" }}>
-                  <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal)", marginBottom: "6px" }}>{season.period}</div>
+                  <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal-text)", marginBottom: "6px" }}>{season.period}</div>
                   {season.description && (
                     <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--charcoal)", lineHeight: 1.7, margin: 0 }}>{season.description}</p>
                   )}
@@ -406,7 +407,7 @@ export default async function CruiseLinePage({
                     <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
                       <div style={{ height: "180px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                         {exp.heroImage ? (
-                          <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          <img src={sanityThumb(exp.heroImage, 600, 440)} alt={exp.heroImageAlt || exp.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         ) : (
                           <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                         )}
@@ -417,7 +418,7 @@ export default async function CruiseLinePage({
                           {[exp.duration ? `${exp.duration} nights` : null, exp.destination].filter(Boolean).join(" · ")}
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold)" }}>
+                          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold-text)" }}>
                             {exp.priceFrom ? <>From R{exp.priceFrom.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></> : ""}
                           </div>
                           <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>View</span>
@@ -510,7 +511,7 @@ export default async function CruiseLinePage({
       {/* ── ENQUIRY FORM ── */}
       <section id="enquire-form" style={{ padding: "80px 40px", background: "var(--ivory)", borderTop: "0.5px solid var(--border)" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>Enquire About This Cruise Line</div>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>Enquire About This Cruise Line</div>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 40px)", color: "var(--charcoal)", textAlign: "center", marginBottom: "12px" }}>{cruiseLine.name}</h2>
           <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", textAlign: "center", lineHeight: 1.7, marginBottom: "40px" }}>
             One of our consultants will be in touch within 24 hours to begin crafting your personalised voyage.

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import type { Metadata } from "next";
 
 export const revalidate = 30;
@@ -51,7 +52,7 @@ export default async function ArticlePage({
 
       <div style={{ position: "relative", background: "var(--abyss)", maxHeight: "70vh", overflow: "hidden" }}>
         {article.heroImage && (
-          <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "auto", display: "block", opacity: 0.85 }} />
+          <img src={sanityThumb(article.heroImage, 1600)} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "auto", display: "block", opacity: 0.85 }} />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.8) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)" }} />
         <div style={{ position: "absolute", bottom: "40px", left: "40px", right: "40px", maxWidth: "800px" }}>
@@ -86,7 +87,7 @@ export default async function ArticlePage({
                 listItem: {
                   bullet: ({children}: any) => (
                     <li style={{ marginBottom: "10px", lineHeight: 1.7, listStyleType: "none", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                      <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "2px" }}>◆</span>
+                      <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "2px" }}>◆</span>
                       <span>{children}</span>
                     </li>
                   ),
@@ -102,7 +103,7 @@ export default async function ArticlePage({
                     if (!imageUrl) return null;
                     return (
                       <div style={{ margin: "40px 0" }}>
-                        <img src={imageUrl} alt={value.alt || ""} style={{ width: "100%", borderRadius: "6px", objectFit: "cover" }} />
+                        <img src={sanityThumb(imageUrl, 1000)} alt={value.alt || ""} loading="lazy" style={{ width: "100%", borderRadius: "6px", objectFit: "cover" }} />
                         {value.caption && <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>{value.caption}</p>}
                       </div>
                     );
@@ -153,7 +154,7 @@ export default async function ArticlePage({
                   <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
                     <div style={{ height: "180px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                       {exp.heroImage ? (
-                        <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={sanityThumb(exp.heroImage, 600, 440)} alt={exp.heroImageAlt || exp.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                       )}
@@ -169,7 +170,7 @@ export default async function ArticlePage({
                         {[exp.duration ? `${exp.duration} nights` : null, exp.destination].filter(Boolean).join(" · ")}
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold)" }}>
+                        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold-text)" }}>
                           {exp.priceFrom ? <>From R{exp.priceFrom.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></> : ""}
                         </div>
                         <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>View</span>

@@ -1,6 +1,7 @@
 import { getConsultants } from "@/sanity/lib/queries";
 import { PortableText } from "@portabletext/react";
 import { portableTextComponents } from "@/app/components/portableTextComponents";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import SiteNav from "@/app/components/SiteNav";
 import type { Metadata } from "next";
@@ -35,7 +36,7 @@ export default async function AboutPage() {
       </section>
 
       <section style={{ padding: "80px 40px", maxWidth: "780px", margin: "0 auto" }}>
-        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "16px" }}>About Us</div>
+        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "16px" }}>About Us</div>
         <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "40px", color: "var(--charcoal)", marginBottom: "32px", lineHeight: 1.2 }}>A Computravel Company</h2>
         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "17px", color: "var(--charcoal)", lineHeight: 1.85 }}>
           <p style={{ marginBottom: "20px" }}>Ocean & Safari is a luxury travel brand by Computravel — one of Southern Africa's first online travel agencies, co-founded in 2008. For over 25 years, we have helped discerning travellers explore unforgettable destinations across Africa, the Indian Ocean Islands and beyond.</p>
@@ -64,7 +65,7 @@ export default async function AboutPage() {
 
       <section id="consultants" style={{ padding: "80px 40px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "60px" }}>
-          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "16px" }}>The People Behind Your Journey</div>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "16px" }}>The People Behind Your Journey</div>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(32px, 5vw, 48px)", color: "var(--charcoal)", lineHeight: 1.2 }}>Meet Our Consultants</h2>
         </div>
 
@@ -85,10 +86,10 @@ export default async function AboutPage() {
                   order: i % 2 === 0 ? 0 : 1,
                 }}>
                   {consultant.photo ? (
-                    <img src={consultant.photo} alt={consultant.photoAlt || consultant.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <img src={sanityThumb(consultant.photo, 500, 667)} alt={consultant.photoAlt || consultant.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   ) : (
                     <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", color: "rgba(247,242,234,0.3)" }}>O&S</div>
+                      <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "48px", color: "rgba(247,242,234,0.75)" }}>O&S</div>
                     </div>
                   )}
                 </div>
@@ -140,7 +141,7 @@ export default async function AboutPage() {
 function ConsultantContent({ consultant }: { consultant: any }) {
   return (
     <div>
-      <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "8px" }}>{consultant.role}</div>
+      <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "8px" }}>{consultant.role}</div>
       <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "40px", color: "var(--charcoal)", marginBottom: "20px", lineHeight: 1.1 }}>{consultant.name}</h2>
 
       {consultant.quote && (
@@ -168,12 +169,12 @@ function ConsultantContent({ consultant }: { consultant: any }) {
 
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {consultant.email && (
-          <a href={'mailto:' + consultant.email} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--teal)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
+          <a href={'mailto:' + consultant.email} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--teal-text)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
             {consultant.email}
           </a>
         )}
         {consultant.blogUrl && (
-          <a href={consultant.blogUrl} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--gold)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
+          <a href={consultant.blogUrl} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--gold-text)", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}>
             {consultant.blogLabel || 'Read my travel blog'}
           </a>
         )}

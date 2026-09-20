@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { sanityThumb } from '@/app/lib/sanityImage'
 
 interface ExperienceItem {
   _id: string
@@ -128,7 +129,7 @@ export default function CategoryTabs({
                 <div style={cardStyle}>
                   <div style={{ height: '220px', position: 'relative', overflow: 'hidden', background: 'var(--abyss)', flexShrink: 0 }}>
                     {exp.heroImage ? (
-                      <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={sanityThumb(exp.heroImage, 600, 440)} alt={exp.heroImageAlt || exp.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     ) : (
                       <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)' }} />
                     )}
@@ -159,7 +160,7 @@ export default function CategoryTabs({
                       {exp.duration} nights · {exp.destination}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '0.5px solid var(--border)', marginTop: 'auto' }}>
-                      <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '18px', fontWeight: 500, color: 'var(--gold)' }}>
+                      <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '18px', fontWeight: 500, color: 'var(--gold-text)' }}>
                         From R{exp.priceFrom?.toLocaleString()} <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400 }}>pp</span>
                       </div>
                       <span style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--pearl)', background: 'var(--indigo)', padding: '9px 18px', borderRadius: '3px', fontWeight: 500 }}>
@@ -196,7 +197,7 @@ export default function CategoryTabs({
                   <div style={cardStyle}>
                     <div style={{ height: '200px', position: 'relative', overflow: 'hidden', background: 'var(--abyss)', flexShrink: 0 }}>
                       {image ? (
-                        <img src={image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={sanityThumb(image, 600, 400)} alt={item.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       ) : (
                         <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)' }} />
                       )}
@@ -220,7 +221,7 @@ export default function CategoryTabs({
                         <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '15px', color: 'var(--muted)', marginBottom: '16px' }}>{subtitle}</div>
                       )}
                       {item.starRating && (
-                        <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '14px', color: 'var(--gold)', marginTop: 'auto', paddingTop: '16px', borderTop: '0.5px solid var(--border)' }}>
+                        <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '14px', color: 'var(--gold-text)', marginTop: 'auto', paddingTop: '16px', borderTop: '0.5px solid var(--border)' }}>
                           {'★'.repeat(item.starRating)}
                         </div>
                       )}

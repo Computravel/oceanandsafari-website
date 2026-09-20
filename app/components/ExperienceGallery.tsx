@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sanityThumb } from "@/app/lib/sanityImage";
 
 interface GalleryImage {
   asset?: { url?: string; _ref?: string };
@@ -59,8 +60,9 @@ export default function ExperienceGallery({ gallery, title = "Gallery" }: Props)
               onClick={() => openLightbox(i)}
             >
               <img
-                src={image.url!}
+                src={sanityThumb(image.url!, 600, 400)}
                 alt={image.alt || ""}
+                loading="lazy"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -190,7 +192,7 @@ export default function ExperienceGallery({ gallery, title = "Gallery" }: Props)
             }}
           >
             <img
-              src={images[lightboxIndex].url!}
+              src={sanityThumb(images[lightboxIndex].url!, 1600)}
               alt={images[lightboxIndex].alt || ""}
               className="lightbox-image"
               style={{
@@ -212,7 +214,7 @@ export default function ExperienceGallery({ gallery, title = "Gallery" }: Props)
             <p style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "12px",
-              color: "rgba(247,242,234,0.4)",
+              color: "rgba(247,242,234,0.55)",
             }}>{lightboxIndex + 1} / {images.length}</p>
           </div>
 

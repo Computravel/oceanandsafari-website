@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 
 export const revalidate = 30;
 
@@ -35,7 +36,7 @@ const portableTextComponents = {
   listItem: {
     bullet: ({children}: any) => (
       <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "inherit", lineHeight: 1.75 }}>
-        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+        <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
         <span>{children}</span>
       </li>
     ),
@@ -58,7 +59,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
         {destination.heroImage && (
-          <img src={destination.heroImage} alt={destination.heroImageAlt || destination.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }} />
+          <img src={sanityThumb(destination.heroImage, 1600, 1000)} alt={destination.heroImageAlt || destination.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }} />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.85) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)" }} />
         <div style={{ position: "absolute", bottom: "48px", left: "40px", right: "40px" }}>
@@ -80,11 +81,11 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "60px 40px" }}>
 
         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", marginBottom: "40px", display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-          <Link href="/destinations" style={{ color: "var(--teal)", textDecoration: "none" }}>Destinations</Link>
+          <Link href="/destinations" style={{ color: "var(--teal-text)", textDecoration: "none" }}>Destinations</Link>
           {destination.parent && (
             <>
               <span>→</span>
-              <Link href={`/destinations/${destination.parent.slug?.current}`} style={{ color: "var(--teal)", textDecoration: "none" }}>{destination.parent.name}</Link>
+              <Link href={`/destinations/${destination.parent.slug?.current}`} style={{ color: "var(--teal-text)", textDecoration: "none" }}>{destination.parent.name}</Link>
             </>
           )}
           <span>→</span>
@@ -127,7 +128,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
               {destination.signatureLuxuryExperiences.map((item: { title: string; description?: string }, i: number) => (
                 <div key={i} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-                  <span style={{ color: "var(--gold)", fontSize: "20px", flexShrink: 0, lineHeight: 1.4 }}>✦</span>
+                  <span style={{ color: "var(--gold-text)", fontSize: "20px", flexShrink: 0, lineHeight: 1.4 }}>✦</span>
                   <div>
                     <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--charcoal)", marginBottom: "6px" }}>{item.title}</div>
                     {item.description && (
@@ -156,7 +157,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
             <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--charcoal)", marginBottom: "20px" }}>Best Time to Visit</h2>
             {destination.bestTimeToVisitDetail.map((season: any, i: number) => (
               <div key={i} style={{ marginBottom: "18px", paddingBottom: "18px", borderBottom: i < destination.bestTimeToVisitDetail.length - 1 ? "0.5px solid var(--border)" : "none" }}>
-                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal)", marginBottom: "6px" }}>{season.period}</div>
+                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", fontWeight: 600, color: "var(--teal-text)", marginBottom: "6px" }}>{season.period}</div>
                 {season.description && (
                   <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "15px", color: "var(--charcoal)", lineHeight: 1.7, margin: 0 }}>{season.description}</p>
                 )}
@@ -174,14 +175,14 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                   <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden" }}>
                     <div style={{ height: "120px", overflow: "hidden", background: "var(--abyss)", position: "relative" }}>
                       {child.heroImage ? (
-                        <img src={child.heroImage} alt={child.heroImageAlt || child.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={sanityThumb(child.heroImage, 400, 280)} alt={child.heroImageAlt || child.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--teal) 100%)" }} />
                       )}
                     </div>
                     <div style={{ padding: "16px" }}>
                       <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", marginBottom: "4px" }}>{child.name}</div>
-                      <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold)", fontWeight: 500 }}>Explore →</div>
+                      <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold-text)", fontWeight: 500 }}>Explore →</div>
                     </div>
                   </div>
                 </Link>
@@ -199,7 +200,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                   <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
                     <div style={{ height: "200px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                       {exp.heroImage ? (
-                        <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={sanityThumb(exp.heroImage, 600, 440)} alt={exp.heroImageAlt || exp.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                       )}
@@ -209,7 +210,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                       <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", marginBottom: "6px", lineHeight: 1.3 }}>{exp.title}</div>
                       <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", marginBottom: "16px" }}>{exp.duration} nights · {exp.destination}</div>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold)" }}>From R{exp.priceFrom?.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
+                        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold-text)" }}>From R{exp.priceFrom?.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
                         <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>View</span>
                       </div>
                     </div>
@@ -229,7 +230,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                   <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", width: "100%" }}>
                     <div style={{ height: "160px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                       {article.heroImage ? (
-                        <img src={article.heroImage} alt={article.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={sanityThumb(article.heroImage, 500, 360)} alt={article.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                       )}
@@ -240,7 +241,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
                         <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)", lineHeight: 1.6, flex: 1 }}>{article.excerpt}</p>
                       )}
                       <div style={{ paddingTop: "12px", borderTop: "0.5px solid var(--border)", marginTop: "12px" }}>
-                        <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold)", fontWeight: 500 }}>Read more →</span>
+                        <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold-text)", fontWeight: 500 }}>Read more →</span>
                       </div>
                     </div>
                   </div>

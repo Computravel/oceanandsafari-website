@@ -1,4 +1,5 @@
 import { getCruiseLines } from "@/sanity/lib/queries";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import SiteNav from "@/app/components/SiteNav";
 import type { Metadata } from "next";
@@ -46,7 +47,7 @@ export default async function CruiseLinesPage() {
                   <div style={{ height: "160px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {cruiseLine.logo ? (
                       <div style={{ width: "100px", height: "100px", background: "white", borderRadius: "10px", padding: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <img src={cruiseLine.logo} alt={cruiseLine.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                        <img src={sanityThumb(cruiseLine.logo, 200)} alt={cruiseLine.name} loading="lazy" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
                       </div>
                     ) : (
                       <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
@@ -63,7 +64,7 @@ export default async function CruiseLinesPage() {
                       {cruiseLine.destinationsServed?.slice(0, 3).join(", ")}
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                      <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", fontWeight: 500, color: "var(--gold)" }}>
+                      <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", fontWeight: 500, color: "var(--gold-text)" }}>
                         {cruiseLine.starRating ? "★".repeat(cruiseLine.starRating) : ""}
                       </span>
                       <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>Explore</span>

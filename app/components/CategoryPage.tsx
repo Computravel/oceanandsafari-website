@@ -7,6 +7,7 @@ import {
   getOceanIslandSpecials,
 } from "@/sanity/lib/queries";
 import { getCheapestPackage } from "@/app/lib/beachcomber/pricing";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import CategoryTabs from "./CategoryTabs";
 import SiteNav from "./SiteNav";
@@ -126,7 +127,7 @@ export default async function CategoryPage({
         <div style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `url(${sanityThumb(heroImage, 1600)})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.3,
@@ -223,7 +224,7 @@ export default async function CategoryPage({
                   }}>
                     <div style={{ height: "180px", overflow: "hidden", position: "relative", background: "var(--indigo)", flexShrink: 0 }}>
                       {article.heroImage ? (
-                        <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
+                        <img src={sanityThumb(article.heroImage, 600, 400)} alt={article.heroImageAlt || article.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                       )}

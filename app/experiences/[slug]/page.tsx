@@ -7,6 +7,7 @@ import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SpecialOfferCard from "@/app/components/SpecialOfferCard";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 
 
 export const revalidate = 10;
@@ -41,7 +42,7 @@ export default async function ExperiencePage({
       }}>
         {experience.heroImage && (
           <img
-            src={experience.heroImage}
+            src={sanityThumb(experience.heroImage, 1600, 1000)}
             alt={experience.title}
             style={{
               width: "100%",
@@ -141,8 +142,9 @@ export default async function ExperiencePage({
         return (
           <div style={{ margin: "24px 0" }}>
             <img
-              src={imageUrl}
+              src={sanityThumb(imageUrl, 1000)}
               alt={value.alt || ""}
+              loading="lazy"
               style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "400px" }}
             />
           </div>
@@ -181,7 +183,7 @@ export default async function ExperiencePage({
                     listItem: {
                       bullet: ({children}: any) => (
                         <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                          <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                          <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                           <span>{children}</span>
                         </li>
                       ),
@@ -257,7 +259,7 @@ export default async function ExperiencePage({
                           alignItems: "flex-start",
                           gap: "10px",
                         }}>
-                          <span style={{ color: "var(--teal)", flexShrink: 0 }}>◆</span>
+                          <span style={{ color: "var(--teal-text)", flexShrink: 0 }}>◆</span>
                           <span>{children}</span>
                         </li>
                       ),
@@ -277,8 +279,9 @@ export default async function ExperiencePage({
                         return (
                           <div style={{ margin: "24px 0" }}>
                             <img
-                              src={imageUrl}
+                              src={sanityThumb(imageUrl, 1000)}
                               alt={value.alt || ""}
+                              loading="lazy"
                               style={{
                                 width: "100%",
                                 borderRadius: "6px",
@@ -412,7 +415,7 @@ export default async function ExperiencePage({
                     fontWeight: 500,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "var(--teal)",
+                    color: "var(--teal-text)",
                     marginBottom: "12px",
                   }}>✓ Included</div>
                   <div style={{
@@ -439,7 +442,7 @@ export default async function ExperiencePage({
                                 alignItems: "flex-start",
                                 gap: "10px",
                               }}>
-                                <span style={{ color: "var(--teal)", flexShrink: 0 }}>✓</span>
+                                <span style={{ color: "var(--teal-text)", flexShrink: 0 }}>✓</span>
                                 <span>{children}</span>
                               </li>
                             ),
@@ -549,7 +552,7 @@ export default async function ExperiencePage({
                 fontSize: "14px",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "rgba(247,242,234,0.5)",
+                color: "rgba(247,242,234,0.55)",
                 marginBottom: "8px",
               }}>From</div>
               <div style={{
@@ -562,7 +565,7 @@ export default async function ExperiencePage({
               <div style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "14px",
-                color: "rgba(247,242,234,0.5)",
+                color: "rgba(247,242,234,0.55)",
               }}>per person</div>
             </div>
 
@@ -653,7 +656,7 @@ export default async function ExperiencePage({
             fontSize: "13px",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "var(--teal)",
+            color: "var(--teal-text)",
             fontWeight: 500,
             marginBottom: "12px",
             textAlign: "center",

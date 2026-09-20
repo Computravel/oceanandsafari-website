@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -98,7 +99,7 @@ const portableTextComponents = {
   listItem: {
     bullet: ({ children }: any) => (
       <li style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-        <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+        <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
         <span>{children}</span>
       </li>
     ),
@@ -112,8 +113,9 @@ const portableTextComponents = {
       return (
         <div style={{ margin: "24px 0" }}>
           <img
-            src={imageUrl}
+            src={sanityThumb(imageUrl, 1000)}
             alt={value.alt || ""}
+            loading="lazy"
             style={{ width: "100%", borderRadius: "6px", objectFit: "cover", maxHeight: "400px" }}
           />
           {value.caption && (
@@ -185,7 +187,7 @@ export default async function LodgePage({
           </div>
         ) : lodge.heroImage && (
           <img
-            src={lodge.heroImage}
+            src={sanityThumb(lodge.heroImage, 1600, 1000)}
             alt={lodge.heroImageAlt || lodge.name}
             style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
           />
@@ -244,7 +246,7 @@ export default async function LodgePage({
               <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                 {lodge.highlights.map((h: string, i: number) => (
                   <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -282,7 +284,7 @@ export default async function LodgePage({
               <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                 {lodge.parksAndReserves.map((p: string, i: number) => (
                   <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                     <span>{p}</span>
                   </li>
                 ))}
@@ -302,7 +304,7 @@ export default async function LodgePage({
                   fontWeight: 500,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "var(--teal)",
+                  color: "var(--teal-text)",
                   background: "rgba(29,165,160,0.1)",
                   padding: "6px 14px",
                   borderRadius: "3px",
@@ -361,7 +363,7 @@ export default async function LodgePage({
                     <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
                       <div style={{ height: "180px", overflow: "hidden", background: "var(--abyss)", position: "relative", flexShrink: 0 }}>
                         {exp.heroImage ? (
-                          <img src={exp.heroImage} alt={exp.heroImageAlt || exp.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          <img src={sanityThumb(exp.heroImage, 600, 440)} alt={exp.heroImageAlt || exp.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         ) : (
                           <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                         )}
@@ -375,7 +377,7 @@ export default async function LodgePage({
                           {[exp.duration ? `${exp.duration} nights` : null, exp.destination].filter(Boolean).join(" · ")}
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
-                          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold)" }}>
+                          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold-text)" }}>
                             {exp.priceFrom ? <>From R{exp.priceFrom.toLocaleString()} <span style={{ fontSize: "12px", color: "var(--muted)", fontWeight: 400 }}>pp</span></> : ""}
                           </div>
                           <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pearl)", background: "var(--indigo)", padding: "8px 16px", borderRadius: "3px", fontWeight: 500 }}>View</span>
@@ -400,7 +402,7 @@ export default async function LodgePage({
           }}>
             {lodge.priceRange && (
               <div style={{ background: "var(--abyss)", padding: "24px" }}>
-                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(247,242,234,0.5)", marginBottom: "8px" }}>Price Range</div>
+                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(247,242,234,0.55)", marginBottom: "8px" }}>Price Range</div>
                 <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--gold)", lineHeight: 1.2 }}>{PRICE_RANGE_LABELS[lodge.priceRange] || lodge.priceRange}</div>
               </div>
             )}
@@ -453,7 +455,7 @@ export default async function LodgePage({
       {/* ── ENQUIRY FORM ── */}
       <section id="enquire-form" style={{ padding: "80px 40px", background: "var(--ivory)", borderTop: "0.5px solid var(--border)" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>{ctaHeading}</div>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>{ctaHeading}</div>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 40px)", color: "var(--charcoal)", textAlign: "center", marginBottom: "12px" }}>{lodge.name}</h2>
           <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", textAlign: "center", lineHeight: 1.7, marginBottom: "40px" }}>
             {ctaSubtext}

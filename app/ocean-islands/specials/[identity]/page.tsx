@@ -3,6 +3,7 @@ import { getCheapestPackage, formatZAR } from "@/app/lib/beachcomber/pricing";
 import EnquiryForm from "@/app/components/EnquiryForm";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import SiteNav from "@/app/components/SiteNav";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -55,7 +56,7 @@ export default async function BeachcomberSpecialPage({
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
         {special.heroImage && (
           <img
-            src={special.heroImage}
+            src={sanityThumb(special.heroImage, 1600, 1000)}
             alt={special.title}
             style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
           />
@@ -115,7 +116,7 @@ export default async function BeachcomberSpecialPage({
                   padding: "16px 0", borderBottom: "0.5px solid var(--border)", gap: "16px",
                 }}>
                   <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--charcoal)" }}>{pkg.packageDesc}</span>
-                  <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--gold)", whiteSpace: "nowrap" }}>{formatZAR(pkg.pricePerPersonZARFrom)} <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)" }}>pp</span></span>
+                  <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "22px", color: "var(--gold-text)", whiteSpace: "nowrap" }}>{formatZAR(pkg.pricePerPersonZARFrom)} <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "var(--muted)" }}>pp</span></span>
                 </div>
               ))}
             </div>
@@ -128,7 +129,7 @@ export default async function BeachcomberSpecialPage({
               <ul style={{ paddingLeft: "0", margin: 0, listStyle: "none", fontFamily: "var(--font-jost), sans-serif", fontSize: "18px", color: "var(--charcoal)", lineHeight: 1.8 }}>
                 {special.beachcomberPlusFactors.map((item: { plusFactor: string }, i: number) => (
                   <li key={i} style={{ marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px" }}>
-                    <span style={{ color: "var(--teal)", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                    <span style={{ color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" }}>◆</span>
                     <span>{item.plusFactor}</span>
                   </li>
                 ))}
@@ -189,7 +190,7 @@ export default async function BeachcomberSpecialPage({
           }}>
             {cheapest && (
               <div style={{ background: "var(--abyss)", padding: "24px" }}>
-                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(247,242,234,0.5)", marginBottom: "8px" }}>Special price from</div>
+                <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(247,242,234,0.55)", marginBottom: "8px" }}>Special price from</div>
                 <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "32px", color: "var(--gold)", lineHeight: 1.2 }}>{formatZAR(cheapest.pricePerPersonZARFrom)}</div>
                 <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", color: "rgba(247,242,234,0.6)", marginTop: "4px" }}>per person · {cheapest.packageDesc}</div>
               </div>
@@ -245,7 +246,7 @@ export default async function BeachcomberSpecialPage({
       {/* ── ENQUIRY FORM ── */}
       <section id="enquire-form" style={{ padding: "80px 40px", background: "var(--ivory)", borderTop: "0.5px solid var(--border)" }}>
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>Enquire About This Offer</div>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "12px", textAlign: "center" }}>Enquire About This Offer</div>
           <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(28px, 4vw, 40px)", color: "var(--charcoal)", textAlign: "center", marginBottom: "12px" }}>{special.title}</h2>
           <p style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", color: "var(--muted)", textAlign: "center", lineHeight: 1.7, marginBottom: "40px" }}>
             One of our consultants will be in touch within 24 hours to begin crafting your personalised escape.

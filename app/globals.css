@@ -11,8 +11,16 @@
   --pearl: #F7F2EA;
   --ivory: #F2EDE6;
   --charcoal: #2C2420;
-  --muted: #9C8E7A;
+  --muted: #766A58;
   --border: #E0D8C8;
+
+  /* Darker, WCAG AA-safe variants for use as small/body TEXT on light
+     backgrounds (cards, links, prices). The originals above stay
+     unchanged for backgrounds, borders and decorative accents on dark
+     sections, where their lighter tone already has plenty of contrast. */
+  --gold-text: #816927;
+  --teal-text: #136D69;
+  --cobalt-text: #18679D;
 }
 
 * {

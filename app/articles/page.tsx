@@ -1,4 +1,5 @@
 import { getArticles } from "@/sanity/lib/queries";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import SiteNav from "@/app/components/SiteNav";
 
@@ -33,7 +34,7 @@ export default async function ArticlesPage() {
                 <div style={{ background: "white", border: "0.5px solid var(--border)", borderRadius: "8px", overflow: "hidden", display: "flex", flexDirection: "column", width: "100%" }}>
                   <div style={{ height: "200px", overflow: "hidden", position: "relative", background: "var(--abyss)", flexShrink: 0 }}>
                     {article.heroImage ? (
-                      <img src={article.heroImage} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <img src={sanityThumb(article.heroImage, 600, 400)} alt={article.heroImageAlt || article.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     ) : (
                       <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--cobalt) 100%)" }} />
                     )}
@@ -48,7 +49,7 @@ export default async function ArticlesPage() {
                       <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--muted)" }}>
                         {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString("en-ZA", { day: "numeric", month: "long", year: "numeric" }) : ""}
                       </span>
-                      <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold)", fontWeight: 500, letterSpacing: "0.06em" }}>Read more →</span>
+                      <span style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold-text)", fontWeight: 500, letterSpacing: "0.06em" }}>Read more →</span>
                     </div>
                   </div>
                 </div>

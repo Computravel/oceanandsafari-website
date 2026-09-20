@@ -65,7 +65,7 @@ export default function EnquiryForm({ experienceTitle, experienceUrl }: Props) {
         <div style={{
           fontFamily: "var(--font-cormorant), serif",
           fontSize: "28px",
-          color: "var(--teal)",
+          color: "var(--teal-text)",
           marginBottom: "12px",
         }}>Thank you for your enquiry</div>
         <p style={{

@@ -186,7 +186,7 @@ export default function SiteNav({ ctaHref = "/#enquire", ctaLabel = "Plan My Jou
         ))}
         <Link href={ctaHref} style={{
           background: "var(--gold)",
-          color: "var(--pearl)",
+          color: "var(--abyss)",
           fontSize: "17px",
           fontWeight: 500,
           letterSpacing: "0.1em",

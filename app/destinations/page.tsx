@@ -1,4 +1,5 @@
 import { getDestinations } from "@/sanity/lib/queries";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import SiteNav from "@/app/components/SiteNav";
 
@@ -73,7 +74,7 @@ export default async function DestinationsPage() {
                   }}>
                     <div style={{ height: "140px", overflow: "hidden", background: "var(--abyss)", position: "relative" }}>
                       {dest.heroImage ? (
-                        <img src={dest.heroImage} alt={dest.heroImageAlt || dest.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={sanityThumb(dest.heroImage, 500, 280)} alt={dest.heroImageAlt || dest.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       ) : (
                         <div style={{ width: "100%", height: "100%", background: "linear-gradient(135deg, var(--indigo) 0%, var(--teal) 100%)" }} />
                       )}
@@ -83,7 +84,7 @@ export default async function DestinationsPage() {
                       {dest.bestTimeToVisit && (
                         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--muted)" }}>Best time: {dest.bestTimeToVisit}</div>
                       )}
-                      <div style={{ marginTop: "10px", fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold)", fontWeight: 500 }}>Explore →</div>
+                      <div style={{ marginTop: "10px", fontFamily: "var(--font-jost), sans-serif", fontSize: "12px", color: "var(--gold-text)", fontWeight: 500 }}>Explore →</div>
                     </div>
                   </div>
                 </Link>

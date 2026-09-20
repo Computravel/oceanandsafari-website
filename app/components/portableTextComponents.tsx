@@ -7,7 +7,7 @@ export function linkMark({ value, children }: any) {
     href,
     target: '_blank',
     rel: 'noopener noreferrer',
-    style: { color: 'var(--teal)', textDecoration: 'underline' },
+    style: { color: 'var(--teal-text)', textDecoration: 'underline' },
   }, children)
 }
 
@@ -23,7 +23,7 @@ export const portableTextComponents = {
   },
   listItem: {
     bullet: ({children}: any) => React.createElement('li', { style: { marginBottom: "10px", display: "flex", alignItems: "flex-start", gap: "12px", lineHeight: 1.75 } },
-      React.createElement('span', { style: { color: "var(--teal)", flexShrink: 0, marginTop: "4px" } }, '◆'),
+      React.createElement('span', { style: { color: "var(--teal-text)", flexShrink: 0, marginTop: "4px" } }, '◆'),
       React.createElement('span', null, children)
     ),
     number: ({children}: any) => React.createElement('li', { style: { marginBottom: "10px", lineHeight: 1.75 } }, children),

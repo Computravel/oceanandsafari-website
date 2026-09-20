@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/app/lib/supabase";
+import { sanityThumb } from "@/app/lib/sanityImage";
 import SiteNav from "@/app/components/SiteNav";
 
 interface Experience {
@@ -64,8 +65,9 @@ function ExperienceCard({ pkg }: { pkg: Experience }) {
         <div style={{ height: "220px", position: "relative", overflow: "hidden", flexShrink: 0 }}>
           {pkg.heroImage ? (
             <img
-              src={pkg.heroImage}
+              src={sanityThumb(pkg.heroImage, 600, 440)}
               alt={pkg.title}
+              loading="lazy"
               style={{
                 width: "100%",
                 height: "100%",
@@ -129,7 +131,7 @@ function ExperienceCard({ pkg }: { pkg: Experience }) {
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "18px",
               fontWeight: 500,
-              color: "var(--gold)",
+              color: "var(--gold-text)",
             }}>From R{pkg.priceFrom?.toLocaleString()} <span style={{ fontSize: "13px", color: "var(--muted)", fontWeight: 400 }}>pp</span></div>
             <span style={{
               fontFamily: "var(--font-jost), sans-serif",
@@ -177,7 +179,7 @@ function ExperienceCategorySection({ title, viewAllHref, items }: { title: strin
           fontSize: "17px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          color: "var(--gold)",
+          color: "var(--gold-text)",
           textDecoration: "none",
           fontWeight: 500,
         }}>View all →</Link>
@@ -280,6 +282,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             autoPlay={i === 0}
             muted
             playsInline
+            preload={i === activeVideo ? "auto" : "metadata"}
             ref={(el) => { videoRefs.current[i] = el; }}
             style={{
               position: "absolute",
@@ -419,7 +422,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             fontSize: "11px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "rgba(247,242,234,0.4)",
+            color: "rgba(247,242,234,0.55)",
           }}>Scroll</div>
           <div style={{
             width: "1px",
@@ -460,8 +463,8 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
           margin: "0 auto",
         }}>
           {[
-            { icon: "✦", title: "Personal consultant", desc: "One dedicated specialist handles your entire journey from first enquiry to final farewell", color: "var(--gold)" },
-            { icon: "◈", title: "Exclusive access", desc: "Official partner relationships with exclusive suppliers", color: "var(--teal)" },
+            { icon: "✦", title: "Personal consultant", desc: "One dedicated specialist handles your entire journey from first enquiry to final farewell", color: "var(--gold-text)" },
+            { icon: "◈", title: "Exclusive access", desc: "Official partner relationships with exclusive suppliers", color: "var(--teal-text)" },
             { icon: "◎", title: "Every detail managed", desc: "From transfers to insurance — nothing is left to chance, nothing left to worry about", color: "var(--cobalt)" },
           ].map((item, i) => (
             <div key={i} style={{
@@ -560,7 +563,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             fontWeight: 500,
-            color: "var(--cobalt)",
+            color: "var(--cobalt-text)",
             background: "rgba(26,110,168,0.1)",
             padding: "4px 10px",
             borderRadius: "2px",
@@ -590,7 +593,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "var(--cobalt)",
+            color: "var(--cobalt-text)",
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
@@ -641,8 +644,9 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                 {escape.heroImage && (
                   <div style={{ height: "180px", overflow: "hidden" }}>
                     <img
-                      src={escape.heroImage}
+                      src={sanityThumb(escape.heroImage, 500, 360)}
                       alt={escape.title}
+                      loading="lazy"
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   </div>
@@ -673,7 +677,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                         <div style={{
                           fontFamily: "var(--font-jost), sans-serif",
                           fontSize: "13px",
-                          color: "rgba(247,242,234,0.35)",
+                          color: "rgba(247,242,234,0.55)",
                           textDecoration: "line-through",
                         }}>R{escape.originalPrice?.toLocaleString()}</div>
                       )}
@@ -681,8 +685,8 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                         fontFamily: "var(--font-jost), sans-serif",
                         fontSize: "18px",
                         fontWeight: 500,
-                        color: "var(--gold)",
-                      }}>R{escape.offerPrice?.toLocaleString()} <span style={{ fontSize: "12px", fontWeight: 400, color: "rgba(247,242,234,0.4)" }}>pp</span></div>
+                        color: "var(--gold-text)",
+                      }}>R{escape.offerPrice?.toLocaleString()} <span style={{ fontSize: "12px", fontWeight: 400, color: "rgba(247,242,234,0.55)" }}>pp</span></div>
                     </div>
                     <a href="#enquire" style={{
                       fontFamily: "var(--font-jost), sans-serif",
@@ -742,7 +746,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             <div style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "17px",
-              color: "rgba(247,242,234,0.4)",
+              color: "rgba(247,242,234,0.55)",
               letterSpacing: "0.1em",
             }}>
               <span style={{ color: "rgba(247,242,234,0.7)", fontWeight: 500 }}>Sandra & Mark T.</span>
@@ -765,7 +769,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
             fontSize: "16px",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "var(--teal)",
+            color: "var(--teal-text)",
             fontWeight: 500,
             marginBottom: "12px",
             textAlign: "center",
@@ -946,7 +950,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                   textAlign: "center",
                   fontFamily: "var(--font-cormorant), serif",
                   fontSize: "22px",
-                  color: "var(--teal)",
+                  color: "var(--teal-text)",
                 }}>
                   Thank you — we will be in touch within 24 hours to begin planning your journey. 🌊
                 </div>
@@ -1028,7 +1032,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
           fontSize: "16px",
           fontWeight: 500,
           letterSpacing: "0.08em",
-          color: "var(--teal)",
+          color: "var(--teal-text)",
           background: "rgba(29,165,160,0.12)",
           border: "0.5px solid var(--teal)",
           padding: "10px 22px",
@@ -1060,14 +1064,14 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "13px",
               letterSpacing: "0.14em",
-              color: "rgba(247,242,234,0.4)",
+              color: "rgba(247,242,234,0.55)",
               textTransform: "uppercase",
               marginBottom: "16px",
             }}>Ocean & Safari · Luxury Travel</div>
             <p style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: "16px",
-              color: "rgba(247,242,234,0.4)",
+              color: "rgba(247,242,234,0.55)",
               lineHeight: 1.7,
               maxWidth: "240px",
               marginBottom: "20px",
@@ -1079,6 +1083,8 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
               <img
                 src="/asata.jpg"
                 alt="ASATA Member"
+                width={182}
+                height={56}
                 style={{
                   height: "56px",
                   width: "auto",
@@ -1132,7 +1138,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                   <Link href={link.href} style={{
                     fontFamily: "var(--font-jost), sans-serif",
                     fontSize: "16px",
-                    color: "rgba(247,242,234,0.45)",
+                    color: "rgba(247,242,234,0.55)",
                     textDecoration: "none",
                     letterSpacing: "0.04em",
                   }}>{link.label}</Link>
@@ -1152,7 +1158,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
           <div style={{
             fontFamily: "var(--font-jost), sans-serif",
             fontSize: "15px",
-            color: "rgba(247,242,234,0.25)",
+            color: "rgba(247,242,234,0.55)",
             letterSpacing: "0.04em",
           }}>© 2026 Ocean & Safari · A Computravel Company · All rights reserved</div>
           <div style={{ display: "flex", gap: "20px" }}>
@@ -1164,7 +1170,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
               <Link key={item.label} href={item.href} style={{
                 fontFamily: "var(--font-jost), sans-serif",
                 fontSize: "15px",
-                color: "rgba(247,242,234,0.25)",
+                color: "rgba(247,242,234,0.55)",
                 textDecoration: "none",
                 letterSpacing: "0.04em",
               }}>{item.label}</Link>
