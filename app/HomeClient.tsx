@@ -1088,7 +1088,9 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
                 style={{
                   height: "56px",
                   width: "auto",
+                  maxWidth: "182px",
                   opacity: 0.9,
+                  flexShrink: 0,
                 }}
               />
             </div>
