@@ -143,6 +143,14 @@ export const resort = {
     },
     
     {
+      name: 'searchKeywords',
+      title: 'Search Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Extra terms to help this appear in site search (e.g. synonyms, occasions like "honeymoon"). Not shown to visitors.',
+    },
+    {
       name: 'published',
       title: 'Published',
       type: 'boolean',

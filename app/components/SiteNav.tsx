@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SiteSearch from "./SiteSearch";
 
 interface Props {
   /** Where the CTA button on the right goes. Defaults to the homepage enquiry section. */
@@ -184,6 +185,7 @@ export default function SiteNav({ ctaHref = "/#enquire", ctaLabel = "Plan My Jou
             opacity: 0.75,
           }}>{item.label}</Link>
         ))}
+        <SiteSearch />
         <Link href={ctaHref} style={{
           background: "var(--gold)",
           color: "var(--abyss)",

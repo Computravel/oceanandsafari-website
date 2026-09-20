@@ -336,6 +336,14 @@ export const experience = {
       description: 'Toggle to make this experience visible on the website',
     },
     {
+      name: 'searchKeywords',
+      title: 'Search Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Extra terms to help this appear in site search (e.g. synonyms, occasions like "honeymoon", wildlife like "Big Five"). Not shown to visitors.',
+    },
+    {
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',

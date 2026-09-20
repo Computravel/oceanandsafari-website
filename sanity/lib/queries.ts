@@ -1,5 +1,6 @@
 import { client, writeClient } from './client'
 import { getCheapestPackage } from '@/app/lib/beachcomber/pricing'
+import type { SearchIndexItem, SearchFacet } from '@/app/lib/search/types'
 
 const options = { next: { revalidate: 10 } }
 
@@ -793,4 +794,234 @@ export async function getBeachcomberSpecialIdentities() {
       "identity": beachcomberIdentity
     }
   `, {}, options)
+}
+
+function truncate(text: string | null | undefined, max = 160): string {
+  if (!text) return ''
+  const trimmed = text.trim()
+  return trimmed.length > max ? trimmed.slice(0, max - 1).trimEnd() + '…' : trimmed
+}
+
+function titleCase(value: string | null | undefined): string | null {
+  if (!value) return null
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
+// experience.category is the one enum in the whole content model that's
+// genuinely a trip-type taxonomy — pass it through as-is. Every other
+// searchable type has no such field (lodge/resort), or an enum that means
+// something else entirely (cruiseLine's tier, article's content genre) — see
+// the SearchFacet doc comment in app/lib/search/types.ts for why those are
+// deliberately NOT mapped into this facet.
+const EXPERIENCE_CATEGORY_FACET: Record<string, SearchFacet> = {
+  safari: 'Safari',
+  island: 'Island',
+  cruise: 'Cruise',
+  coastal: 'Coastal',
+  rail: 'Rail',
+}
+
+// Builds the flat, normalized index the site search UI fuzzy-searches
+// client-side. Two round-trips, not one: beachcomberSpecial has a confirmed
+// anonymous-read ACL gap (see the comment above getOceanIslandSpecials) so it
+// can only be read via writeClient, which the combined multi-root query below
+// (issued through the public client) can't include.
+export async function getSearchIndex(): Promise<SearchIndexItem[]> {
+  const [main, specials] = await Promise.all([
+    client.fetch(`{
+      "experiences": *[_type == "experience" && published == true] {
+        _id, title, category, destination, country,
+        "excerpt": pt::text(description),
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "lodges": *[_type == "lodge" && published == true] {
+        _id, name, region, country,
+        "excerpt": pt::text(description),
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "resorts": *[_type == "resort" && published == true] {
+        _id, name, location,
+        "excerpt": description,
+        "heroImage": heroImage.asset->url,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "cruiseLines": *[_type == "cruiseLine" && published == true] {
+        _id, name, category, destinationsServed,
+        "excerpt": description,
+        "heroImage": logo.asset->url,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "destinations": *[_type == "destination" && published == true] {
+        _id, name, region, level,
+        "excerpt": pt::text(description),
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "articles": *[_type == "article" && published == true] {
+        _id, title, category, excerpt,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        searchKeywords,
+        "slug": slug.current
+      },
+      "exclusiveEscapes": *[_type == "exclusiveEscape" && active == true && defined(linkedExperience->slug.current)] {
+        _id, title,
+        "excerpt": description,
+        "heroImage": heroImage.asset->url,
+        "heroImageAlt": heroImage.alt,
+        "linkedCategory": linkedExperience->category,
+        "linkedDestination": linkedExperience->destination,
+        "linkedSlug": linkedExperience->slug.current
+      }
+    }`, {}, options),
+    getOceanIslandSpecials(),
+  ])
+
+  const items: SearchIndexItem[] = []
+
+  for (const e of main.experiences) {
+    items.push({
+      id: e._id,
+      title: e.title,
+      resultType: 'experience',
+      facet: EXPERIENCE_CATEGORY_FACET[e.category] ?? 'Safari',
+      badge: null,
+      location: [e.destination, e.country].filter(Boolean).join(', '),
+      excerpt: truncate(e.excerpt),
+      heroImage: e.heroImage ?? null,
+      heroImageAlt: e.heroImageAlt ?? null,
+      searchKeywords: e.searchKeywords ?? [],
+      url: `/experiences/${e.slug}`,
+    })
+  }
+
+  for (const l of main.lodges) {
+    items.push({
+      id: l._id,
+      title: l.name,
+      resultType: 'lodge',
+      facet: 'Safari',
+      badge: null,
+      location: [l.region, l.country].filter(Boolean).join(', '),
+      excerpt: truncate(l.excerpt),
+      heroImage: l.heroImage ?? null,
+      heroImageAlt: l.heroImageAlt ?? null,
+      searchKeywords: l.searchKeywords ?? [],
+      url: `/safari-lodges/${l.slug}`,
+    })
+  }
+
+  for (const r of main.resorts) {
+    items.push({
+      id: r._id,
+      title: r.name,
+      resultType: 'resort',
+      facet: 'Island',
+      badge: null,
+      location: r.location ?? '',
+      excerpt: truncate(r.excerpt),
+      heroImage: r.heroImage ?? null,
+      heroImageAlt: null,
+      searchKeywords: r.searchKeywords ?? [],
+      url: `/ocean-islands/resorts/${r.slug}`,
+    })
+  }
+
+  for (const c of main.cruiseLines) {
+    items.push({
+      id: c._id,
+      title: c.name,
+      resultType: 'cruiseLine',
+      facet: 'Cruise',
+      // Deliberately NOT the facet — see EXPERIENCE_CATEGORY_FACET comment above.
+      badge: titleCase(c.category),
+      location: Array.isArray(c.destinationsServed) ? c.destinationsServed.join(', ') : '',
+      excerpt: truncate(c.excerpt),
+      heroImage: c.heroImage ?? null,
+      heroImageAlt: null,
+      searchKeywords: c.searchKeywords ?? [],
+      url: `/luxury-cruises/cruise-lines/${c.slug}`,
+    })
+  }
+
+  for (const d of main.destinations) {
+    items.push({
+      id: d._id,
+      title: d.name,
+      resultType: 'destination',
+      facet: 'Destination',
+      badge: titleCase(d.level),
+      location: d.region ?? '',
+      excerpt: truncate(d.excerpt),
+      heroImage: d.heroImage ?? null,
+      heroImageAlt: d.heroImageAlt ?? null,
+      searchKeywords: d.searchKeywords ?? [],
+      url: `/destinations/${d.slug}`,
+    })
+  }
+
+  for (const a of main.articles) {
+    items.push({
+      id: a._id,
+      title: a.title,
+      resultType: 'article',
+      facet: 'Journal',
+      badge: null,
+      location: '',
+      excerpt: truncate(a.excerpt),
+      heroImage: a.heroImage ?? null,
+      heroImageAlt: a.heroImageAlt ?? null,
+      searchKeywords: a.searchKeywords ?? [],
+      url: `/articles/${a.slug}`,
+    })
+  }
+
+  // No page of their own — each links through to the experience it promotes,
+  // inheriting that experience's facet. Escapes with no linkedExperience are
+  // already excluded by the query above (defined(linkedExperience->slug.current)).
+  for (const x of main.exclusiveEscapes) {
+    items.push({
+      id: x._id,
+      title: x.title,
+      resultType: 'experience',
+      facet: EXPERIENCE_CATEGORY_FACET[x.linkedCategory] ?? 'Island',
+      badge: 'Exclusive Escape',
+      location: x.linkedDestination ?? '',
+      excerpt: truncate(x.excerpt),
+      heroImage: x.heroImage ?? null,
+      heroImageAlt: x.heroImageAlt ?? null,
+      searchKeywords: [],
+      url: `/experiences/${x.linkedSlug}`,
+    })
+  }
+
+  // Matches the tagging beachcomberSpecial already gets elsewhere in this
+  // file (resolveRelatedExperiences tags these ['Island', 'Exclusive Offer']).
+  for (const s of specials as Array<{ _id: string; beachcomberIdentity: string; title: string; destination?: string; heroImage?: string }>) {
+    items.push({
+      id: s._id,
+      title: s.title,
+      resultType: 'special',
+      facet: 'Island',
+      badge: 'Exclusive Offer',
+      location: s.destination ?? '',
+      excerpt: '',
+      heroImage: s.heroImage ?? null,
+      heroImageAlt: null,
+      searchKeywords: [],
+      url: `/ocean-islands/specials/${s.beachcomberIdentity}`,
+    })
+  }
+
+  return items
 }

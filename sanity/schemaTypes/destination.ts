@@ -271,6 +271,15 @@ export const destination = {
       group: 'planning',
     },
     {
+      name: 'searchKeywords',
+      title: 'Search Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Extra terms to help this appear in site search (e.g. synonyms, related themes). Not shown to visitors.',
+      group: 'seo',
+    },
+    {
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',

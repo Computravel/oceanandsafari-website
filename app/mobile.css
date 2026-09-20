@@ -83,4 +83,26 @@
     gap: 12px !important;
     align-items: flex-start !important;
   }
+
+  /* ── SEARCH ── */
+  .search-trigger {
+    padding: 8px !important;
+  }
+
+  .search-overlay {
+    padding: 0 !important;
+  }
+
+  .search-panel {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .search-facets {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
 }

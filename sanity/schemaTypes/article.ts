@@ -162,6 +162,14 @@ export const article = {
       description: 'Toggle to make this article visible on the website',
     },
     {
+      name: 'searchKeywords',
+      title: 'Search Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+      description: 'Extra terms to help this appear in site search (e.g. synonyms, related topics). Not shown to visitors.',
+    },
+    {
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',
