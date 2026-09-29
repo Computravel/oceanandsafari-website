@@ -14,9 +14,21 @@ interface Experience {
   country: string;
   duration: number;
   priceFrom: number;
+  /** ISO date string (YYYY-MM-DD). Only shown for category === 'cruise'. */
+  departureDate?: string;
   heroImage: string;
   description: string;
   slug: { current: string };
+}
+
+/** Formats an ISO date string (YYYY-MM-DD) without any timezone-shift risk. */
+function formatDepartureDate(iso?: string): string | null {
+  if (!iso) return null;
+  const [year, month, day] = iso.split("-").map(Number);
+  if (!year || !month || !day) return null;
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-GB", {
+    day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+  });
 }
 
 interface ExclusiveEscape {
@@ -118,7 +130,10 @@ function ExperienceCard({ pkg }: { pkg: Experience }) {
             fontSize: "15px",
             color: "var(--muted)",
             marginBottom: "16px",
-          }}>{pkg.duration} nights · {pkg.destination}</div>
+          }}>
+            {pkg.duration} nights · {pkg.destination}
+            {pkg.category === "cruise" && formatDepartureDate(pkg.departureDate) && ` · Departs ${formatDepartureDate(pkg.departureDate)}`}
+          </div>
           <div style={{
             display: "flex",
             justifyContent: "space-between",

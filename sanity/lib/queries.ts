@@ -309,6 +309,7 @@ export async function getExperiencesByCategory(category: string) {
       country,
       duration,
       priceFrom,
+      departureDate,
       "heroImage": heroImage.asset->url,
       "heroImageAlt": heroImage.alt,
       description,
@@ -668,6 +669,7 @@ export async function getCruiseLine(slug: string) {
         country,
         duration,
         priceFrom,
+        departureDate,
         "heroImage": heroImage.asset->url,
         "heroImageAlt": heroImage.alt,
         slug

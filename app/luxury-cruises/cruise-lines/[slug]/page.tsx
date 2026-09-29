@@ -19,6 +19,16 @@ const CATEGORY_LABELS: Record<string, string> = {
   river: "River",
 };
 
+/** Formats an ISO date string (YYYY-MM-DD) without any timezone-shift risk. */
+function formatDepartureDate(iso?: string): string | null {
+  if (!iso) return null;
+  const [year, month, day] = iso.split("-").map(Number);
+  if (!year || !month || !day) return null;
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-GB", {
+    day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+  });
+}
+
 const WHO_IS_IT_FOR_LABELS: Record<string, string> = {
   couples: "Couples",
   families: "Families",
@@ -415,7 +425,11 @@ export default async function CruiseLinePage({
                       <div style={{ padding: "20px", display: "flex", flexDirection: "column", flex: 1 }}>
                         <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", color: "var(--charcoal)", marginBottom: "6px", lineHeight: 1.3 }}>{exp.title}</div>
                         <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", color: "var(--muted)", marginBottom: "16px" }}>
-                          {[exp.duration ? `${exp.duration} nights` : null, exp.destination].filter(Boolean).join(" · ")}
+                          {[
+                            exp.duration ? `${exp.duration} nights` : null,
+                            exp.destination,
+                            formatDepartureDate(exp.departureDate) ? `Departs ${formatDepartureDate(exp.departureDate)}` : null,
+                          ].filter(Boolean).join(" · ")}
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "0.5px solid var(--border)", marginTop: "auto" }}>
                           <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "16px", fontWeight: 500, color: "var(--gold-text)" }}>

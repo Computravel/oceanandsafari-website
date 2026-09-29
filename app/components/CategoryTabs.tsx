@@ -14,8 +14,20 @@ interface ExperienceItem {
   destination?: string
   duration?: number | string
   priceFrom?: number
+  /** ISO date string (YYYY-MM-DD). Only shown for category === 'cruise'. */
+  departureDate?: string
   heroImage?: string
   heroImageAlt?: string
+}
+
+/** Formats an ISO date string (YYYY-MM-DD) without any timezone-shift risk. */
+function formatDepartureDate(iso?: string): string | null {
+  if (!iso) return null
+  const [year, month, day] = iso.split('-').map(Number)
+  if (!year || !month || !day) return null
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC',
+  })
 }
 
 interface WhoItem {
@@ -158,6 +170,7 @@ export default function CategoryTabs({
                     <div style={{ fontFamily: 'var(--font-cormorant), serif', fontSize: '22px', color: 'var(--charcoal)', marginBottom: '6px', lineHeight: 1.3 }}>{exp.title}</div>
                     <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '15px', color: 'var(--muted)', marginBottom: '16px' }}>
                       {exp.duration} nights · {exp.destination}
+                      {exp.category === 'cruise' && formatDepartureDate(exp.departureDate) && ` · Departs ${formatDepartureDate(exp.departureDate)}`}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '0.5px solid var(--border)', marginTop: 'auto' }}>
                       <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '18px', fontWeight: 500, color: 'var(--gold-text)' }}>
