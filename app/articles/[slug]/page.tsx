@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
 import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 import type { Metadata } from "next";
 
 export const revalidate = 30;
@@ -50,9 +51,13 @@ export default async function ArticlePage({
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
       <SiteNav />
 
-      <div style={{ position: "relative", background: "var(--abyss)", maxHeight: "70vh", overflow: "hidden" }}>
+      <div style={{ position: "relative", background: "var(--abyss)", height: "60vh", overflow: "hidden" }}>
         {article.heroImage && (
-          <img src={sanityThumb(article.heroImage, 1600)} alt={article.heroImageAlt || article.title} style={{ width: "100%", height: "auto", display: "block", opacity: 0.85 }} />
+          <img
+            src={urlFor(article.heroImage).width(1600).height(900).fit("crop").auto("format").quality(80).url()}
+            alt={article.heroImageAlt || article.title}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: 0.85 }}
+          />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.8) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)" }} />
         <div style={{ position: "absolute", bottom: "40px", left: "40px", right: "40px", maxWidth: "800px" }}>

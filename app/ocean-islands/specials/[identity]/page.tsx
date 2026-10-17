@@ -3,7 +3,7 @@ import { getCheapestPackage, formatZAR } from "@/app/lib/beachcomber/pricing";
 import EnquiryForm from "@/app/components/EnquiryForm";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import SiteNav from "@/app/components/SiteNav";
-import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -46,6 +46,13 @@ export default async function BeachcomberSpecialPage({
     .sort((a: any, b: any) => (a.orderIndex ?? 0) - (b.orderIndex ?? 0))
     .map((img: any) => ({ asset: { url: img.imageURL }, alt: special.hotelName || special.title }));
 
+  // curatedImage is a Sanity asset with hotspot data; the Beachcomber-synced
+  // fallback is a plain external URL with no hotspot concept, so only the
+  // curatedImage case goes through urlFor().
+  const heroImageSrc = special.curatedImage
+    ? urlFor(special.curatedImage).width(1600).height(1000).fit("crop").auto("format").quality(80).url()
+    : special.fallbackHeroImage;
+
   return (
     <main style={{ fontFamily: "var(--font-jost), sans-serif", background: "var(--pearl)" }}>
 
@@ -54,9 +61,9 @@ export default async function BeachcomberSpecialPage({
 
       {/* ── HERO ── */}
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
-        {special.heroImage && (
+        {heroImageSrc && (
           <img
-            src={sanityThumb(special.heroImage, 1600, 1000)}
+            src={heroImageSrc}
             alt={special.title}
             style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
           />

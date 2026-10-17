@@ -7,6 +7,7 @@ import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
 import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -187,7 +188,7 @@ export default async function LodgePage({
           </div>
         ) : lodge.heroImage && (
           <img
-            src={sanityThumb(lodge.heroImage, 1600, 1000)}
+            src={urlFor(lodge.heroImage).width(1600).height(1000).fit("crop").auto("format").quality(80).url()}
             alt={lodge.heroImageAlt || lodge.name}
             style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
           />

@@ -8,6 +8,7 @@ import { linkMark } from "@/app/components/portableTextComponents";
 import SpecialOfferCard from "@/app/components/SpecialOfferCard";
 import SiteNav from "@/app/components/SiteNav";
 import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 
 
 export const revalidate = 10;
@@ -42,7 +43,7 @@ export default async function ExperiencePage({
       }}>
         {experience.heroImage && (
           <img
-            src={sanityThumb(experience.heroImage, 1600, 1000)}
+            src={urlFor(experience.heroImage).width(1600).height(1000).fit("crop").auto("format").quality(80).url()}
             alt={experience.title}
             style={{
               width: "100%",

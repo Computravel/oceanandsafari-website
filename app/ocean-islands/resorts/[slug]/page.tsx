@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ExperienceGallery from "@/app/components/ExperienceGallery";
 import SiteNav from "@/app/components/SiteNav";
 import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -106,7 +107,7 @@ export default async function ResortPage({
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
         {resort.heroImage && (
           <img
-            src={sanityThumb(resort.heroImage, 1600, 1000)}
+            src={urlFor(resort.heroImage).width(1600).height(1000).fit("crop").auto("format").quality(80).url()}
             alt={resort.name}
             style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }}
           />

@@ -7,6 +7,7 @@ import ExperienceGallery from "@/app/components/ExperienceGallery";
 import { linkMark } from "@/app/components/portableTextComponents";
 import SiteNav from "@/app/components/SiteNav";
 import { sanityThumb } from "@/app/lib/sanityImage";
+import { urlFor } from "@/sanity/lib/image";
 
 export const revalidate = 30;
 
@@ -59,7 +60,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ sl
 
       <div style={{ height: "60vh", position: "relative", overflow: "hidden", background: "var(--abyss)" }}>
         {destination.heroImage && (
-          <img src={sanityThumb(destination.heroImage, 1600, 1000)} alt={destination.heroImageAlt || destination.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }} />
+          <img src={urlFor(destination.heroImage).width(1600).height(1000).fit("crop").auto("format").quality(80).url()} alt={destination.heroImageAlt || destination.name} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.75 }} />
         )}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(11,31,58,0.85) 0%, rgba(11,31,58,0.2) 60%, transparent 100%)" }} />
         <div style={{ position: "absolute", bottom: "48px", left: "40px", right: "40px" }}>
