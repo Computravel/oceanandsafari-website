@@ -63,7 +63,7 @@ export async function getExclusiveEscapes() {
 // Fetch all published articles
 export async function getArticles() {
   return client.fetch(`
-    *[_type == "article" && published == true] | order(publishedAt desc) {
+    *[_type == "article" && published == true] | order(coalesce(publishedAt, _createdAt) desc) {
       _id,
       title,
       category,
@@ -322,7 +322,7 @@ export async function getExperiencesByCategory(category: string) {
 // Fetch articles by category
 export async function getArticlesByCategory(category: string) {
   return client.fetch(`
-    *[_type == "article" && published == true && category == $category] | order(publishedAt desc) [0..5] {
+    *[_type == "article" && published == true && category == $category] | order(coalesce(publishedAt, _createdAt) desc) [0..5] {
       _id,
       title,
       category,
@@ -393,7 +393,7 @@ export async function getDestination(slug: string) {
         "heroImageAlt": heroImage.alt,
         slug
       },
-      "articles": *[_type == "article" && published == true && references(^._id)] | order(publishedAt desc) [0..5] {
+      "articles": *[_type == "article" && published == true && references(^._id)] | order(coalesce(publishedAt, _createdAt) desc) [0..5] {
         _id, title, category, excerpt,
         "heroImage": heroImage.asset->url,
         publishedAt, slug
