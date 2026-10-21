@@ -8,6 +8,7 @@ import { destination } from './destination'
 import { consultant } from './consultant'
 import { beachcomberSpecial } from './beachcomberSpecial'
 import { legalPage } from './legalPage'
+import { imageAsset } from './imageAsset'
 
 export const schemaTypes = [
   article,
@@ -19,5 +20,6 @@ export const schemaTypes = [
   destination,
   consultant,
   beachcomberSpecial,
-  legalPage
+  legalPage,
+  imageAsset
 ]
