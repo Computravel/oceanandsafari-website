@@ -22,6 +22,8 @@ export type SearchFacet =
   | "Cruise"
   | "Coastal"
   | "Rail"
+  | "Wellness"
+  | "Golf"
   | "Destination"
   | "Journal";
 

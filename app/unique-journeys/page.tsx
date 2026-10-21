@@ -9,7 +9,7 @@ export default function UniqueJourneysPage() {
       subtitle="Journey"
       description="Coastal adventures, legendary rail journeys and extraordinary experiences that defy easy categorisation. For travellers who seek the exceptional."
       heroImage="/seychelles.jpg"
-      experienceCategory={["coastal", "rail"]}
+      experienceCategory={["coastal", "rail", "wellness", "golf"]}
       articleCategory={["travel-tips", "community-sustainability"]}
       accentColor="var(--coral)"
     />

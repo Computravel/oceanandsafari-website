@@ -822,6 +822,8 @@ const EXPERIENCE_CATEGORY_FACET: Record<string, SearchFacet> = {
   cruise: 'Cruise',
   coastal: 'Coastal',
   rail: 'Rail',
+  wellness: 'Wellness',
+  golf: 'Golf',
 }
 
 // Builds the flat, normalized index the site search UI fuzzy-searches

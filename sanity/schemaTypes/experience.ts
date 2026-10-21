@@ -29,6 +29,8 @@ export const experience = {
           { title: 'Cruise', value: 'cruise' },
           { title: 'Coastal', value: 'coastal' },
           { title: 'Rail', value: 'rail' },
+          { title: 'Wellness', value: 'wellness' },
+          { title: 'Golf', value: 'golf' },
         ],
       },
       validation: (Rule: any) => Rule.required(),
