@@ -548,26 +548,37 @@ export default async function ExperiencePage({
 
             {/* Price header */}
             <div style={{ background: "var(--abyss)", padding: "24px" }}>
-              <div style={{
-                fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "14px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "rgba(247,242,234,0.55)",
-                marginBottom: "8px",
-              }}>From</div>
-              <div style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: "40px",
-                color: "var(--gold)",
-                lineHeight: 1,
-                marginBottom: "4px",
-              }}>R{experience.priceFrom?.toLocaleString()}</div>
-              <div style={{
-                fontFamily: "var(--font-jost), sans-serif",
-                fontSize: "14px",
-                color: "rgba(247,242,234,0.55)",
-              }}>per person</div>
+              {experience.priceFrom ? (
+                <>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "rgba(247,242,234,0.55)",
+                    marginBottom: "8px",
+                  }}>From</div>
+                  <div style={{
+                    fontFamily: "var(--font-cormorant), serif",
+                    fontSize: "40px",
+                    color: "var(--gold)",
+                    lineHeight: 1,
+                    marginBottom: "4px",
+                  }}>R{experience.priceFrom.toLocaleString()}</div>
+                  <div style={{
+                    fontFamily: "var(--font-jost), sans-serif",
+                    fontSize: "14px",
+                    color: "rgba(247,242,234,0.55)",
+                  }}>per person</div>
+                </>
+              ) : (
+                <div style={{
+                  fontFamily: "var(--font-cormorant), serif",
+                  fontSize: "28px",
+                  color: "var(--gold)",
+                  lineHeight: 1.2,
+                }}>Price on request</div>
+              )}
             </div>
 
             {/* Trip details */}

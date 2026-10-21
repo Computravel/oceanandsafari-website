@@ -174,7 +174,11 @@ export default function CategoryTabs({
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '16px', borderTop: '0.5px solid var(--border)', marginTop: 'auto' }}>
                       <div style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '18px', fontWeight: 500, color: 'var(--gold-text)' }}>
-                        From R{exp.priceFrom?.toLocaleString()} <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400 }}>pp</span>
+                        {exp.priceFrom ? (
+                          <>From R{exp.priceFrom.toLocaleString()} <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 400 }}>pp</span></>
+                        ) : (
+                          'Price on request'
+                        )}
                       </div>
                       <span style={{ fontFamily: 'var(--font-jost), sans-serif', fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--pearl)', background: 'var(--indigo)', padding: '9px 18px', borderRadius: '3px', fontWeight: 500 }}>
                         View details
