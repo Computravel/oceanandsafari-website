@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/app/lib/supabase";
 import { sanityThumb } from "@/app/lib/sanityImage";
 import SiteNav from "@/app/components/SiteNav";
+import ContactDetails from "@/app/components/ContactDetails";
 
 interface Experience {
   _id: string;
@@ -1060,7 +1061,7 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
       <footer style={{ background: "var(--abyss)", padding: "48px 40px 32px" }}>
         <div className="footer-grid" style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
+          gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
           gap: "40px",
           marginBottom: "40px",
         }}>
@@ -1163,6 +1164,19 @@ export default function HomeClient({ oceanIslandsExperiences, luxuryCruisesExper
               ))}
             </div>
           ))}
+
+          <div>
+            <div style={{
+              fontFamily: "var(--font-jost), sans-serif",
+              fontSize: "13px",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "var(--gold)",
+              fontWeight: 500,
+              marginBottom: "16px",
+            }}>Contact</div>
+            <ContactDetails theme="dark" />
+          </div>
         </div>
 
         <div className="footer-bottom" style={{

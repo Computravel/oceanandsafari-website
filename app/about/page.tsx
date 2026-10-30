@@ -4,6 +4,7 @@ import { portableTextComponents } from "@/app/components/portableTextComponents"
 import { sanityThumb } from "@/app/lib/sanityImage";
 import Link from "next/link";
 import SiteNav from "@/app/components/SiteNav";
+import ContactDetails from "@/app/components/ContactDetails";
 import type { Metadata } from "next";
 
 export const revalidate = 10;
@@ -132,6 +133,11 @@ export default async function AboutPage() {
         <Link href="/#enquire" style={{ display: "inline-block", background: "var(--gold)", color: "var(--abyss)", fontFamily: "var(--font-jost), sans-serif", fontSize: "14px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", padding: "16px 40px", borderRadius: "4px", textDecoration: "none" }}>
           Start a Conversation
         </Link>
+
+        <div style={{ marginTop: "48px", paddingTop: "40px", borderTop: "0.5px solid var(--border)", maxWidth: "340px", marginLeft: "auto", marginRight: "auto" }}>
+          <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--teal-text)", fontWeight: 500, marginBottom: "20px" }}>Or Reach Us Directly</div>
+          <ContactDetails theme="light" />
+        </div>
       </section>
 
     </main>
